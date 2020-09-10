@@ -30,6 +30,8 @@ include_once('../../connect.php'); ?>
   <link rel="stylesheet" href="../../plugins/datatables/dataTables.bootstrap4.min.css">
 
 </head>
+
+
 <body class="hold-transition sidebar-mini">
 <div class="wrapper">
 

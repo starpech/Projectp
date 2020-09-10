@@ -36,12 +36,16 @@ $sql9="select * from members where mem_id = '".$_SESSION['mem_id']."'";
 $res9=mysqli_query($conn,$sql9);
 $row9=mysqli_fetch_array($res9);
 ?>
+
+
   <!-- /.navbar -->
 <aside class="main-sidebar sidebar-dark-primary elevation-4" style="min-height: 5px;">
     <!-- Brand Logo -->
+
     <a href="#" class="brand-link">
-    <center><img src="..\..\..\..\assets\image\LOGOKMS.PNG" alt="KMS LOGO" width="140" height="70"></center>
-    </a>
+      <center><img src="..\..\..\..\assets\image\LOGOKMS.PNG" alt="KMS LOGO" width="70" height="40"></center>
+      </a>
+
 
 
     <!-- Sidebar -->
@@ -108,7 +112,7 @@ $row9=mysqli_fetch_array($res9);
           </li>
 
 
-              <!-- -->
+<!-- 
           <li class="nav-item">
             <a href="../pr_approve" class="nav-link <?php echo $name == 'pr_approve' ? 'active': '' ?>">
               <i class="fas fa-clipboard-check nav-icon"></i>
@@ -145,7 +149,7 @@ $row9=mysqli_fetch_array($res9);
               <p>อัพโหลดเอกสาร</p>
             </a>
           </li>
-
+ -->
 
 
 
