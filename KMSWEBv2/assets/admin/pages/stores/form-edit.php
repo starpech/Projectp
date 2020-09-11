@@ -102,8 +102,7 @@ include('../../../../includes/function.php');
 
 
 
-
-
+  
 
                 <!-- ราคาขาย +++++++++++++++  -->
 
@@ -142,7 +141,7 @@ include('../../../../includes/function.php');
 
                 <div class="form-group col-md-2">  </div>
 
-
+                <br> <br> <br> <br>
                 <!-- ราคาต่นทุน  ๑๑๑๑๑๑๑๑๑๑๑๑๑/ -->
 
             <div class="form-group col-md-12"> <label style="color:red" for="product_detail"> ราคาต้นทุน </label></div> 

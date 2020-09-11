@@ -93,6 +93,8 @@ include('../../../../includes/function.php');
                             <img  src="../../../image/store/<?php echo $rows['product_image']?>" id="imgUpload" class="figure-img img-fluid rounded" style="max-width:50%">
                         </figure>
                     </div>
+
+
             <table>
             <div class="form-group col-md-6">
                   <label for="product_name">Product Name </label>
@@ -132,6 +134,7 @@ include('../../../../includes/function.php');
 
 
               </div>
+              
               <div class="form-group col-md-2">
                   <label for="product_date">Date</label>
                   <input type="date" class="form-control" id="product_date" name="product_date"value="<?php echo $rows['product_date']?>">
