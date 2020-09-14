@@ -14,6 +14,10 @@
 </style>
 
 <body>
+    <nav style="background-color:yellow" >
+        <span><a href="pechweb/page1.ph">PAGE 1</a></span>
+    </nav>
+
     <p><h1 style="background-color:red">Hollo This is my webpage</h1></p>
     <h3>Hry</h3>
 </body>

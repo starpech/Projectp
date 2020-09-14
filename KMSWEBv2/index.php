@@ -15,7 +15,7 @@
     <link href="https://fonts.googleapis.com/css?family=Kanit&display=swap" rel="stylesheet">
     <title>KMS-Web</title>
 </head>
-<!-- MMMMMMMMMMMMM -->
+
 <style>
     body {
         background-color: whitesmoke;
@@ -26,6 +26,7 @@
     <?php
     require_once 'config.php';
     include('includes/navbar.php') ?>
+    
     <!-- The Modal -->
     <br><br> <br><br><br>
 
