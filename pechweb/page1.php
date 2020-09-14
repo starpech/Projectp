@@ -15,7 +15,7 @@
 
 <body>
     <nav style="background-color:yellow" >
-        <span><a href="pechweb/page1.ph">PAGE 1</a></span>
+        <span><a href="index.php">Home Page</a></span>
     </nav>
 
 
