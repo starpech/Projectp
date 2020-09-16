@@ -7,6 +7,10 @@
     box-shadow: 0 1px 2px rgba(0,0,0,.075);
     max-width: 100%;
 }
+.sidebar-footer {
+  position:fixed;
+  bottom:0px;
+}
 </style>
 
 <?php 
@@ -53,9 +57,9 @@ $row9=mysqli_fetch_array($res9);
 		  <a  class="d-block h5"><?php echo "ยินดีต้อนรับ  คุณ" ?></a>
           <a  class="d-block h6"><?php echo $_SESSION['mem_fname']?></a>
           <a  class="d-block h7">  Status: <?php if($_SESSION['mem_status']=="admin"){ 
-    echo "ผู้ดูแลระบบ";
-}
-?></a>
+        echo "ผู้ดูแลระบบ";
+          }
+          ?></a>
           <a  class="d-block h6"><i class="fas fa-circle text-success"></i>  Online</a>
           </center>
         </div>
@@ -108,8 +112,7 @@ $row9=mysqli_fetch_array($res9);
           </li>
 
 
-              <!-- -->
-          <li class="nav-item">
+<!--           <li class="nav-item">
             <a href="../pr_approve" class="nav-link <?php echo $name == 'pr_approve' ? 'active': '' ?>">
               <i class="fas fa-clipboard-check nav-icon"></i>
               <p>อนุมัติคำสั่งซื้อ</p>
@@ -144,7 +147,9 @@ $row9=mysqli_fetch_array($res9);
             <i class="fa fa-arrow-circle-up nav-icon"></i>
               <p>อัพโหลดเอกสาร</p>
             </a>
-          </li>
+          </li> -->
+  
+
 
 
 
@@ -179,19 +184,27 @@ $row9=mysqli_fetch_array($res9);
                 </a>
               </li>
             </ul>
+
+
+
           </li>
-          <!-- dropdown -->
-          <li class="nav-header dropdown">Account Settings</li>
-          <li class="nav-item">
-            <a href="../dashboard/logout.php" class="nav-link">
-              <i class="fas fa-sign-out-alt"></i>
+
+          <!-- <li class="nav-header dropdown">Account Settings</li> -->
+<div class="sidebar-footer"><li class="nav-item">
+          <a href="../dashboard/logout.php" class="nav-link">
+              <!-- <i class="fas fa-sign-out-alt"></i> -->
               <p>ออกจากระบบ</p>
             </a>
           </li>
+</div>
+
+          <!-- dropdown -->
         </ul>
       </nav>
       <!-- /.sidebar-menu -->
     </div>
+
+
     <!-- /.sidebar -->
 </aside>
 

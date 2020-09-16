@@ -33,6 +33,12 @@ include('../../../../includes/function.php');
   <link rel="stylesheet" href="../../plugins/responsive/responsive.bootstrap4.min.css"><!-- responsive-->
 </head>
 
+<style>
+  .span-edit {
+    color:green;
+  }
+</style>
+
 <body class="hold-transition sidebar-mini">
 <!-- Site wrapper -->
 <div class="wrapper">
@@ -99,13 +105,92 @@ include('../../../../includes/function.php');
                   <label for="product_detail">Product Detail </label><br>
                   <textarea name="product_detail"  id="product_detail" rows="5" class="form-control"disabled><?php echo $rows['product_detail']?></textarea>
               </div>
-               <div class="form-group col-md-2">
-                  <label for="product_price">Product Price</label>
-                  <div class="input-group-prepend">
-                  <input type="text" class="form-control" id="product_price1" name="product_price1" class="form-control" value="<?php echo $rows['product_price1']?>"disabled>
-                  <div class="input-group-text">bath</div>
-                  </div>
+
+
+                <!-- ราคาขาย +++++++++++++++  -->
+
+            <div class="form-group col-md-12"> <label style="color:red" for="product_detail"> ราคาขายโรงงาน </label> </div> 
+
+
+              <div class="form-group col-md-2"> <label for="product_detail"> Product Price 1 <span class="span-edit">(NP)</span> </label>
+                <div class="input-group-prepend">
+                  <input type="text" class="form-control" id="product_price1" name="product_price1" class="form-control" value="<?php echo $rows['product_price1']?>"disabled> <div class="input-group-text">bath</div>
+                </div>
               </div>
+
+              <div class="form-group col-md-2"> <label for="product_detail"> Product Price 2 <span class="span-edit">(WP)</span></label>
+                <div class="input-group-prepend">
+                  <input type="text" class="form-control" id="product_price2" name="product_price2" class="form-control" value="<?php echo $rows['product_price2']?>"disabled> <div class="input-group-text">bath</div>
+                </div>
+              </div>
+              
+              <div class="form-group col-md-2"> <label for="product_detail"> Product Price 3 <span class="span-edit">(BP)</span></label>
+                <div class="input-group-prepend">
+                  <input type="text" class="form-control" id="product_price3" name="product_price3" class="form-control" value="<?php echo $rows['product_price3']?>"disabled> <div class="input-group-text">bath</div>
+                </div>
+              </div>
+
+              <div class="form-group col-md-2"> <label for="product_detail"> Product Price 4 <span class="span-edit">(TK)</span></label>
+                <div class="input-group-prepend">
+                  <input type="text" class="form-control" id="product_price4" name="product_price4" class="form-control" value="<?php echo $rows['product_price4']?>"disabled> <div class="input-group-text">bath</div>
+                </div>
+              </div>
+
+              <div class="form-group col-md-2"> <label for="product_detail"> Product Price 5 <span class="span-edit">(PN)</span> </label>
+                <div class="input-group-prepend">
+                  <input type="text" class="form-control" id="product_price5" name="product_price5" class="form-control" value="<?php echo $rows['product_price5']?>"disabled> <div class="input-group-text">bath</div>
+                </div>
+              </div>
+
+                <div class="form-group col-md-2">  </div>
+
+                <br> <br> <br> <br>
+                <!-- ราคาต่นทุน  ๑๑๑๑๑๑๑๑๑๑๑๑๑/ -->
+
+            <div class="form-group col-md-12"> <label style="color:red" for="product_detail"> ราคาต้นทุน </label></div> 
+            <div class="form-group col-md-2"> <label for="product_detail"> Product Cost 1 <span class="span-edit">(NP)</span> </label>
+                <div class="input-group-prepend">
+                  <input type="text" class="form-control" id="product_cost1" name="product_cost1" class="form-control" value="<?php echo $rows['product_cost1']?>"disabled> <div class="input-group-text">bath</div>
+                </div>
+              </div>
+
+              <div class="form-group col-md-2"> <label for="product_detail"> Product Cost 2 <span class="span-edit">(WP)</span></label>
+                <div class="input-group-prepend">
+                  <input type="text" class="form-control" id="product_cost2" name="product_cost2" class="form-control" value="<?php echo $rows['product_cost2']?>"disabled> <div class="input-group-text">bath</div>
+                </div>
+              </div>
+              
+              <div class="form-group col-md-2"> <label for="product_detail"> Product Cost 3 <span class="span-edit">(BP)</span></label>
+                <div class="input-group-prepend">
+                  <input type="text" class="form-control" id="product_cost3" name="product_cost3" class="form-control" value="<?php echo $rows['product_cost3']?>"disabled> <div class="input-group-text">bath</div>
+                </div>
+              </div>
+
+              <div class="form-group col-md-2"> <label for="product_detail"> Product Cost 4 <span class="span-edit">(TK)</span></label>
+                <div class="input-group-prepend">
+                  <input type="text" class="form-control" id="product_cost4" name="product_cost4" class="form-control" value="<?php echo $rows['product_cost4']?>"disabled> <div class="input-group-text">bath</div>
+                </div>
+              </div>
+
+              <div class="form-group col-md-2"> <label for="product_detail"> Product Cost 5 <span class="span-edit">(PN)</span> </label>
+                <div class="input-group-prepend">
+                  <input type="text" class="form-control" id="product_cost5" name="product_cost5" class="form-control" value="<?php echo $rows['product_cost5']?>"disabled> <div class="input-group-text">bath</div>
+                </div>
+              </div>
+                <div class="form-group col-md-2">  </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
               <div class="form-group col-md-2">
                   <label for="product_code">Product Code</label>
                   <input type="text" class="form-control" id="product_code" name="product_code"value="<?php echo $rows['product_code']?>"disabled>
@@ -121,6 +206,7 @@ include('../../../../includes/function.php');
               <div class="form-group col-md-4">
                   <label for="submit" style="opacity: 0;">Product Type</label><br>
               </div>
+
               <div class="form-group col-md-12">
               <div class="card-footer">
           <a href="form-edit2.php?product_id=<?php echo $rows['product_id']?>"class="btn btn-warning float-right">แก้ไขข้อมูล</a>
