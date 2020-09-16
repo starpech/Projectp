@@ -98,7 +98,8 @@ include('../../../../includes/function.php');
                         <figure class="figure text-center mt-2">
                             <img  src="../../../image/store/<?php echo $rows['product_image']?>" id="imgUpload" class="figure-img img-fluid rounded" style="max-width:50%">
                         </figure>
-                    </div>
+                </div>
+
             <table>
             <div class="form-group col-md-6">
                   <label for="product_name">Product Name </label>
@@ -111,6 +112,7 @@ include('../../../../includes/function.php');
               </div>
 
 <!-- Product Price -->
+              <div class="form-group col-md-12"> <label style="color:red" for="product_detail"> ราคาขายโรงงาน </label></div> 
               <div class="form-group col-md-2">
                   <label for="product_price">Product Price 1 <span class="span-edit2">(NP)</span> </label>
                   <div class="input-group-prepend">
@@ -121,30 +123,30 @@ include('../../../../includes/function.php');
               <div class="form-group col-md-2">
                   <label for="product_price">Product Price 2 <span class="span-edit2">(WP)</span> </label>
                   <div class="input-group-prepend">
-                  <input type="text" class="form-control" id="product_price1" name="product_price1" class="form-control" value="<?php echo $rows['product_price1']?>">
+                  <input type="text" class="form-control" id="product_price2" name="product_price2" class="form-control" value="<?php echo $rows['product_price1']?>">
                   <div class="input-group-text">bath</div>
                   </div>
               </div>
               <div class="form-group col-md-2">
                   <label for="product_price">Product Price 3 <span class="span-edit2">(BP)</span> </label>
                   <div class="input-group-prepend">
-                  <input type="text" class="form-control" id="product_price1" name="product_price1" class="form-control" value="<?php echo $rows['product_price1']?>">
+                  <input type="text" class="form-control" id="product_price3" name="product_price3" class="form-control" value="<?php echo $rows['product_price1']?>">
                   <div class="input-group-text">bath</div>
                   </div>
               </div>
               <div class="form-group col-md-2">
                   <label for="product_price">Product Price 4 <span class="span-edit2">(TK)</span> </label>
                   <div class="input-group-prepend">
-                  <input type="text" class="form-control" id="product_price1" name="product_price1" class="form-control" value="<?php echo $rows['product_price1']?>">
+                  <input type="text" class="form-control" id="product_price4" name="product_price4" class="form-control" value="<?php echo $rows['product_price1']?>">
                   <div class="input-group-text">bath</div>
                   </div>
               </div>
               <div class="form-group col-md-2">
                   <label for="product_price">Product Price 5 <span class="span-edit2">(PN)</span> </label>
                   <div class="input-group-prepend">
-                  <input type="text" class="form-control" id="product_price1" name="product_price1" class="form-control" value="<?php echo $rows['product_price1']?>">
+                  <input type="text" class="form-control" id="product_price5" name="product_price5" class="form-control" value="<?php echo $rows['product_price1']?>">
                   <div class="input-group-text">bath</div>
-                  </div>
+              </div>
              
                 </div><div class="form-group col-md-2">
 
@@ -152,38 +154,39 @@ include('../../../../includes/function.php');
 <!-- END Product Price -->
 
 <!-- Product Cost -->
-<div class="form-group col-md-2">
+              <div class="form-group col-md-12"> <label style="color:red" for="product_detail"> ราคาต้นทุน </label></div> 
+              <div class="form-group col-md-2">
                   <label for="product_price">Product Cost 1 <span class="span-edit2">(NP)</span> </label>
                   <div class="input-group-prepend">
-                  <input type="text" class="form-control" id="product_price1" name="product_price1" class="form-control" value="<?php echo $rows['product_price1']?>">
+                  <input type="text" class="form-control" id="product_cost1" name="product_cost1" class="form-control" value="<?php echo $rows['product_price1']?>">
                   <div class="input-group-text">bath</div>
                   </div>
               </div>
               <div class="form-group col-md-2">
                   <label for="product_price">Product Cost 2 <span class="span-edit2">(WP)</span> </label>
                   <div class="input-group-prepend">
-                  <input type="text" class="form-control" id="product_price1" name="product_price1" class="form-control" value="<?php echo $rows['product_price1']?>">
+                  <input type="text" class="form-control" id="product_cost2" name="product_cost2" class="form-control" value="<?php echo $rows['product_price1']?>">
                   <div class="input-group-text">bath</div>
                   </div>
               </div>
               <div class="form-group col-md-2">
                   <label for="product_price">Product Cost 3 <span class="span-edit2">(BP)</span> </label>
                   <div class="input-group-prepend">
-                  <input type="text" class="form-control" id="product_price1" name="product_price1" class="form-control" value="<?php echo $rows['product_price1']?>">
+                  <input type="text" class="form-control" id="product_cost3" name="product_cost3" class="form-control" value="<?php echo $rows['product_price1']?>">
                   <div class="input-group-text">bath</div>
                   </div>
               </div>
               <div class="form-group col-md-2">
                   <label for="product_price">Product Cost 4 <span class="span-edit2">(TK)</span> </label>
                   <div class="input-group-prepend">
-                  <input type="text" class="form-control" id="product_price1" name="product_price1" class="form-control" value="<?php echo $rows['product_price1']?>">
+                  <input type="text" class="form-control" id="product_cost4" name="product_cost4" class="form-control" value="<?php echo $rows['product_price1']?>">
                   <div class="input-group-text">bath</div>
                   </div>
               </div>
               <div class="form-group col-md-2">
                   <label for="product_price">Product Cost 5 <span class="span-edit2">(PN)</span> </label>
                   <div class="input-group-prepend">
-                  <input type="text" class="form-control" id="product_price1" name="product_price1" class="form-control" value="<?php echo $rows['product_price1']?>">
+                  <input type="text" class="form-control" id="product_cost5" name="product_cost5" class="form-control" value="<?php echo $rows['product_price1']?>">
                   <div class="input-group-text">bath</div>
                   </div>
              
