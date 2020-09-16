@@ -24,8 +24,11 @@ body {
 
 <body>
     <?php 
+
 require_once 'config.php';
-include('includes/navbar.php')?>
+include('includes/navbar.php')
+
+?>
     <!-- The Modal -->
     <br><br> <br><br><br>
 
