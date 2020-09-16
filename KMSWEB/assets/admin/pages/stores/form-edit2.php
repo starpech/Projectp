@@ -88,7 +88,7 @@ include('../../../../includes/function.php');
             <div class="form-row">
               <div class="form-group col-md-6">
                   <label for="mem_fname">Add Image Product</label>
-                 
+
                     <div class="custom-file">
                         <input name="product_id" type="hidden" id="product_id" value="<?php echo $rows['product_id']; ?>">
                         <input type="file" class="custom-file-input" name="imgUpload" id="customFile" >
