@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="report1" language="groovy" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="229bd28a-946f-43b4-b2ad-387cbb67297f">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<queryString>
+		<![CDATA[SELECT
+     pr_detail.`id_no` AS pr_detail_id_no,
+     pr_detail.`pr_detail_id` AS pr_detail_pr_detail_id,
+     pr_detail.`pr_id` AS pr_detail_pr_id,
+     pr_detail.`input_date` AS pr_detail_input_date,
+     pr_detail.`input_by` AS pr_detail_input_by,
+     pr_detail.`approve_date` AS pr_detail_approve_date,
+     pr_detail.`approve_by` AS pr_detail_approve_by,
+     pr_detail.`Quota_id` AS pr_detail_Quota_id,
+     pr_detail.`Quota_name` AS pr_detail_Quota_name,
+     pr_detail.`Quota_ket` AS pr_detail_Quota_ket,
+     pr_detail.`Quota_place` AS pr_detail_Quota_place,
+     pr_detail.`Product_code` AS pr_detail_Product_code,
+     pr_detail.`Product_name` AS pr_detail_Product_name,
+     pr_detail.`Product_amount` AS pr_detail_Product_amount,
+     pr_detail.`Product_price` AS pr_detail_Product_price,
+     pr_detail.`Product_total` AS pr_detail_Product_total,
+     pr_detail.`recieve_amount` AS pr_detail_recieve_amount,
+     pr_detail.`remain_amount` AS pr_detail_remain_amount,
+     pr_detail.`Invoice_date` AS pr_detail_Invoice_date,
+     pr_detail.`weightdoc_no` AS pr_detail_weightdoc_no,
+     pr_detail.`invoice_no` AS pr_detail_invoice_no,
+     pr_detail.`remark` AS pr_detail_remark,
+     pr_detail.`status` AS pr_detail_status,
+     pr_detail.`flag` AS pr_detail_flag,
+     pr_detail.`modify_date` AS pr_detail_modify_date,
+     pr_detail.`modify_by` AS pr_detail_modify_by
+FROM
+     `pr_detail` pr_detail]]>
+	</queryString>
+	<field name="pr_detail_id_no" class="java.lang.Integer"/>
+	<field name="pr_detail_pr_detail_id" class="java.lang.String"/>
+	<field name="pr_detail_pr_id" class="java.lang.Integer"/>
+	<field name="pr_detail_input_date" class="java.sql.Timestamp"/>
+	<field name="pr_detail_input_by" class="java.lang.String"/>
+	<field name="pr_detail_approve_date" class="java.sql.Date"/>
+	<field name="pr_detail_approve_by" class="java.lang.String"/>
+	<field name="pr_detail_Quota_id" class="java.lang.String"/>
+	<field name="pr_detail_Quota_name" class="java.lang.String"/>
+	<field name="pr_detail_Quota_ket" class="java.lang.String"/>
+	<field name="pr_detail_Quota_place" class="java.lang.String"/>
+	<field name="pr_detail_Product_code" class="java.lang.String"/>
+	<field name="pr_detail_Product_name" class="java.lang.String"/>
+	<field name="pr_detail_Product_amount" class="java.lang.Integer"/>
+	<field name="pr_detail_Product_price" class="java.lang.Double"/>
+	<field name="pr_detail_Product_total" class="java.lang.Double"/>
+	<field name="pr_detail_recieve_amount" class="java.lang.Integer"/>
+	<field name="pr_detail_remain_amount" class="java.lang.Integer"/>
+	<field name="pr_detail_Invoice_date" class="java.sql.Date"/>
+	<field name="pr_detail_weightdoc_no" class="java.lang.String"/>
+	<field name="pr_detail_invoice_no" class="java.lang.String"/>
+	<field name="pr_detail_remark" class="java.lang.String"/>
+	<field name="pr_detail_status" class="java.lang.String"/>
+	<field name="pr_detail_flag" class="java.lang.String"/>
+	<field name="pr_detail_modify_date" class="java.sql.Timestamp"/>
+	<field name="pr_detail_modify_by" class="java.lang.Integer"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="79" splitType="Stretch"/>
+	</title>
+	<pageHeader>
+		<band height="35" splitType="Stretch"/>
+	</pageHeader>
+	<columnHeader>
+		<band height="61" splitType="Stretch">
+			<staticText>
+				<reportElement x="61" y="2" width="100" height="20" uuid="d2c8b604-867f-49b3-9f4a-51a163508090"/>
+				<text><![CDATA[pr_detail_input_date]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="125" splitType="Stretch">
+			<textField>
+				<reportElement x="61" y="46" width="100" height="20" uuid="cc80351a-2d0d-4d76-8eaf-aa417f063968"/>
+				<textFieldExpression><![CDATA[$F{pr_detail_input_date}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<columnFooter>
+		<band height="45" splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band height="54" splitType="Stretch"/>
+	</pageFooter>
+	<summary>
+		<band height="42" splitType="Stretch"/>
+	</summary>
+</jasperReport>
