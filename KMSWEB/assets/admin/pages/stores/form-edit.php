@@ -179,18 +179,6 @@ include('../../../../includes/function.php');
               </div>
                 <div class="form-group col-md-2">  </div>
 
-
-
-
-
-
-
-
-
-
-
-
-
               <div class="form-group col-md-2">
                   <label for="product_code">Product Code</label>
                   <input type="text" class="form-control" id="product_code" name="product_code"value="<?php echo $rows['product_code']?>"disabled>

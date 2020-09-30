@@ -50,6 +50,6 @@ WHERE pd.`pr_detail_no` = '2';
 */
 //$query = "update pr_main set flag_delete = 1 where pr_id  = '{$_GET['id']}' ";
 //$conn->query($query);
-echo "<script>alert('แก้ไขเรียบร้อย');</script>";
+//echo "<script>alert('แก้ไขเรียบร้อย');</script>";
 
 header('location: pr_gen.php');
