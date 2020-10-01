@@ -7,10 +7,6 @@ include('includes/function.php');
 <!DOCTYPE html>
 <html lang="en">
 <head>
-
-
-
-
 <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
@@ -28,7 +24,6 @@ include('includes/function.php');
 
     <title>สร้างใบส่งสินค้า</title>
 </head>
-
 
 <?php 
   include('includes/navbar_sale.php')
@@ -96,7 +91,7 @@ function selectProducts(){
    <br><br><br><br><br>
    <h3 align="center">สร้างใบส่งสินค้า</h3><br />
 
-   <form method="post"  action="pr_create.php">
+   <form method="post"  action="inv_create.php">
         <div class="table-responsive">
           <table class="table table-bordered">
             <tr>

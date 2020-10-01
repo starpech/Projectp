@@ -65,11 +65,11 @@ $mem_id=$_SESSION['mem_id'];
 
       <li class="nav-item">
        <!-- <a class="nav-link" href="orderhistory.php"><?php echo $orderhistory?> </a> -->
-        <a class="nav-link" href="pr_gen.php">แสดงรายการใบขอซื้อ</a>
+        <a class="nav-link" href="req_list.php">แสดงรายการใบขอซื้อ</a>
       </li>
     </ul>
     
-    <div class="form-inline my-2 my-lg-0">
+    <div class="form-inline my-2 my-lg-0 pull-right">
     <ul class="navbar-nav mr-auto">
       <li class="nav-item ">
       <div class="dropdown show">
@@ -153,7 +153,7 @@ $mem_id=$_SESSION['mem_id'];
       </li> -->
     </ul>
     
-    <div class="form-inline my-2 my-lg-0">
+    <div class="form-inline my-2 my-lg-0 pull-right">
     <ul class="navbar-nav mr-auto">
       <li class="nav-item active">
         <a class="nav-link " href="login.php" data-toggle="modal" data-target="#mySignin" ><?php echo $signin?><span class="sr-only">(current)</span></a>

@@ -55,7 +55,6 @@ $mem_id=$_SESSION['mem_id'];
         <a class="dropdown-item " href="">สร้างรายการจัดส่งสินค้า</a>
         
         <a class="dropdown-item" href="" >แสดงรายการจัดส่งสินค้า</a>
-        <a class="dropdown-item" href="inv_gen.php" >สร้างใบส่งสินค้า</a>
       </div>
     </div>
     </li>

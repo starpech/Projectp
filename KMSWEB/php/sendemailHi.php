@@ -28,7 +28,7 @@ $mail = new PHPMailer(true);
     $mail->isHTML(true);
     $mail->Subject = 'แจ้งเตือนการ Login เข้าแอป KMSWeb / Notice of KMSWeb Login';
     $mail->Body = " เรียน คุณ &nbsp; <h3>$mem_name</h3><br>
-    คุณได้ทำการ &nbsp; Login &nbsp; เข้าสู่ &nbsp; KMSWeb &nbsp; ครั้งล่าสุดเมื่อวันที่ <h3>$datelogin</h3><br>หากคุณไม่ได้เข้าสู่ระบบ &nbsp; ในวันเวลาดังกล่าว &nbsp;&nbsp; กรุณาแจ้งเจ้าหน้าที่ดูแลระบบ <br><br> ขอแสดงความนับถือ <br><br>
+    คุณได้ทำการ &nbsp; Login &nbsp; เข้าสู่ &nbsp; <a href='https://ireport.kslgroup.com/kmsweb/'>KMSWeb</a> &nbsp; ครั้งล่าสุดเมื่อวันที่ <h3>$datelogin</h3><br>หากคุณไม่ได้เข้าสู่ระบบ &nbsp; ในวันเวลาดังกล่าว &nbsp;&nbsp; กรุณาแจ้งเจ้าหน้าที่ดูแลระบบ <br><br> ขอแสดงความนับถือ <br><br>
     เจ้าหน้าที่ดูแลระบบ&nbsp; KMSWeb";
     
     $mail->send();

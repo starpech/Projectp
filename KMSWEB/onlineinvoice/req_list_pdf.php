@@ -77,7 +77,7 @@ $bodyTable = '';
 $dbdata = dbData();
 foreach($dbdata as $k=>$v){
   $datei = date('d/m/Y',strtotime($v["input_date"]));
-  $status = ($v["status"])?"<span style=\"color:green\"> approved </span>":"<span style=\"color:red\"> no approved </span>";
+  $status = ($v["status"])?"<span style=\"color:red\"> no approved </span>":"<span style=\"color:green\"> approved </span>";
   $bodyTable .= "
   <tr>
     <td>{$datei}</td>

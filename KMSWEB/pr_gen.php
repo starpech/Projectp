@@ -93,6 +93,9 @@ $dataPrMain = (dbPrMain());
  
                    <a href='pr_gen_edit.php?id=".$row[0]."' class='btn btn-success btn-sm' ><span class='glyphicon glyphicon-edit'></span> แก้ไข</a>
                    <a href='#delete_".$row[0]."' class='btn btn-danger btn-sm' data-toggle='modal'><span class='glyphicon glyphicon-trash'></span> ลบ</a>
+                   
+                   <a href='pr_gen_upload.php?id=".$row[0]."' class='btn btn-warning btn-sm' ><span class='glyphicon glyphicon-edit'></span> รูปภาพ </a>
+
                    </td>
                    </tr>";
                    

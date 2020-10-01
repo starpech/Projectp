@@ -51,7 +51,7 @@ $comp_code = $_SESSION["comp_code"];
        <th width="25%"><h5 align="center">ชื่อสินค้า</h5></th>
        <th width="10%"><h5 align="center">จำนวน</h5></th>
               <!--<th>More</th>-->
-              <th style="width:100px"><a href="req_order.php" class="btn btn-info"><i class="fas fa-plus-square"></i> เพิ่มผู้ใช้</a></th>
+              <th style="width:100px"><a href="req_order.php" class="btn btn-info"><i class="fas fa-plus-square"></i> เพิ่มรายการขอซื้อ</a></th>
             </tr>
             </thead>
             <tbody>
@@ -74,7 +74,9 @@ $comp_code = $_SESSION["comp_code"];
                    <td> {$row['Product_amount']}</td>
                    <td> 
                    <a href='#edit_".$row['req_detail_id']."' class='btn btn-success btn-sm' data-toggle='modal'><span class='glyphicon glyphicon-edit'></span> แก้ไข</a>
-                   <a style=\"display:none;\" href='#delete_".$row['req_detail_id']."' class='btn btn-danger btn-sm' data-toggle='modal'><span class='glyphicon glyphicon-trash'></span> ลบ</a>
+
+                   <a href='#delete_".$row['req_detail_id']."' class='btn btn-danger btn-sm' data-toggle='modal'><span class='glyphicon glyphicon-trash'></span> ลบ</a>
+                   
                    </td>
                    </tr>";
                    
