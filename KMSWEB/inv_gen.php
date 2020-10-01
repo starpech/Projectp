@@ -71,7 +71,7 @@ $dataPrMain = (dbPrMain());
        <th width="15%"><h5 align="center">สถานที่ส่งสินค้า</h5></th>
        <th width="10%"><h5 align="center">จำนวน</h5></th>
               <!--<th>More</th>-->
-              <th style="width:100px"><a href="inv_gen_create.php" class="btn btn-info"><i class="fas fa-plus-square"></i> สร้างรายการขอซื้อ</a></th>
+              <th style="width:100px"><a href="inv_gen_create.php" class="btn btn-info"><i class="fas fa-plus-square"></i> สร้างใบส่งสินค้า</a></th>
             </tr>
             </thead>
             <tbody>

@@ -16,8 +16,6 @@ include('includes/function.php');
     <link rel="stylesheet" href="node_modules/css/style.css">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/flag-icon-css/3.4.3/css/flag-icon.css" rel="stylesheet"/>
     <link href="https://fonts.googleapis.com/css?family=Kanit&display=swap" rel="stylesheet">
-	  
-   
     <!-- DataTables -->
   <link rel="stylesheet" href="assets/admin/plugins/datatables/dataTables.bootstrap4.min.css">
   <link rel="stylesheet" href="assets/admin/plugins/responsive/responsive.bootstrap4.min.css"><!-- responsive-->
@@ -34,8 +32,7 @@ include('includes/function.php');
 
 function dbComp(){
   global $conn;
-  $query = "
-  SELECT * FROM comp order by comp_code";
+  $query = "SELECT * FROM comp order by comp_code";
   $result = $conn->query($query);     
   if (!$result) {
     printf("Query failed: %s\n", $conn->error);
@@ -50,10 +47,8 @@ function dbComp(){
 function dbProduct(){
   global $conn;
  $my_comp_code = (int)$_SESSION["comp_code"];
-  $query = "
-  SELECT *, product_price{$my_comp_code} as product_price FROM product where comp_code = '{$_SESSION["comp_code"]}' order by product_id";
-  $query = "
-  SELECT * , product_price{$my_comp_code} as product_price FROM product where 1=1 order by product_code";
+  $query = "SELECT *, product_price{$my_comp_code} as product_price FROM product where comp_code = '{$_SESSION["comp_code"]}' order by product_id";
+  $query = "SELECT * , product_price{$my_comp_code} as product_price FROM product where 1=1 order by product_code";
   
   //echo ":::".$query;
 
@@ -83,10 +78,8 @@ function selectProducts(){
   }
   return sprintf($htmlSelectProduct,$op);
 }
-
-
-
 ?>
+
 <div class="container-fluid">
    <br><br><br><br><br>
    <h3 align="center">สร้างใบส่งสินค้า</h3><br />

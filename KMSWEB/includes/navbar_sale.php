@@ -52,7 +52,7 @@ $mem_id=$_SESSION['mem_id'];
       <a class="nav-link dropdown-toggle active" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">รายการจัดส่งสินค้า</a>
       <div class="dropdown-menu " aria-labelledby="dropdownMenuLink">
 
-        <a class="dropdown-item " href="">สร้างรายการจัดส่งสินค้า</a>
+        <a class="dropdown-item " href="inv_gen.php">สร้างรายการจัดส่งสินค้า</a>
         
         <a class="dropdown-item" href="" >แสดงรายการจัดส่งสินค้า</a>
       </div>

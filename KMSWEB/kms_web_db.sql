@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Oct 01, 2020 at 06:05 AM
+-- Generation Time: Oct 01, 2020 at 10:36 AM
 -- Server version: 10.4.11-MariaDB
 -- PHP Version: 7.2.31
 
@@ -111,11 +111,11 @@ INSERT INTO `members` (`mem_id`, `mem_code`, `mem_fname`, `mem_lname`, `comp_cod
 (6, '01', 'จิรายุส', 'แก้วสระแสน', '01', 'jirayut@kslgroup.com', '0869316956', '     ', 'jirayut', 'jirayut', '', '0000-00-00 00:00:00', 'admin', '0'),
 (7, '02', 'พีรวิชญ์', 'เครือเนตร', '01', 'phirawit@kslgroup.com', '', '  ', 'phirawit', 'phirawit', '', '0000-00-00 00:00:00', 'officer', '0'),
 (8, '03', 'ธนินณัฐ', 'ชาวกล้า', '01', 'Thaninnat@kslgroup.com', '', '  ', 'thaninnat', 'thaninnat', '', '0000-00-00 00:00:00', 'officer', '0'),
-(9, '04', 'สมบัติ', 'วงษ์พล', '03', 'sombat@kslgroup.com', '', '   ', 'sombat', 'sombat', '', '0000-00-00 00:00:00', 'approver', '0'),
+(9, '04', 'สมบัติ', 'วงษ์พล', '06', 'sombat@kslgroup.com', '', '   ', 'sombat', 'sombat', '', '0000-00-00 00:00:00', 'approver', '0'),
 (10, '05', 'จิราภรณ์', 'พัฒนมณี', '03', 'jiraporn@kslgroup.com', '', '  ', 'jiraporn', 'jiraporn', '', '0000-00-00 00:00:00', '', '0'),
 (11, '06', 'จิตติมา', 'กลับแสง', '04', 'jittama@kslgroup.com', '', '  ', 'jittama', 'jittama', '', '0000-00-00 00:00:00', '', '0'),
 (12, '07', 'จิรายุส', 'แก้วสระแสน', '01', 'jirayut@kslgroup.com', '0902349988', '  ', 'admin', 'admin', '', '0000-00-00 00:00:00', 'admin', '0'),
-(13, '08', 'สารัช', 'ชุณหโรจน์ฤทธิ์', '03', 'sarat@kslgroup.com', '', '    ', 'demo', 'demo', '', '0000-00-00 00:00:00', 'operator', '0'),
+(13, '08', 'สารัช', 'ชุณหโรจน์ฤทธิ์', '06', 'sarat@kslgroup.com', '', '    ', 'demo', 'demo', '', '0000-00-00 00:00:00', 'operator', '0'),
 (14, '09', 'วิรัตน์', 'ดำขำ', '05', 'wirat@kslgroup.com', '', ' ', 'wirat', 'wirat', '', '0000-00-00 00:00:00', 'approver', '0'),
 (15, '10', 'รัชดาพร', 'ลิ้วเจริญ', '06', 'ratchadaporn@kslgroup.com', '', ' ', 'ratchadaporn', 'ratchadaporn', '', '0000-00-00 00:00:00', '', '0'),
 (16, '11', 'พรพิมล', 'เจริญศิลป์', '08', '', '', ' ', 'pornpimon', 'pornpimon', '', '0000-00-00 00:00:00', '', '0'),
@@ -349,7 +349,15 @@ INSERT INTO `pr_detail` (`pr_detail_no`, `pr_main_id`, `pr_detail_order`, `produ
 (21, '15', NULL, '5121000063', 'ไซแอมฟิฟ-เอสซี', 30, '30.00', 'Bottle', '900.00'),
 (22, '15', NULL, '5121000065', 'คชาเพนดิ', 40, '30.00', 'Bottle', '1200.00'),
 (23, '16', NULL, '5021000032', 'ปุ๋ย KMS 888 (50 Kg.ต่อ กส.)', 500, '30.00', 'BAG', '15000.00'),
-(24, '16', NULL, '5021000034', 'ปุ๋ยน้ำ KSL888 (1000 CC.)', 200, '30.00', 'Bottle', '6000.00');
+(24, '16', NULL, '5021000034', 'ปุ๋ยน้ำ KSL888 (1000 CC.)', 200, '30.00', 'Bottle', '6000.00'),
+(25, '17', NULL, '5021000032', 'ปุ๋ย KMS 888 (50 Kg.ต่อ กส.)', 50, '0.00', 'BAG', '0.00'),
+(26, '18', NULL, '5123458882', 'ปุ๋ย ตรา Leadership 15-15-15', 50, '20.00', 'BAG', '1000.00'),
+(27, '18', NULL, '5123458884', 'ปุ๋ย ตรา Leadership 1ุ6-10-16', 30, '20.00', 'BAG', '600.00'),
+(28, '18', NULL, '5123458886', 'ปุ๋ย ตรา Leadership 20-6-25', 20, '20.00', 'BAG', '400.00'),
+(29, '20', NULL, '5021000032', 'ปุ๋ย KMS 888 (50 Kg.ต่อ กส.)', 250, '0.00', 'BAG', '0.00'),
+(30, '21', NULL, '5123458884', 'ปุ๋ย ตรา Leadership 1ุ6-10-16', 100, '50.00', 'BAG', '5000.00'),
+(31, '22', NULL, '5121000071', 'อะซีโทคลอร์', 190, '50.00', 'Bottle', '9500.00'),
+(32, '22', NULL, '5121000079', 'ไซแอม คอมบี', 50, '50.00', 'BAG', '2500.00');
 
 -- --------------------------------------------------------
 
@@ -388,7 +396,42 @@ INSERT INTO `pr_main` (`pr_no`, `pr_id`, `pr_date`, `pr_SupplierID`, `pr_Supplie
 (13, 'WP63640006', '2020-09-28', '08', 'บริษัท คชา เคมีการเกษตร จำกัด', ' 225 ม.4 ต.หนองหญ้าปล้อง วังสะพุง เลย', NULL, NULL, '0000007', 1, '03', 0),
 (14, 'WP63640007', '2020-09-28', '03', 'บริษัท น้ำตาลขอนแก่น จำกัด(สาขาวังสะพุง)', ' 225 ม.4 ต.หนองหญ้าปล้อง วังสะพุง เลย', NULL, NULL, '', 1, '03', 0),
 (15, 'WP63640008', '2020-09-30', '03', 'บริษัท เคเอสแอล แมททีเรียล ซัพพลายส์ จำกัด', ' 225 ม.4 ต.หนองหญ้าปล้อง วังสะพุง เลย', NULL, NULL, '', 1, '03', 0),
-(16, 'WP63640009', '2020-10-01', '03', 'บริษัท น้ำตาลขอนแก่น จำกัด (สาขาน้ำพอง)', ' 225 ม.4 ต.หนองหญ้าปล้อง วังสะพุง เลย', NULL, NULL, '', 1, '03', 0);
+(16, 'WP63640009', '2020-10-01', '03', 'บริษัท น้ำตาลขอนแก่น จำกัด (สาขาน้ำพอง)', ' 225 ม.4 ต.หนองหญ้าปล้อง วังสะพุง เลย', NULL, NULL, '', 1, '03', 0),
+(17, 'WP63640010', '2020-10-01', '01', 'บริษัท เคเอสแอล แมททีเรียล ซัพพลายส์ จำกัด', ' 225 ม.4 ต.หนองหญ้าปล้อง วังสะพุง เลย', NULL, NULL, '0000013', 1, '03', 0),
+(18, 'WP63640011', '2020-10-01', '07', 'บริษัท ปุ๋ยศักดิ์สยาม จำกัด', ' 225 ม.4 ต.หนองหญ้าปล้อง วังสะพุง เลย', NULL, NULL, '0000009,0000010,0000011', 1, '03', 0),
+(20, 'PN63640001', '2020-10-01', '01', 'บริษัท เคเอสแอล แมททีเรียล ซัพพลายส์ จำกัด', ' 24 ม.1 ถ.บ้านหนองบัว ต.หมอนนาง อ.พนัสนิคม ชลบุรี', NULL, NULL, '0000001,0000002,0000004', 1, '06', 0),
+(21, 'PN63640002', '2020-10-01', '07', 'บริษัท ปุ๋ยศักดิ์สยาม จำกัด', ' 24 ม.1 ถ.บ้านหนองบัว ต.หมอนนาง อ.พนัสนิคม ชลบุรี', NULL, NULL, '0000003', 1, '06', 0),
+(22, 'PN63640003', '2020-10-01', '08', 'บริษัท คชา เคมีการเกษตร จำกัด', ' 24 ม.1 ถ.บ้านหนองบัว ต.หมอนนาง อ.พนัสนิคม ชลบุรี', NULL, NULL, '0000005,0000006', 1, '06', 0);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `pr_main_uploads`
+--
+
+CREATE TABLE `pr_main_uploads` (
+  `id` int(11) NOT NULL,
+  `pr_id` varchar(10) COLLATE utf8_unicode_ci NOT NULL,
+  `pr_image_path` varchar(100) COLLATE utf8_unicode_ci NOT NULL,
+  `pr_image_title` varchar(100) COLLATE utf8_unicode_ci NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+--
+-- Dumping data for table `pr_main_uploads`
+--
+
+INSERT INTO `pr_main_uploads` (`id`, `pr_id`, `pr_image_path`, `pr_image_title`) VALUES
+(1, 'NP63640001', 'upload_doc_img/233921375f74355a0f0d4.jpg', 'ทดสอบ'),
+(4, 'NP63640001', 'upload_doc_img/2186707065f7442803273a.jpg', 'ทดสอบ 001'),
+(5, 'NP63640002', 'upload_doc_img/18876137445f7454ea0660a.jpg', 'fffgsdfgs'),
+(7, 'NP63640002', 'upload_doc_img/3017709645f7456b0afa04.jpg', 'ฟกฟกฟกฟ'),
+(8, 'NP63640003', 'upload_doc_img/164228855f74576c1d4e3.jpg', ''),
+(9, 'NP63640003', 'upload_doc_img/20644141185f7457a0a6919.jpg', 'beauty'),
+(10, 'NP63640003', 'upload_doc_img/14038010835f7457d832dc1.jpg', ''),
+(12, 'WP63640004', 'upload_doc_img/15792436145f745d3b33e3f.jpg', 'beauty01'),
+(13, 'WP63640004', 'upload_doc_img/5698667415f745d51e4240.jpg', 'beauty02'),
+(14, 'NP63640001', 'upload_doc_img/770525575f754b71ba70e.jpg', 'ใบส่งของ'),
+(15, 'WP63640009', 'upload_doc_img/8095564915f754d9908da8.jpg', '');
 
 -- --------------------------------------------------------
 
@@ -425,6 +468,261 @@ CREATE TABLE `req_detail` (
   `modify_date` date DEFAULT NULL COMMENT 'วันที่แก้ไขรายการ',
   `modify_by` int(11) DEFAULT NULL COMMENT 'แก้ไขรายการโดย'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `req_detail01`
+--
+
+CREATE TABLE `req_detail01` (
+  `id_no` int(7) UNSIGNED ZEROFILL NOT NULL COMMENT 'เลขประจำตัวรายการขอซื้อ',
+  `req_detail_id` varchar(10) NOT NULL COMMENT 'หมายเลขรายการขอซื้อ',
+  `req_id` int(10) DEFAULT NULL COMMENT 'หมายเลขใบขอซื้อ',
+  `req_comp_code` varchar(2) DEFAULT NULL COMMENT 'รหัสบริษัทที่ออกรายการขอซื้อ',
+  `input_date` date DEFAULT NULL COMMENT 'วันที่ทำรายการ',
+  `input_by` varchar(2) DEFAULT NULL COMMENT 'รหัสผู้ทำรายการ',
+  `approve` varchar(1) DEFAULT NULL COMMENT 'อนุมัติหรือยัง',
+  `approve_date` date DEFAULT NULL COMMENT 'วันที่อนุมัติ',
+  `approve_by` varchar(2) DEFAULT NULL COMMENT 'รหัสผู้อนุมัติ',
+  `Quota_id` varchar(7) DEFAULT NULL COMMENT 'โค้วต้าชาวไร่/เขต',
+  `Quota_name` varchar(60) DEFAULT NULL COMMENT 'ชื่อนามสกุลโควต้า/เขต',
+  `Quota_ket` varchar(3) DEFAULT NULL COMMENT 'เขตชาวไร่',
+  `Quota_place` varchar(50) DEFAULT NULL COMMENT 'สถานที่จัดส่ง',
+  `comp_code` varchar(2) DEFAULT NULL COMMENT 'เป็นสินค้าของบริษัท',
+  `Product_code` varchar(11) DEFAULT NULL COMMENT 'รหัสสินค้า',
+  `Product_name` varchar(30) DEFAULT NULL COMMENT 'ชื่อสินค้า',
+  `Product_amount` int(10) DEFAULT NULL COMMENT 'จำนวนสินค้า',
+  `Product_price` double(10,2) DEFAULT NULL COMMENT 'ราคาต่อหน่วย',
+  `Product_total` double(10,2) DEFAULT NULL COMMENT 'ราคาสินค้า',
+  `recieve_amount` int(11) DEFAULT NULL COMMENT 'จำนวนที่ส่งแล้ว',
+  `remain_amount` int(11) DEFAULT NULL COMMENT 'จำนวนที่ยังไม่ส่ง',
+  `remark` varchar(500) DEFAULT NULL COMMENT 'หมายเหตุ',
+  `status` varchar(1) DEFAULT NULL COMMENT 'สถานะรายการขอซื้อ NULL:ยังไม่ทำอะไร 1:สร้างใบขอซื้อแล้ว 2:สร้างใบสั่งซื้อแล้ว',
+  `flag` varchar(1) NOT NULL DEFAULT '0' COMMENT 'flag 0:use 1:notuse',
+  `pr_id` varchar(10) DEFAULT NULL COMMENT 'หมายเลขใบขอซื้อ',
+  `modify_date` date DEFAULT NULL COMMENT 'วันที่แก้ไขรายการ',
+  `modify_by` int(11) DEFAULT NULL COMMENT 'แก้ไขรายการโดย'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `req_detail02`
+--
+
+CREATE TABLE `req_detail02` (
+  `id_no` int(7) UNSIGNED ZEROFILL NOT NULL COMMENT 'เลขประจำตัวรายการขอซื้อ',
+  `req_detail_id` varchar(10) NOT NULL COMMENT 'หมายเลขรายการขอซื้อ',
+  `req_id` int(10) DEFAULT NULL COMMENT 'หมายเลขใบขอซื้อ',
+  `req_comp_code` varchar(2) DEFAULT NULL COMMENT 'รหัสบริษัทที่ออกรายการขอซื้อ',
+  `input_date` date DEFAULT NULL COMMENT 'วันที่ทำรายการ',
+  `input_by` varchar(2) DEFAULT NULL COMMENT 'รหัสผู้ทำรายการ',
+  `approve` varchar(1) DEFAULT NULL COMMENT 'อนุมัติหรือยัง',
+  `approve_date` date DEFAULT NULL COMMENT 'วันที่อนุมัติ',
+  `approve_by` varchar(2) DEFAULT NULL COMMENT 'รหัสผู้อนุมัติ',
+  `Quota_id` varchar(7) DEFAULT NULL COMMENT 'โค้วต้าชาวไร่/เขต',
+  `Quota_name` varchar(60) DEFAULT NULL COMMENT 'ชื่อนามสกุลโควต้า/เขต',
+  `Quota_ket` varchar(3) DEFAULT NULL COMMENT 'เขตชาวไร่',
+  `Quota_place` varchar(50) DEFAULT NULL COMMENT 'สถานที่จัดส่ง',
+  `comp_code` varchar(2) DEFAULT NULL COMMENT 'เป็นสินค้าของบริษัท',
+  `Product_code` varchar(11) DEFAULT NULL COMMENT 'รหัสสินค้า',
+  `Product_name` varchar(30) DEFAULT NULL COMMENT 'ชื่อสินค้า',
+  `Product_amount` int(10) DEFAULT NULL COMMENT 'จำนวนสินค้า',
+  `Product_price` double(10,2) DEFAULT NULL COMMENT 'ราคาต่อหน่วย',
+  `Product_total` double(10,2) DEFAULT NULL COMMENT 'ราคาสินค้า',
+  `recieve_amount` int(11) DEFAULT NULL COMMENT 'จำนวนที่ส่งแล้ว',
+  `remain_amount` int(11) DEFAULT NULL COMMENT 'จำนวนที่ยังไม่ส่ง',
+  `remark` varchar(500) DEFAULT NULL COMMENT 'หมายเหตุ',
+  `status` varchar(1) DEFAULT NULL COMMENT 'สถานะรายการขอซื้อ NULL:ยังไม่ทำอะไร 1:สร้างใบขอซื้อแล้ว 2:สร้างใบสั่งซื้อแล้ว',
+  `flag` varchar(1) NOT NULL DEFAULT '0' COMMENT 'flag 0:use 1:notuse',
+  `pr_id` varchar(10) DEFAULT NULL COMMENT 'หมายเลขใบขอซื้อ',
+  `modify_date` date DEFAULT NULL COMMENT 'วันที่แก้ไขรายการ',
+  `modify_by` int(11) DEFAULT NULL COMMENT 'แก้ไขรายการโดย'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Dumping data for table `req_detail02`
+--
+
+INSERT INTO `req_detail02` (`id_no`, `req_detail_id`, `req_id`, `req_comp_code`, `input_date`, `input_by`, `approve`, `approve_date`, `approve_by`, `Quota_id`, `Quota_name`, `Quota_ket`, `Quota_place`, `comp_code`, `Product_code`, `Product_name`, `Product_amount`, `Product_price`, `Product_total`, `recieve_amount`, `remain_amount`, `remark`, `status`, `flag`, `pr_id`, `modify_date`, `modify_by`) VALUES
+(0000001, 'NP0000001', NULL, NULL, '2020-09-27', '13', 'Y', '2020-09-27', '9', '0131029', 'วิชัย', '401', 'โนนสะอาด', '01', '5021000032', 'ปุ๋ย KMS 888 (50 Kg.ต่อ กส.)', 10, 330.00, 3300.00, NULL, NULL, NULL, NULL, '0', NULL, NULL, NULL),
+(0000002, 'NP0000002', NULL, NULL, '2020-09-27', '13', 'Y', '2020-09-27', '9', '0131029', 'วิชัย', '401', 'โนนสะอาด', '07', '5123458882', 'ปุ๋ย ตรา Leadership 15-15-15', 20, 999.00, 19980.00, NULL, NULL, NULL, NULL, '0', NULL, NULL, NULL),
+(0000003, 'NP0000003', NULL, NULL, '2020-09-27', '13', 'Y', '2020-09-27', '9', '0100312', 'ทองศรี', '302', 'เขาสวนกวาง', '08', '5121000080', 'ไกลโฟเสท', 30, 520.00, 15600.00, NULL, NULL, NULL, NULL, '0', NULL, NULL, NULL),
+(0000004, 'NP0000004', NULL, NULL, '2020-09-27', '13', 'Y', '2020-09-27', '9', '0100312', 'ทองศรี', '302', 'เขาสวนกวาง', '07', '5123458882', 'ปุ๋ย ตรา Leadership 15-15-15', 10, 999.00, 9990.00, NULL, NULL, NULL, NULL, '0', NULL, NULL, NULL),
+(0000005, 'NP0000005', NULL, NULL, '2020-09-27', '13', 'Y', '2020-09-27', '9', '0103980', 'กิตติ', '205', 'กระนวน', '08', '5121000078', 'คชาเอมีน-84-SL', 10, 150.00, 1500.00, NULL, NULL, NULL, NULL, '0', NULL, NULL, NULL),
+(0000006, 'NP0000006', NULL, NULL, '2020-09-27', '13', 'Y', '2020-09-27', '9', '0103980', 'กิตติ', '205', 'กระนวน', '07', '5123458886', 'ปุ๋ย ตรา Leadership 20-6-25', 10, 999.00, 9990.00, NULL, NULL, NULL, NULL, '0', NULL, NULL, NULL),
+(0000007, 'NP0000007', NULL, NULL, '2020-09-27', '13', 'Y', '2020-09-27', '9', '0103980', 'กิตติ', '205', 'กระนวน', '01', '5021000032', 'ปุ๋ย KMS 888 (50 Kg.ต่อ กส.)', 50, 330.00, 16500.00, NULL, NULL, NULL, NULL, '0', NULL, NULL, NULL);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `req_detail03`
+--
+
+CREATE TABLE `req_detail03` (
+  `id_no` int(7) UNSIGNED ZEROFILL NOT NULL COMMENT 'เลขประจำตัวรายการขอซื้อ',
+  `req_detail_id` varchar(10) NOT NULL COMMENT 'หมายเลขรายการขอซื้อ',
+  `req_id` int(10) DEFAULT NULL COMMENT 'หมายเลขใบขอซื้อ',
+  `req_comp_code` varchar(2) DEFAULT NULL COMMENT 'รหัสบริษัทที่ออกรายการขอซื้อ',
+  `input_date` date DEFAULT NULL COMMENT 'วันที่ทำรายการ',
+  `input_by` varchar(2) DEFAULT NULL COMMENT 'รหัสผู้ทำรายการ',
+  `approve` varchar(1) DEFAULT NULL COMMENT 'อนุมัติหรือยัง',
+  `approve_date` date DEFAULT NULL COMMENT 'วันที่อนุมัติ',
+  `approve_by` varchar(2) DEFAULT NULL COMMENT 'รหัสผู้อนุมัติ',
+  `Quota_id` varchar(7) DEFAULT NULL COMMENT 'โค้วต้าชาวไร่/เขต',
+  `Quota_name` varchar(60) DEFAULT NULL COMMENT 'ชื่อนามสกุลโควต้า/เขต',
+  `Quota_ket` varchar(3) DEFAULT NULL COMMENT 'เขตชาวไร่',
+  `Quota_place` varchar(50) DEFAULT NULL COMMENT 'สถานที่จัดส่ง',
+  `comp_code` varchar(2) DEFAULT NULL COMMENT 'เป็นสินค้าของบริษัท',
+  `Product_code` varchar(11) DEFAULT NULL COMMENT 'รหัสสินค้า',
+  `Product_name` varchar(30) DEFAULT NULL COMMENT 'ชื่อสินค้า',
+  `Product_amount` int(10) DEFAULT NULL COMMENT 'จำนวนสินค้า',
+  `Product_price` double(10,2) DEFAULT NULL COMMENT 'ราคาต่อหน่วย',
+  `Product_total` double(10,2) DEFAULT NULL COMMENT 'ราคาสินค้า',
+  `recieve_amount` int(11) DEFAULT NULL COMMENT 'จำนวนที่ส่งแล้ว',
+  `remain_amount` int(11) DEFAULT NULL COMMENT 'จำนวนที่ยังไม่ส่ง',
+  `remark` varchar(500) DEFAULT NULL COMMENT 'หมายเหตุ',
+  `status` varchar(1) DEFAULT NULL COMMENT 'สถานะรายการขอซื้อ NULL:ยังไม่ทำอะไร 1:สร้างใบขอซื้อแล้ว 2:สร้างใบสั่งซื้อแล้ว',
+  `flag` varchar(1) NOT NULL DEFAULT '0' COMMENT 'flag 0:use 1:notuse',
+  `pr_id` varchar(10) DEFAULT NULL COMMENT 'หมายเลขใบขอซื้อ',
+  `modify_date` date DEFAULT NULL COMMENT 'วันที่แก้ไขรายการ',
+  `modify_by` int(11) DEFAULT NULL COMMENT 'แก้ไขรายการโดย'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Dumping data for table `req_detail03`
+--
+
+INSERT INTO `req_detail03` (`id_no`, `req_detail_id`, `req_id`, `req_comp_code`, `input_date`, `input_by`, `approve`, `approve_date`, `approve_by`, `Quota_id`, `Quota_name`, `Quota_ket`, `Quota_place`, `comp_code`, `Product_code`, `Product_name`, `Product_amount`, `Product_price`, `Product_total`, `recieve_amount`, `remain_amount`, `remark`, `status`, `flag`, `pr_id`, `modify_date`, `modify_by`) VALUES
+(0000004, 'WP0000004', NULL, NULL, '2020-09-28', '13', 'Y', '2020-09-28', '9', '0202337', 'ทองย้อย', '301', 'วังไห', '01', '5021000032', 'ปุ๋ย KMS 888 (50 Kg.ต่อ กส.)', 50, 20.00, 1000.00, NULL, NULL, NULL, NULL, '0', NULL, NULL, NULL),
+(0000005, 'WP0000005', NULL, NULL, '2020-09-28', '13', 'Y', '2020-09-28', '9', '0201483', 'สมศรี', '204', 'ศรีชมพู', '01', '5021000032', 'ปุ๋ย KMS 888 (50 Kg.ต่อ กส.)', 50, 20.00, 1000.00, NULL, NULL, NULL, NULL, '0', NULL, NULL, NULL),
+(0000006, 'WP0000006', NULL, NULL, '2020-09-28', '13', 'Y', '2020-09-28', '9', '0201483', 'สมศรี', '204', 'ศรีชมพู', '07', '5123458882', 'ปุ๋ย ตรา Leadership 15-15-15', 50, 20.00, 1000.00, NULL, NULL, NULL, NULL, '0', NULL, NULL, NULL),
+(0000007, 'WP0000007', NULL, NULL, '2020-09-28', '13', 'Y', '2020-09-28', '9', '0201483', 'สมศรี', '204', 'ศรีชมพู', '08', '5121000087', 'คชายูรอน-80-ดับบลิวพี', 20, 20.00, 400.00, NULL, NULL, NULL, NULL, '0', NULL, NULL, NULL),
+(0000009, 'WP0000009', NULL, NULL, '2020-10-01', '13', 'Y', '2020-10-01', '9', '0903452', 'ทองแดง', '401', 'โคกสูง', '07', '5123458882', 'ปุ๋ย ตรา Leadership 15-15-15', 50, 20.00, 1000.00, NULL, NULL, NULL, NULL, '0', NULL, NULL, NULL),
+(0000010, 'WP0000010', NULL, NULL, '2020-10-01', '13', 'Y', '2020-10-01', '9', '0903552', 'ทองคำ', '401', 'นากว้าง', '07', '5123458884', 'ปุ๋ย ตรา Leadership 1ุ6-10-16', 30, 20.00, 600.00, NULL, NULL, NULL, NULL, '0', NULL, NULL, NULL),
+(0000011, 'WP0000011', NULL, NULL, '2020-10-01', '13', 'Y', '2020-10-01', '9', '0903216', 'ทองดี', '401', 'วังไห', '07', '5123458886', 'ปุ๋ย ตรา Leadership 20-6-25', 20, 20.00, 400.00, NULL, NULL, NULL, NULL, '0', NULL, NULL, NULL),
+(0000013, 'WP0000013', NULL, NULL, '2020-10-01', '13', 'Y', '2020-10-01', '9', '0902188', 'วรรณา', '401', 'โคกกลาง', '01', '5021000032', 'ปุ๋ย KMS 888 (50 Kg.ต่อ กส.)', 50, 0.00, 0.00, NULL, NULL, NULL, NULL, '0', NULL, NULL, NULL);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `req_detail04`
+--
+
+CREATE TABLE `req_detail04` (
+  `id_no` int(7) UNSIGNED ZEROFILL NOT NULL COMMENT 'เลขประจำตัวรายการขอซื้อ',
+  `req_detail_id` varchar(10) NOT NULL COMMENT 'หมายเลขรายการขอซื้อ',
+  `req_id` int(10) DEFAULT NULL COMMENT 'หมายเลขใบขอซื้อ',
+  `req_comp_code` varchar(2) DEFAULT NULL COMMENT 'รหัสบริษัทที่ออกรายการขอซื้อ',
+  `input_date` date DEFAULT NULL COMMENT 'วันที่ทำรายการ',
+  `input_by` varchar(2) DEFAULT NULL COMMENT 'รหัสผู้ทำรายการ',
+  `approve` varchar(1) DEFAULT NULL COMMENT 'อนุมัติหรือยัง',
+  `approve_date` date DEFAULT NULL COMMENT 'วันที่อนุมัติ',
+  `approve_by` varchar(2) DEFAULT NULL COMMENT 'รหัสผู้อนุมัติ',
+  `Quota_id` varchar(7) DEFAULT NULL COMMENT 'โค้วต้าชาวไร่/เขต',
+  `Quota_name` varchar(60) DEFAULT NULL COMMENT 'ชื่อนามสกุลโควต้า/เขต',
+  `Quota_ket` varchar(3) DEFAULT NULL COMMENT 'เขตชาวไร่',
+  `Quota_place` varchar(50) DEFAULT NULL COMMENT 'สถานที่จัดส่ง',
+  `comp_code` varchar(2) DEFAULT NULL COMMENT 'เป็นสินค้าของบริษัท',
+  `Product_code` varchar(11) DEFAULT NULL COMMENT 'รหัสสินค้า',
+  `Product_name` varchar(30) DEFAULT NULL COMMENT 'ชื่อสินค้า',
+  `Product_amount` int(10) DEFAULT NULL COMMENT 'จำนวนสินค้า',
+  `Product_price` double(10,2) DEFAULT NULL COMMENT 'ราคาต่อหน่วย',
+  `Product_total` double(10,2) DEFAULT NULL COMMENT 'ราคาสินค้า',
+  `recieve_amount` int(11) DEFAULT NULL COMMENT 'จำนวนที่ส่งแล้ว',
+  `remain_amount` int(11) DEFAULT NULL COMMENT 'จำนวนที่ยังไม่ส่ง',
+  `remark` varchar(500) DEFAULT NULL COMMENT 'หมายเหตุ',
+  `status` varchar(1) DEFAULT NULL COMMENT 'สถานะรายการขอซื้อ NULL:ยังไม่ทำอะไร 1:สร้างใบขอซื้อแล้ว 2:สร้างใบสั่งซื้อแล้ว',
+  `flag` varchar(1) NOT NULL DEFAULT '0' COMMENT 'flag 0:use 1:notuse',
+  `pr_id` varchar(10) DEFAULT NULL COMMENT 'หมายเลขใบขอซื้อ',
+  `modify_date` date DEFAULT NULL COMMENT 'วันที่แก้ไขรายการ',
+  `modify_by` int(11) DEFAULT NULL COMMENT 'แก้ไขรายการโดย'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `req_detail05`
+--
+
+CREATE TABLE `req_detail05` (
+  `id_no` int(7) UNSIGNED ZEROFILL NOT NULL COMMENT 'เลขประจำตัวรายการขอซื้อ',
+  `req_detail_id` varchar(10) NOT NULL COMMENT 'หมายเลขรายการขอซื้อ',
+  `req_id` int(10) DEFAULT NULL COMMENT 'หมายเลขใบขอซื้อ',
+  `req_comp_code` varchar(2) DEFAULT NULL COMMENT 'รหัสบริษัทที่ออกรายการขอซื้อ',
+  `input_date` date DEFAULT NULL COMMENT 'วันที่ทำรายการ',
+  `input_by` varchar(2) DEFAULT NULL COMMENT 'รหัสผู้ทำรายการ',
+  `approve` varchar(1) DEFAULT NULL COMMENT 'อนุมัติหรือยัง',
+  `approve_date` date DEFAULT NULL COMMENT 'วันที่อนุมัติ',
+  `approve_by` varchar(2) DEFAULT NULL COMMENT 'รหัสผู้อนุมัติ',
+  `Quota_id` varchar(7) DEFAULT NULL COMMENT 'โค้วต้าชาวไร่/เขต',
+  `Quota_name` varchar(60) DEFAULT NULL COMMENT 'ชื่อนามสกุลโควต้า/เขต',
+  `Quota_ket` varchar(3) DEFAULT NULL COMMENT 'เขตชาวไร่',
+  `Quota_place` varchar(50) DEFAULT NULL COMMENT 'สถานที่จัดส่ง',
+  `comp_code` varchar(2) DEFAULT NULL COMMENT 'เป็นสินค้าของบริษัท',
+  `Product_code` varchar(11) DEFAULT NULL COMMENT 'รหัสสินค้า',
+  `Product_name` varchar(30) DEFAULT NULL COMMENT 'ชื่อสินค้า',
+  `Product_amount` int(10) DEFAULT NULL COMMENT 'จำนวนสินค้า',
+  `Product_price` double(10,2) DEFAULT NULL COMMENT 'ราคาต่อหน่วย',
+  `Product_total` double(10,2) DEFAULT NULL COMMENT 'ราคาสินค้า',
+  `recieve_amount` int(11) DEFAULT NULL COMMENT 'จำนวนที่ส่งแล้ว',
+  `remain_amount` int(11) DEFAULT NULL COMMENT 'จำนวนที่ยังไม่ส่ง',
+  `remark` varchar(500) DEFAULT NULL COMMENT 'หมายเหตุ',
+  `status` varchar(1) DEFAULT NULL COMMENT 'สถานะรายการขอซื้อ NULL:ยังไม่ทำอะไร 1:สร้างใบขอซื้อแล้ว 2:สร้างใบสั่งซื้อแล้ว',
+  `flag` varchar(1) NOT NULL DEFAULT '0' COMMENT 'flag 0:use 1:notuse',
+  `pr_id` varchar(10) DEFAULT NULL COMMENT 'หมายเลขใบขอซื้อ',
+  `modify_date` date DEFAULT NULL COMMENT 'วันที่แก้ไขรายการ',
+  `modify_by` int(11) DEFAULT NULL COMMENT 'แก้ไขรายการโดย'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `req_detail06`
+--
+
+CREATE TABLE `req_detail06` (
+  `id_no` int(7) UNSIGNED ZEROFILL NOT NULL COMMENT 'เลขประจำตัวรายการขอซื้อ',
+  `req_detail_id` varchar(10) NOT NULL COMMENT 'หมายเลขรายการขอซื้อ',
+  `req_id` int(10) DEFAULT NULL COMMENT 'หมายเลขใบขอซื้อ',
+  `req_comp_code` varchar(2) DEFAULT NULL COMMENT 'รหัสบริษัทที่ออกรายการขอซื้อ',
+  `input_date` date DEFAULT NULL COMMENT 'วันที่ทำรายการ',
+  `input_by` varchar(2) DEFAULT NULL COMMENT 'รหัสผู้ทำรายการ',
+  `approve` varchar(1) DEFAULT NULL COMMENT 'อนุมัติหรือยัง',
+  `approve_date` date DEFAULT NULL COMMENT 'วันที่อนุมัติ',
+  `approve_by` varchar(2) DEFAULT NULL COMMENT 'รหัสผู้อนุมัติ',
+  `Quota_id` varchar(7) DEFAULT NULL COMMENT 'โค้วต้าชาวไร่/เขต',
+  `Quota_name` varchar(60) DEFAULT NULL COMMENT 'ชื่อนามสกุลโควต้า/เขต',
+  `Quota_ket` varchar(3) DEFAULT NULL COMMENT 'เขตชาวไร่',
+  `Quota_place` varchar(50) DEFAULT NULL COMMENT 'สถานที่จัดส่ง',
+  `comp_code` varchar(2) DEFAULT NULL COMMENT 'เป็นสินค้าของบริษัท',
+  `Product_code` varchar(11) DEFAULT NULL COMMENT 'รหัสสินค้า',
+  `Product_name` varchar(30) DEFAULT NULL COMMENT 'ชื่อสินค้า',
+  `Product_amount` int(10) DEFAULT NULL COMMENT 'จำนวนสินค้า',
+  `Product_price` double(10,2) DEFAULT NULL COMMENT 'ราคาต่อหน่วย',
+  `Product_total` double(10,2) DEFAULT NULL COMMENT 'ราคาสินค้า',
+  `recieve_amount` int(11) DEFAULT NULL COMMENT 'จำนวนที่ส่งแล้ว',
+  `remain_amount` int(11) DEFAULT NULL COMMENT 'จำนวนที่ยังไม่ส่ง',
+  `remark` varchar(500) DEFAULT NULL COMMENT 'หมายเหตุ',
+  `status` varchar(1) DEFAULT NULL COMMENT 'สถานะรายการขอซื้อ NULL:ยังไม่ทำอะไร 1:สร้างใบขอซื้อแล้ว 2:สร้างใบสั่งซื้อแล้ว',
+  `flag` varchar(1) NOT NULL DEFAULT '0' COMMENT 'flag 0:use 1:notuse',
+  `pr_id` varchar(10) DEFAULT NULL COMMENT 'หมายเลขใบขอซื้อ',
+  `modify_date` date DEFAULT NULL COMMENT 'วันที่แก้ไขรายการ',
+  `modify_by` int(11) DEFAULT NULL COMMENT 'แก้ไขรายการโดย'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Dumping data for table `req_detail06`
+--
+
+INSERT INTO `req_detail06` (`id_no`, `req_detail_id`, `req_id`, `req_comp_code`, `input_date`, `input_by`, `approve`, `approve_date`, `approve_by`, `Quota_id`, `Quota_name`, `Quota_ket`, `Quota_place`, `comp_code`, `Product_code`, `Product_name`, `Product_amount`, `Product_price`, `Product_total`, `recieve_amount`, `remain_amount`, `remark`, `status`, `flag`, `pr_id`, `modify_date`, `modify_by`) VALUES
+(0000001, 'PN0000001', NULL, NULL, '2020-10-01', '13', 'Y', '2020-10-01', '9', '0600341', 'มงคล', '705', 'พัทยา', '01', '5021000032', 'ปุ๋ย KMS 888 (50 Kg.ต่อ กส.)', 100, 0.00, 0.00, NULL, NULL, NULL, NULL, '0', NULL, NULL, NULL),
+(0000002, 'PN0000002', NULL, NULL, '2020-10-01', '13', 'Y', '2020-10-01', '9', '0601849', 'บังเอิญ', '806', 'สระแก้ว', '01', '5021000032', 'ปุ๋ย KMS 888 (50 Kg.ต่อ กส.)', 50, 0.00, 0.00, NULL, NULL, NULL, NULL, '0', NULL, NULL, NULL),
+(0000003, 'PN0000003', NULL, NULL, '2020-10-01', '13', 'Y', '2020-10-01', '9', '0605381', 'วิภา', '704', 'คลองหาด', '07', '5123458884', 'ปุ๋ย ตรา Leadership 1ุ6-10-16', 100, 50.00, 5000.00, NULL, NULL, NULL, NULL, '0', NULL, NULL, NULL),
+(0000004, 'PN0000004', NULL, NULL, '2020-10-01', '13', 'Y', '2020-10-01', '9', '0605381', 'วิภา', '704', 'คลองหาด', '01', '5021000032', 'ปุ๋ย KMS 888 (50 Kg.ต่อ กส.)', 100, 0.00, 0.00, NULL, NULL, NULL, NULL, '0', NULL, NULL, NULL),
+(0000005, 'PN0000005', NULL, NULL, '2020-10-01', '13', 'Y', '2020-10-01', '9', '0613944', 'วิบูลย์', '803', 'ปราจีนบุรี', '08', '5121000079', 'ไซแอม คอมบี', 50, 50.00, 2500.00, NULL, NULL, NULL, NULL, '0', NULL, NULL, NULL),
+(0000006, 'PN0000006', NULL, NULL, '2020-10-01', '13', 'Y', '2020-10-01', '9', '0605488', 'เสนา', '304', 'สัตหีบ', '08', '5121000071', 'อะซีโทคลอร์', 190, 50.00, 9500.00, NULL, NULL, NULL, NULL, '0', NULL, NULL, NULL);
 
 --
 -- Indexes for dumped tables
@@ -497,9 +795,51 @@ ALTER TABLE `pr_main`
   ADD PRIMARY KEY (`pr_no`,`site_no`) USING BTREE;
 
 --
+-- Indexes for table `pr_main_uploads`
+--
+ALTER TABLE `pr_main_uploads`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indexes for table `req_detail`
 --
 ALTER TABLE `req_detail`
+  ADD PRIMARY KEY (`id_no`);
+
+--
+-- Indexes for table `req_detail01`
+--
+ALTER TABLE `req_detail01`
+  ADD PRIMARY KEY (`id_no`);
+
+--
+-- Indexes for table `req_detail02`
+--
+ALTER TABLE `req_detail02`
+  ADD PRIMARY KEY (`id_no`);
+
+--
+-- Indexes for table `req_detail03`
+--
+ALTER TABLE `req_detail03`
+  ADD PRIMARY KEY (`id_no`);
+
+--
+-- Indexes for table `req_detail04`
+--
+ALTER TABLE `req_detail04`
+  ADD PRIMARY KEY (`id_no`);
+
+--
+-- Indexes for table `req_detail05`
+--
+ALTER TABLE `req_detail05`
+  ADD PRIMARY KEY (`id_no`);
+
+--
+-- Indexes for table `req_detail06`
+--
+ALTER TABLE `req_detail06`
   ADD PRIMARY KEY (`id_no`);
 
 --
@@ -564,19 +904,61 @@ ALTER TABLE `product_tag`
 -- AUTO_INCREMENT for table `pr_detail`
 --
 ALTER TABLE `pr_detail`
-  MODIFY `pr_detail_no` int(11) NOT NULL AUTO_INCREMENT COMMENT 'ลำดับรายการขอซื้อ', AUTO_INCREMENT=25;
+  MODIFY `pr_detail_no` int(11) NOT NULL AUTO_INCREMENT COMMENT 'ลำดับรายการขอซื้อ', AUTO_INCREMENT=34;
 
 --
 -- AUTO_INCREMENT for table `pr_main`
 --
 ALTER TABLE `pr_main`
-  MODIFY `pr_no` int(6) NOT NULL AUTO_INCREMENT COMMENT 'เลขลำดับรายการ', AUTO_INCREMENT=17;
+  MODIFY `pr_no` int(6) NOT NULL AUTO_INCREMENT COMMENT 'เลขลำดับรายการ', AUTO_INCREMENT=23;
+
+--
+-- AUTO_INCREMENT for table `pr_main_uploads`
+--
+ALTER TABLE `pr_main_uploads`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
 
 --
 -- AUTO_INCREMENT for table `req_detail`
 --
 ALTER TABLE `req_detail`
   MODIFY `id_no` int(10) NOT NULL AUTO_INCREMENT COMMENT 'เลขประจำตัวรายการขอซื้อ';
+
+--
+-- AUTO_INCREMENT for table `req_detail01`
+--
+ALTER TABLE `req_detail01`
+  MODIFY `id_no` int(7) UNSIGNED ZEROFILL NOT NULL AUTO_INCREMENT COMMENT 'เลขประจำตัวรายการขอซื้อ';
+
+--
+-- AUTO_INCREMENT for table `req_detail02`
+--
+ALTER TABLE `req_detail02`
+  MODIFY `id_no` int(7) UNSIGNED ZEROFILL NOT NULL AUTO_INCREMENT COMMENT 'เลขประจำตัวรายการขอซื้อ', AUTO_INCREMENT=8;
+
+--
+-- AUTO_INCREMENT for table `req_detail03`
+--
+ALTER TABLE `req_detail03`
+  MODIFY `id_no` int(7) UNSIGNED ZEROFILL NOT NULL AUTO_INCREMENT COMMENT 'เลขประจำตัวรายการขอซื้อ', AUTO_INCREMENT=14;
+
+--
+-- AUTO_INCREMENT for table `req_detail04`
+--
+ALTER TABLE `req_detail04`
+  MODIFY `id_no` int(7) UNSIGNED ZEROFILL NOT NULL AUTO_INCREMENT COMMENT 'เลขประจำตัวรายการขอซื้อ';
+
+--
+-- AUTO_INCREMENT for table `req_detail05`
+--
+ALTER TABLE `req_detail05`
+  MODIFY `id_no` int(7) UNSIGNED ZEROFILL NOT NULL AUTO_INCREMENT COMMENT 'เลขประจำตัวรายการขอซื้อ';
+
+--
+-- AUTO_INCREMENT for table `req_detail06`
+--
+ALTER TABLE `req_detail06`
+  MODIFY `id_no` int(7) UNSIGNED ZEROFILL NOT NULL AUTO_INCREMENT COMMENT 'เลขประจำตัวรายการขอซื้อ', AUTO_INCREMENT=7;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

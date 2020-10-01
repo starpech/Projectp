@@ -57,4 +57,4 @@ update pr_main set pr_detail_add=1 where pr_no = @pr_no;
 $conn->multi_query($insPrMainSQL.$insPrDetailSQL);
 
 
-header('location: pr_gen.php');
+header('location: inv_gen.php');
