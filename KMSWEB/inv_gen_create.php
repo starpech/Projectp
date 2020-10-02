@@ -151,7 +151,7 @@ function selectProducts(){
                 <td colspan="2" align="center">
                 <input type="hidden" name="comp_code" value="<?php echo $_SESSION["comp_code"]?>" />
                  <div>จำนนเงินทั้งหมด <span id='sumtotal' style="color:red;">00.00</span> บาท</div>
-                                   <input type="submit" name="btnSubmit" id="btnSubmit" class="btn btn-info" value="สร้างรายการสั่งซื้อ" />
+                <input type="submit" name="btnSubmit" id="btnSubmit" class="btn btn-info" value="สร้างรายการสั่งซื้อ" />
                 </td>
               </tr>
           </table>
