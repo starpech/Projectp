@@ -1,6 +1,18 @@
 <?php
-$con= mysqli_connect("localhost","root","","projectshop")
-    or die ("Error:".mysqli_error($con));
-mysqli_query($con,"SET NAME 'utf8'");
-date_default_timezone_set('Asia/Bangkok');
+
+$servername = 'localhost';
+$username = 'root';
+$password = '';
+$dbname = 'projectshop';
+
+$conn = mysqli_connect($locohost, $root, , $projectshop);
+
+
+<?php if (!$conn) {
+	die("Connection : failed (เชื่อมต่อฐานข้อมูล ไม่ สำเร็จ)" . mysqli_connect_error());
+} else {
+	echo "Connection : OK (เชื่อมต่อฐานข้อมูลสำเร็จ)";
+} ?>
+
+mysqli_close($conn); // ปิดฐานข้อมูล
 ?>

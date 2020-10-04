@@ -15,10 +15,7 @@
         <!-- Content Wrapper. Contains page content -->
       </div>
     </div>
-    <?php
-        if($conn){echo "connect success";}
-        else {echo "connect fails";}
-     ?>
+
   </div>
   </body>
 </html>
