@@ -5,7 +5,7 @@ $username = 'root';
 $password = '';
 $dbname = 'projectshop';
 
-$conn = mysqli_connect($locohost, $root, , $projectshop);
+$conn = mysqli_connect($locohost, $root, $password , $projectshop);
 
 
 <?php if (!$conn) {
