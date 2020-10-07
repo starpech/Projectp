@@ -30,7 +30,10 @@
   </button> -->
     
   <div class="collapse navbar-collapse" id="navbarColor01">
-    <?php if(isset($_SESSION["mem_id"])) {?>
+    <?php
+         session_start();
+         if(isset($_SESSION["mem_id"]))
+    {?>
 <!-- login แล้ว -->
     <ul class="navbar-nav mr-auto">
       <li class="nav-item">
@@ -49,7 +52,7 @@
 
         <a class="dropdown-item " href="approve_page.php">อนุมัติรายการขอซื้อ</a>
         
-        <a class="dropdown-item" href="" >แสดงรายการอนุมัติ</a>
+        <a class="dropdown-item" href="req_list.php" >แสดงรายการอนุมัติ</a>
       </div>
     </div>
     </li>
@@ -57,13 +60,13 @@
         <a class="nav-link" href="pr_order.php"><?php echo $prorder?> </a>
       </li> -->
 
-      <li class="nav-item">
+      <!--<li class="nav-item">
        <!-- <a class="nav-link" href="orderhistory.php"><?php echo $orderhistory?> </a> -->
-        <a class="nav-link" href="">แก้ไขรายการขอซื้อ</a>
-      </li>
+        <!--<a class="nav-link" href="">แก้ไขรายการขอซื้อ</a>
+      </li>-->
     </ul>
     
-    <div class="form-inline my-2 my-lg-0">
+    <div class="form-inline my-2 my-lg-0 pull-right">
     <ul class="navbar-nav mr-auto">
       <li class="nav-item ">
       <div class="dropdown show">
@@ -72,9 +75,9 @@
       </a>
       <div class="dropdown-menu " aria-labelledby="dropdownMenuLink">
 
-        <a class="dropdown-item " href="profile.php"><i class="far fa-address-card"></i> <?php echo $changeprofile?></a>
+        <a class="dropdown-item " href="profile.php"><i class="far fa-address-card"></i>แก้ไขข้อมูลส่วนตัว</a>
         
-        <a class="dropdown-item" href="changepassword.php" data-toggle="modal" data-target="#mychangepassword" ><i class="fas fa-key"></i> <?php echo $changepassword?></a>
+        <a class="dropdown-item" href="changepassword.php" data-toggle="modal" data-target="#mychangepassword" ><i class="fas fa-key"></i>เปลี่ยนรหัสผ่าน</a>
       </div>
     </div>
     </li>
@@ -123,7 +126,7 @@
 </li> --> <!-- ซ่อนตระกร้า -->
 
       <li class="nav-item active">
-      <a class="nav-link " href="php/logout.php" ><i class="fas fa-sign-out-alt"></i> <?php echo $signout?> <span class="sr-only">(current)</span></a>
+      <a class="nav-link " href="php/logout.php" ><i class="fas fa-sign-out-alt"></i>ออกจากระบบ<span class="sr-only">(current)</span></a>
       </li>
       <!--<li class="nav-item active">
         <a href="?lang=en" class="flag-icon flag-icon-us nav-link"></a>
@@ -137,20 +140,20 @@
 <!-- ไม่ได้login-->
       <ul class="navbar-nav mr-auto">
       <li class="nav-item active">
-        <a class="nav-link" href="index.php"><i class="fas fa-home"> </i> <?php echo $home ?> <span class="sr-only">(current)</span></a>
+        <a class="nav-link" href="index.php"><i class="fas fa-home"> </i>หน้าแรก<span class="sr-only">(current)</span></a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" href="stores.php"><?php echo $store ?> </a>
+        <a class="nav-link" href="stores.php">สินค้า</a>
       </li>
       <!-- <li class="nav-item">
-        <a class="nav-link" href="about.php"><?php echo $about ?> </a>
+        <a class="nav-link" href="about.php">เกี่ยวกับ</a>
       </li> -->
     </ul>
     
     <div class="form-inline my-2 my-lg-0">
     <ul class="navbar-nav mr-auto">
       <li class="nav-item active">
-        <a class="nav-link " href="login.php" data-toggle="modal" data-target="#mySignin" ><?php echo $signin?><span class="sr-only">(current)</span></a>
+        <a class="nav-link " href="login.php" data-toggle="modal" data-target="#mySignin" >เข้าสู่ระบบ<span class="sr-only">(current)</span></a>
       </li>
       <!-- <li class="nav-item active">
       <a class="nav-link " href="php/register.php" data-toggle="modal" data-target="#mySignup"><?php echo $signup ?>  <span class="sr-only">(current)</span></a>

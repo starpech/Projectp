@@ -158,7 +158,7 @@ width:160px;
 }
 
 </style>
-<?php include("php/connect.php"); ?>
+<?php //include("php/connect.php"); ?>
 <?php
 
 

@@ -93,35 +93,35 @@ include('../../connect.php');
               </div>
 
                <div class="form-group col-md-2">
-                  <label for="product_price">ราคาต่อหน่วย1</label>
+                  <label for="product_price">ราคาต่อหน่วย1<span style="color:red">(NP)</span></label>
                   <div class="input-group-prepend">
                   <input type="text" class="form-control" id="product_price1" name="product_price1" class="form-control">
                   <div class="input-group-text">บาท</div>
                   </div>
               </div>
               <div class="form-group col-md-2">
-                  <label for="product_price">ราคาต่อหน่วย2</label>
+                  <label for="product_price">ราคาต่อหน่วย2<span style="color:red">(WP)</span></label>
                   <div class="input-group-prepend">
                   <input type="text" class="form-control" id="product_price2" name="product_price2" class="form-control">
                   <div class="input-group-text">บาท</div>
                   </div>
               </div>
               <div class="form-group col-md-2">
-                  <label for="product_price">ราคาต่อหน่วย3</label>
+                  <label for="product_price">ราคาต่อหน่วย3<span style="color:red">(BP)</span></label>
                   <div class="input-group-prepend">
                   <input type="text" class="form-control" id="product_price3" name="product_price3" class="form-control">
                   <div class="input-group-text">บาท</div>
                   </div>
               </div>
               <div class="form-group col-md-2">
-                  <label for="product_price">ราคาต่อหน่วย4</label>
+                  <label for="product_price">ราคาต่อหน่วย4<span style="color:red">(TK)</span></label>
                   <div class="input-group-prepend">
                   <input type="text" class="form-control" id="product_price4" name="product_price4" class="form-control">
                   <div class="input-group-text">บาท</div>
                   </div>
               </div>
               <div class="form-group col-md-2">
-                  <label for="product_price">ราคาต่อหน่วย5</label>
+                  <label for="product_price">ราคาต่อหน่วย5<span style="color:red">(PN)</span></label>
                   <div class="input-group-prepend">
                   <input type="text" class="form-control" id="product_price5" name="product_price5" class="form-control">
                   <div class="input-group-text">บาท</div>
@@ -133,35 +133,35 @@ include('../../connect.php');
 
 
               <div class="form-group col-md-2">
-                  <label for="product_price">ราคาต้นทุน1</label>
+                  <label for="product_price">ราคาต้นทุน1 <span style="color:red">(NP)</span></label>
                   <div class="input-group-prepend">
                   <input type="text" class="form-control" id="product_cost1" name="product_cost1" class="form-control">
                   <div class="input-group-text">บาท</div>
                   </div>
               </div>
               <div class="form-group col-md-2">
-                  <label for="product_price">ราคาต้นทุน2</label>
+                  <label for="product_price">ราคาต้นทุน2 <span style="color:red">(WP)</span></label>
                   <div class="input-group-prepend">
                   <input type="text" class="form-control" id="product_cost2" name="product_cost2" class="form-control">
                   <div class="input-group-text">บาท</div>
                   </div>
               </div>
               <div class="form-group col-md-2">
-                  <label for="product_price">ราคาต้นทุน3</label>
+                  <label for="product_price">ราคาต้นทุน3 <span style="color:red">(BP)</span></label>
                   <div class="input-group-prepend">
                   <input type="text" class="form-control" id="product_cost3" name="product_cost3" class="form-control">
                   <div class="input-group-text">บาท</div>
                   </div>
               </div>
               <div class="form-group col-md-2">
-                  <label for="product_price">ราคาต้นทุน4</label>
+                  <label for="product_price">ราคาต้นทุน4 <span style="color:red">(TK)</span></label>
                   <div class="input-group-prepend">
                   <input type="text" class="form-control" id="product_cost4" name="product_cost4" class="form-control">
                   <div class="input-group-text">บาท</div>
                   </div>
               </div>
               <div class="form-group col-md-2">
-                  <label for="product_price">ราคาต้นทุน5</label>
+                  <label for="product_price">ราคาต้นทุน5 <span style="color:red">(PN)</span></label>
                   <div class="input-group-prepend">
                   <input type="text" class="form-control" id="product_cost5" name="product_cost5" class="form-control">
                   <div class="input-group-text">บาท</div>

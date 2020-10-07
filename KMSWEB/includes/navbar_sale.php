@@ -52,7 +52,7 @@ $mem_id=$_SESSION['mem_id'];
       <a class="nav-link dropdown-toggle active" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">รายการจัดส่งสินค้า</a>
       <div class="dropdown-menu " aria-labelledby="dropdownMenuLink">
 
-        <a class="dropdown-item " href="inv_gen.php">สร้างรายการจัดส่งสินค้า</a>
+        <a class="dropdown-item " href="">สร้างรายการจัดส่งสินค้า</a>
         
         <a class="dropdown-item" href="" >แสดงรายการจัดส่งสินค้า</a>
       </div>
@@ -77,9 +77,9 @@ $mem_id=$_SESSION['mem_id'];
       </a>
       <div class="dropdown-menu " aria-labelledby="dropdownMenuLink">
 
-        <a class="dropdown-item " href="profile.php"><i class="far fa-address-card"></i> <?php echo $changeprofile?></a>
+        <a class="dropdown-item " href="profile.php"><i class="far fa-address-card"></i>แก้ไขข้อมูลส่วนตัว</a>
         
-        <a class="dropdown-item" href="changepassword.php" data-toggle="modal" data-target="#mychangepassword" ><i class="fas fa-key"></i> <?php echo $changepassword?></a>
+        <a class="dropdown-item" href="changepassword.php" data-toggle="modal" data-target="#mychangepassword" ><i class="fas fa-key"></i>เปลี่ยนรหัสผ่าน</a>
       </div>
     </div>
     </li>
@@ -128,7 +128,7 @@ $mem_id=$_SESSION['mem_id'];
 </li> --> <!-- ซ่อนตระกร้า -->
 
       <li class="nav-item active">
-      <a class="nav-link " href="php/logout.php" ><i class="fas fa-sign-out-alt"></i> <?php echo $signout?> <span class="sr-only">(current)</span></a>
+      <a class="nav-link " href="php/logout.php" ><i class="fas fa-sign-out-alt"></i>ออกจากระบบ<span class="sr-only">(current)</span></a>
       </li>
       <!--<li class="nav-item active">
         <a href="?lang=en" class="flag-icon flag-icon-us nav-link"></a>
@@ -142,10 +142,10 @@ $mem_id=$_SESSION['mem_id'];
 <!-- ไม่ได้login-->
       <ul class="navbar-nav mr-auto">
       <li class="nav-item active">
-        <a class="nav-link" href="index.php"><i class="fas fa-home"> </i> <?php echo $home ?> <span class="sr-only">(current)</span></a>
+        <a class="nav-link" href="index.php"><i class="fas fa-home"> </i>หน้าแรก<span class="sr-only">(current)</span></a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" href="stores.php"><?php echo $store ?> </a>
+        <a class="nav-link" href="stores.php">สินค้า</a>
       </li>
       <!-- <li class="nav-item">
         <a class="nav-link" href="about.php"><?php echo $about ?> </a>

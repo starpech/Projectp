@@ -114,25 +114,40 @@
 			  <div class="form-group col-md-2">
                   <label for="mem_status">ตำแหน่ง</label>
                   <select name="mem_status" id="mem_status" class="form-control">
-                   
-                   <?php
+           <?php
 				   $sqldata="Select * from members where mem_id=$mem_id";
                    $rese2=mysqli_query($conn,$sqldata);
                    $row2=mysqli_fetch_assoc($rese2);
-                   $user;
+                   $operator;
                    $approver;
-				   $admin;
-				   if($row2['mem_status']=="user"){
-                     $user="selected";
-                   }elseif ($row2['mem_status']=="approver"){
-                     $approver="selected";
-                   }else {
-					 $admin="selected";  
-				   }  
-                  ?>
-                  <option value="user" <?php echo $user?>>user</option>
+                   $officer;
+                   $sale;
+                   $acc;
+                   $plant;
+				           $admin;
+				      if($row2['mem_status']=="operator"){
+                       $operator="selected";
+              }elseif ($row2['mem_status']=="approver"){
+                       $approver="selected";
+              }elseif ($row2['mem_status']=="officer"){
+                       $officer="selected";
+              }elseif ($row2['mem_status']=="sale"){
+                       $sale="selected";
+              }elseif ($row2['mem_status']=="acc"){
+                       $acc="selected";
+              }elseif ($row2['mem_status']=="plant"){
+                       $plant="selected";
+              }else {
+					             $admin="selected";  
+				      }  
+           ?>
+                  <option value="operator" <?php echo $operator?>>user</option>
                   <option value="approver"<?php echo $approver?>>approver</option>
-				  <option value="admin"<?php echo $admin?>>admin</option>
+                  <option value="officer"<?php echo $officer?>>officer</option>
+                  <option value="sale"<?php echo $sale?>>sale</option>
+                  <option value="acc"<?php echo $acc?>>acc</option>
+                  <option value="plant"<?php echo $plant?>>plant</option>
+				          <option value="admin"<?php echo $admin?>>admin</option>
 				  </select>
                   <?php    
                   ?>

@@ -25,8 +25,7 @@
     
 </style>
 <body>
-<?php 
-require_once 'config.php';
+<?php
 session_start();
 if($_SESSION["mem_status"]=="operator"){
       include('includes/navbar_operator.php'); }
@@ -64,28 +63,28 @@ $row=mysqli_fetch_array($res);
 
                         <div class="form-row">
                             <div class="form-group col-md-4">
-                                <label for="mem_username"><?php echo $user;?></label>
+                                <label for="mem_username">ชื่อผู้ใช้งาน</label>
                                 <input type="text" class="form-control" id="mem_username" value="<?php echo $row['mem_username']?>" disabled>
                             </div>
                             <div class="form-group col-md-4">
-                                <label for="mem_fname"><?php echo $name;?></label>
+                                <label for="mem_fname">ชื่อ</label>
                                 <input type="text" class="form-control" id="mem_fname" value="<?php echo $row['mem_fname']?>" disabled>
                             </div>
                             <div class="form-group col-md-4">
-                                <label for="mem_lname"><?php echo $lname;?></label>
+                                <label for="mem_lname">นามสกุล</label>
                                 <input type="text" class="form-control" id="mem_lname" value="<?php echo $row['mem_lname']?>" disabled>
                             </div>
                             <div class="form-group col-md-6">
-                                <label for="mem_email"><?php echo $mail;?></label>
+                                <label for="mem_email">อีเมลล์</label>
                                 <input type="email" class="form-control" id="mem_email" value="<?php echo $row['mem_email']?>" disabled>
                             </div>
                             <div class="form-group col-md-6">
-                                <label for="mem_tel"><?php echo $tel;?></label>
+                                <label for="mem_tel">เบอร์โทรศัพท์</label>
                                 <input type="text" class="form-control" id="mem_tel" value="<?php echo $row['mem_tel']?>" disabled>
                             </div>
                         </div>
                         <div class="form-group">
-                                <label for="mem_address"><?php echo $add;?></label>
+                                <label for="mem_address">ที่อยู่</label>
                                 <textarea class="form-control" id="mem_address" rows="5" disabled><?php echo $row['mem_address']?> </textarea>
                             </div>
                             <a href="profile-edit.php"class="btn btn-warning float-right">แก้ไขข้อมูล</a>

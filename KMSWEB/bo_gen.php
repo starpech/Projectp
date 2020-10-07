@@ -25,7 +25,7 @@ include('includes/function.php');
   <link rel="stylesheet" href="assets/admin/plugins/datatables/dataTables.bootstrap4.min.css">
   <link rel="stylesheet" href="assets/admin/plugins/responsive/responsive.bootstrap4.min.css"><!-- responsive-->
 
-    <title>แก้ไขรายการขอซื้อ</title>
+    <title>รายการใบวางบิล</title>
 </head>
 
 <?php
@@ -49,9 +49,17 @@ include('includes/function.php');
 <?php 
 
 function dbPrMain(){
-  global $conn;
+  global $conn,$prefix_po;
   $query="
-  SELECT p.pr_id, p.pr_date, p.`pr_SupplierName`, (select c.comp_name from comp as c where c.comp_code= p.`site_no`) as site_name, (select sum(pd.amount) from pr_detail as pd where pd.pr_main_id = p.pr_no) as sumall FROM `pr_main` as p
+  SELECT 
+      p.{$prefix_po}id, 
+      p.{$prefix_po}date, 
+      p.`{$prefix_po}SupplierName`, 
+      (select c.comp_name from comp as c where c.comp_code= p.`site_no`) as site_name, 
+      (select sum(pd.amount) from {$prefix_po}detail as pd where pd.{$prefix_po}main_id = p.{$prefix_po}no) as sumall 
+  
+      ,approved 
+          FROM `{$prefix_po}main` as p
   where flag_delete = 0
   ";
   $result = $conn->query($query);     
@@ -73,19 +81,20 @@ $dataPrMain = (dbPrMain());
 ?>
 <div class="container-fluid">
    <br><br><br><br><br>
-   <h3 align="center">รายการใบสั่งซื้อ</h3><br />
+   <h3 align="center">รายการใบวางบิล</h3><br />
    
 
    <table id="dataTable" class="table table-bordered table-striped w-100 ">
             <thead>
             <tr>
-            <th width="15%"><h5 align="center">เลขที่ใบสั่งซื้อ</h5></th>
-       <th width="20%"><h5 align="center">วันที่สั่งซื้อ</h5></th>
+            <th width="15%"><h5 align="center">เลขที่ใบวางบิล</h5></th>
+       <th width="20%"><h5 align="center">วันที่วางบิล</h5></th>
        <th width="10%"><h5 align="center">บริษัทที่จำหน่าย</h5></th>
        <th width="15%"><h5 align="center">สถานที่ส่งสินค้า</h5></th>
-       <th width="10%"><h5 align="center">จำนวน</h5></th>
+       <th width="10%"><h5 align="center">จำนวนเงิน</h5></th>
+       <th width="10%"><h5 align="center">สถานะ</h5></th>
               <!--<th>More</th>-->
-              <th style="width:100px"><a href="pr_gen_create.php" class="btn btn-info"><i class="fas fa-plus-square"></i> สร้างรายการขอซื้อ</a></th>
+              <th style="width:100px"><a href="<?php echo $prefix_po?>gen_create.php" class="btn btn-info"><i class="fas fa-plus-square"></i> สร้างรายการวางบิล</a></th>
             </tr>
             </thead>
             <tbody>
@@ -94,24 +103,34 @@ $dataPrMain = (dbPrMain());
              if($dataPrMain)
              foreach($dataPrMain as $row ){
                  
+              $approved = "ยังไม่อนุมัติ";
+              $btnApproved = '';
+              if($row[5]){
+                $approved = "<span class='text-success'>อนุมัติแล้ว</span>";
+              }else{
+                $btnApproved = " <a href='{$prefix_po}approved.php?id=".$row[0]."' class='btn btn-primary btn-sm' > อนุมัติ </a>
+                ";
+              }
+
                    echo "<tr>
                    <td> {$row[0]} </td>
                    <td> {$row[1]}</td>
                    <td> {$row[2]}</td>
                    <td> {$row[3]}</td>
                    <td> ".number_format($row[4],2)."</td>
+                   <td> {$approved} </td>
                    <td>
-                   <a href='onlineinvoice/pr_pdf.php?id=".$row[0]."' target='_blank' class='btn btn-info btn-sm'><span class='glyphicon glyphicon-edit'></span> PDF </a>
+                   <a href='onlineinvoice/{$prefix_po}pdf.php?id=".$row[0]."' target='_blank' class='btn btn-info btn-sm'><span class='glyphicon glyphicon-edit'></span> PDF </a>
  
-                   <a href='pr_gen_edit.php?id=".$row[0]."' class='btn btn-success btn-sm' ><span class='glyphicon glyphicon-edit'></span> แก้ไข</a>
+                   <a href='{$prefix_po}gen_edit.php?id=".$row[0]."' class='btn btn-success btn-sm' ><span class='glyphicon glyphicon-edit'></span> แก้ไข</a>
                    <a href='#delete_".$row[0]."' class='btn btn-danger btn-sm' data-toggle='modal'><span class='glyphicon glyphicon-trash'></span> ลบ</a>
                    
-                   <a href='pr_gen_upload.php?id=".$row[0]."' class='btn btn-warning btn-sm' ><span class='glyphicon glyphicon-edit'></span> รูปภาพ </a>
-
+                   <a href='{$prefix_po}gen_upload.php?id=".$row[0]."' class='btn btn-warning btn-sm' ><span class='glyphicon glyphicon-edit'></span> รูปภาพ </a>
+                   {$btnApproved}
                    </td>
                    </tr>";
                    
-                 include "edit_delete_pr_gen.php";
+                 include "edit_delete_{$prefix_po}gen.php";
                
              }
              ?>

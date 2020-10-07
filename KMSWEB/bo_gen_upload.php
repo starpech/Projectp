@@ -25,7 +25,7 @@ include('includes/function.php');
   <link rel="stylesheet" href="assets/admin/plugins/datatables/dataTables.bootstrap4.min.css">
   <link rel="stylesheet" href="assets/admin/plugins/responsive/responsive.bootstrap4.min.css"><!-- responsive-->
 
-    <title>อัพโหลดรูปภาพใบสั่งซื้อ</title>
+    <title>อัพโหลดรูปภาพใบวางบิล</title>
 </head>
 
 <?php
@@ -77,21 +77,22 @@ include('includes/function.php');
     font-weight: normal;
 }
 </style>
-  <form action="pr_gen_uploading.php" method="post" enctype="multipart/form-data" id="uploadImageForm">
+  <form action="<?php echo $prefix_po?>gen_uploading.php" method="post" enctype="multipart/form-data" id="uploadImageForm">
 		  <div class="form-group">
-		    <input type="hidden" value="<?php echo $_GET['id']?>" name="pr_id" />
+		    <input type="hidden" value="<?php echo $_GET['id']?>" name="<?php echo $prefix_po?>id" />
         <label for="fullName">คำอธิบายภาพ</label>
-		    <input type="text" class="form-control" id="pr_image_title" name="pr_image_title" placeholder="Name">
+		    <input type="text" class="form-control" id="<?php echo $prefix_po?>image_title" name="<?php echo $prefix_po?>image_title" placeholder="Name">
 		  </div>
 		  <div class="form-group">
 		    <label for="exampleInputPassword1">รูปภาพ</label>		    
 		    <div id="kv-avatar-errors-2" class="center-block" style="width:800px;display:none"></div>
 
             <div class="kv-avatar center-block" style="width:200px">
-		        <input id="avatar-2" name="pr_image" type="file" class="file-loading">
+		        <input id="avatar-2" name="<?php echo $prefix_po?>image" type="file" class="file-loading">
 		    </div>
 		  </div>
 		  <button type="submit" class="btn btn-default">อัพโหลดรูปภาพ</button>
+      <button type="button" onclick="window.history.back()" class="btn btn-warning"> กลับไปเมนูก่อนหน้า </button>
 		</form>
 
   </div>
@@ -100,8 +101,8 @@ include('includes/function.php');
 <?php  
 
 function dbImages(){
-  global $conn;
-  $query=  "SELECT * FROM `pr_main_uploads` where pr_id = '{$_GET['id']}' "  ;
+  global $conn,$prefix_po;
+  $query=  "SELECT * FROM `{$prefix_po}main_uploads` where {$prefix_po}id = '{$_GET['id']}' "  ;
   $result = $conn->query($query);     
   if (!$result) {
     printf("Query failed: %s\n", $conn->error);
@@ -127,24 +128,27 @@ echo "<tr>
       </tr></thead><tbody>";
 foreach($arrData as $key => $v){ 
 
-$file_name = end(explode('/',$v['pr_image_path']));
+$file_name = end(explode('/',$v[$prefix_po.'image_path']));
 
   echo "<tr>
   
   <td>".($key+1)."</td>
   
-  <td>{$v['pr_image_title']} </td>
+  <td>{$v[$prefix_po.'image_title']} </td>
   
   <td>
   
-  <img class='zimage' src='{$v['pr_image_path']}' style='height:100px; width:100px;' />
-  
-  
-
+  <img class='zimage' src='{$v[$prefix_po.'image_path']}' style='height:100px; width:100px;' />
   
   
   </td>
-  <td> <a href=\"pr_gen_upload_delete.php?pr_id={$v['pr_id']}&id={$v['id']}&file_name={$file_name}\" class='btn btn-danger'> delete </a> </td>
+  <td> 
+    
+     <a href=\"{$prefix_po}gen_upload_delete.php?{$prefix_po}id={$v[$prefix_po.'id']}&id={$v['id']}&file_name={$file_name}\" class='btn btn-danger'> delete </a> 
+
+     <a href=\"onlineinvoice/{$prefix_po}image_pdf.php?file_name={$file_name}\" target='_blank' class='btn btn-info'> print </a> 
+  
+  </td>
   </tr>";
     
 }  
@@ -208,7 +212,7 @@ $('.zimage').zoomify();
 	    elErrorContainer: '#kv-avatar-errors-2',
 	    msgErrorClass: 'alert alert-block alert-danger',
 	    defaultPreviewContent: '<img src="upload_doc_img/no_image.jpg" alt="Your Avatar" style="width:160px"><h6 class="text-muted">Click to select</h6>',
-	    layoutTemplates: {main2: '{preview} ' +  btnCust + ' {remove} {browse}'},
+	    layoutTemplates: {main2: '{preview}  {remove} {browse}'},
 	    allowedFileExtensions: ["jpg", "png", "gif"]
 		});
     
@@ -238,7 +242,7 @@ $('.zimage').zoomify();
 							$('input[type="text"]').val('');
 							$(".fileinput-remove-button").click();
 
-              window.location.href="pr_gen_upload.php?id=<?php echo $_GET['id']?>";
+              window.location.href="<?php echo $prefix_po?>gen_upload.php?id=<?php echo $_GET['id']?>";
 
 						}
 						else {

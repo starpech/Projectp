@@ -4,9 +4,9 @@ require_once __DIR__ . '/vendor/autoload.php';
 require_once '../php/connect.php';
 // Create an instance of the class:
 function dbPrDetail(){
-  global $conn,$prefix_inv;
+  global $conn,$prefix_po;
   $query = "
-  SELECT * FROM `{$prefix_inv}detail` WHERE {$prefix_inv}main_id in (select x.{$prefix_inv}no from {$prefix_inv}main as x where x.{$prefix_inv}id = '{$_GET['id']}')";
+  SELECT * FROM `{$prefix_po}detail` WHERE {$prefix_po}main_id in (select x.{$prefix_po}no from {$prefix_po}main as x where x.{$prefix_po}id = '{$_GET['id']}')";
   $result = $conn->query($query);     
   if (!$result) {
     printf("Query failed: %s\n", $conn->error);
@@ -19,25 +19,25 @@ function dbPrDetail(){
   return $rows;
 }
 function dbPrMain(){
-  global $conn,$prefix_inv;
+  global $conn,$prefix_po;
   $query="
   
   SELECT 
 
-   p.{$prefix_inv}id,
-   p.{$prefix_inv}date,
-   p.`{$prefix_inv}SupplierID`,
-   p.`{$prefix_inv}SupplierName`,
-   (select c.comp_addr from comp as c where c.comp_code= p.`{$prefix_inv}SupplierID`) as SupplierAddr,
+   p.{$prefix_po}id,
+   p.{$prefix_po}date,
+   p.`{$prefix_po}SupplierID`,
+   p.`{$prefix_po}SupplierName`,
+   (select c.comp_addr from comp as c where c.comp_code= p.`{$prefix_po}SupplierID`) as SupplierAddr,
 
    (select c.comp_name from comp as c where c.comp_code= p.`site_no`) as site_name,
    (select c.comp_addr from comp as c where c.comp_code= p.`site_no`) as site_addr,
 
-   (select sum(pd.amount) from {$prefix_inv}detail as pd where pd.{$prefix_inv}main_id = p.{$prefix_inv}no) as sumall
+   (select sum(pd.amount) from {$prefix_po}detail as pd where pd.{$prefix_po}main_id = p.{$prefix_po}no) as sumall
 
-   FROM `{$prefix_inv}main` as p
+   FROM `{$prefix_po}main` as p
  
-   where p.{$prefix_inv}id = '{$_GET['id']}' and flag_delete = 0
+   where p.{$prefix_po}id = '{$_GET['id']}' and flag_delete = 0
 
   ";
   $result = $conn->query($query);     
@@ -84,7 +84,7 @@ $output .= '
   <td colspan="2" align="center" style="font-size:18px">
   
      <b>บริษัท เคเอสแอล แมททีเรียล ซัพพลายส์ จำกัด</b><br>
-     ใบส่งของ
+     ใบวางบิล
   </td>
  </tr>
  <tr>

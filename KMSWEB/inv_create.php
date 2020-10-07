@@ -1,46 +1,54 @@
 <?php 
 require_once 'php/connect.php';
-debug($_POST);
+//debug($_POST);
 $p = $_POST;
 $updateQuery = array();
 
 
-// add pr_main
+// add ${$prefix_inv}main
 $insPrMainSQL = "
-insert into `pr_main` (`pr_SupplierID`,`pr_SupplierName`,`pr_DeliveryTo`,`pr_detail_no`,site_no,pr_id)
+insert into `{$prefix_inv}main` (`{$prefix_inv}SupplierID`,`{$prefix_inv}SupplierName`,`{$prefix_inv}DeliveryTo`,
+`{$prefix_inv}detail_no`,site_no,{$prefix_inv}id,inv_RecieveID,inv_RecieveName,remark_po)
 (SELECT 
 '{$p['comp_code']}' as comp_code,
-(select c.comp_name from comp as c where c.comp_code='{$p['supplier_id']}') as pr_SupplierName,
-(select c.comp_addr from comp as c where c.comp_code ='{$p['comp_code']}') as pr_DeliveryTo,
-'' as pr_detail_no, '{$p['comp_code']}' as site_no , '6364' as pr_id
+(select c.comp_name from comp as c where c.comp_code='{$p['supplier_id']}') as {$prefix_inv}SupplierName,
+(select c.comp_addr from comp as c where c.comp_code ='{$p['comp_code']}') as {$prefix_inv}DeliveryTo,
+'' as {$prefix_inv}detail_no, 
+'{$p['comp_code']}' as site_no , 
+'6364' as {$prefix_inv}id,
+'{$p['inv_RecieveID']}' as inv_RecieveID,
+(select c.comp_name from comp as c where c.comp_code='{$p['inv_RecieveID']}') as inv_RecieveName,
+'{$p['remark_po']}' as remark_po
+
+
 );
 
-update pr_main as p set p.pr_id = (
+update {$prefix_inv}main as p set p.{$prefix_inv}id = (
  SELECT 
     concat(
         (select c.comp_nickname from comp as c where c.comp_code = x.site_no),
         '6364',RIGHT(concat('00000',x.row_num),4)) 
  from ( 
-     SELECT pr_no,site_no, ( ROW_NUMBER() OVER (PARTITION BY site_no ORDER BY site_no,pr_no)) AS row_num FROM pr_main ) as x  where p.pr_no = x.pr_no 
+     SELECT {$prefix_inv}no,site_no, ( ROW_NUMBER() OVER (PARTITION BY site_no ORDER BY site_no,{$prefix_inv}no)) AS row_num FROM {$prefix_inv}main ) as x  where p.{$prefix_inv}no = x.{$prefix_inv}no 
    
    );
      
-   SET @pr_no = LAST_INSERT_ID();
+   SET @{$prefix_inv}no = LAST_INSERT_ID();
 
 
 ";
 
 //$conn->multi_query($insPrMainSQL);
-$pr_no = ($conn->insert_id);
+//$pr_no = ($conn->insert_id);
 
 $insPrDetailSQL = "";
 foreach($p['products'] as $k=>$v){
 $product_code = explode("|",$v);
 $product_code = $product_code[0];
 $insPrDetailSQL .= "
-insert into pr_detail (pr_main_id,product_id,product_name,quantity,unit_price,amount,unit)
+insert into {$prefix_inv}detail ({$prefix_inv}main_id,product_id,product_name,quantity,unit_price,amount,unit)
 ( SELECT 
-@pr_no as pr_main_id,
+@{$prefix_inv}no as {$prefix_inv}main_id,
     '{$product_code}' as Product_code, 
     (SELECT p.product_name FROM `product` as p WHERE p.product_code = '{$product_code}' ) as Product_name, 
     '{$p['amounts'][$k]}' as Product_amount, 
@@ -49,12 +57,10 @@ insert into pr_detail (pr_main_id,product_id,product_name,quantity,unit_price,am
     (SELECT p.product_unit FROM `product` as p WHERE p.product_code = '{$product_code}' ) as unit
 );
 
-update pr_main set pr_detail_add=1 where pr_no = @pr_no;
+update {$prefix_inv}main set {$prefix_inv}detail_add=1 where {$prefix_inv}no = @{$prefix_inv}no;
 
 ";
 }
-
+//echo $insPrMainSQL.$insPrDetailSQL;
 $conn->multi_query($insPrMainSQL.$insPrDetailSQL);
-
-
-header('location: inv_gen.php');
+header('location: '.$prefix_inv.'gen.php');

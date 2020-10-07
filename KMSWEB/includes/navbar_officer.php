@@ -131,7 +131,7 @@ $_SESSION['carttotal']=$rowcount['carttotal'];
 </li> --> <!-- ซ่อนตระกร้า -->
 
       <li class="nav-item active">
-      <a class="nav-link " href="php/logout.php" ><i class="fas fa-sign-out-alt"></i> <?php echo $signout?> <span class="sr-only">(current)</span></a>
+      <a class="nav-link " href="php/logout.php" ><i class="fas fa-sign-out-alt"></i>ออกจากระบบ<span class="sr-only">(current)</span></a>
       </li>
       <!--<li class="nav-item active">
         <a href="?lang=en" class="flag-icon flag-icon-us nav-link"></a>
@@ -158,7 +158,7 @@ $_SESSION['carttotal']=$rowcount['carttotal'];
     <div class="form-inline my-2 my-lg-0">
     <ul class="navbar-nav mr-auto">
       <li class="nav-item active">
-        <a class="nav-link " href="login.php" data-toggle="modal" data-target="#mySignin" ><?php echo $signin?><span class="sr-only">(current)</span></a>
+        <a class="nav-link " href="login.php" data-toggle="modal" data-target="#mySignin" >เข้าสู่ระบบ<span class="sr-only">(current)</span></a>
       </li>
       <!-- <li class="nav-item active">
       <a class="nav-link " href="php/register.php" data-toggle="modal" data-target="#mySignup"><?php echo $signup ?>  <span class="sr-only">(current)</span></a>

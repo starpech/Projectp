@@ -50,9 +50,9 @@ $mpdf->SetTitle(' แสดงรายการขอซื้อ ');
 $mpdf->AddPage("P");
 $datei = ($_GET['findDate'])?"วันที่ ".date('d / m / Y',strtotime($_GET['findDate'])):" ทั้งหมด ";
 $output = "
-<table width=\"100%\" border=\"0\" cellpadding=\"2\" cellspacing=\"0\" style=\"font-size:16px\">
+<table width=\"100%\" border=\"1\" cellpadding=\"2\" cellspacing=\"0\" style=\"font-size:16px\">
 <thead>
-<tr><th colspan='8' style=\"font-size:18px\"> 
+<tr><th colspan='9' style=\"font-size:18px\"> 
   <b style=\"font-size:20px\">บริษัท เคเอสแอล แมททีเรียล ซัพพลายส์ จำกัด</b><br>
 แสดงรายการขอซื้อ <br>
 {$datei}
@@ -61,9 +61,10 @@ $output = "
 </th></tr>
 <tr>
   <th>วันที่</th>
-  <th>โค้วต้าชาวไร่</th>
-  <th>ชื่อนามสกุล</th>
-  <th>เขตชาวไร่</th>
+  <th>เลขที่</th>
+  <th>โค้วต้า</th>
+  <th>ชื่อ-นามสกุล</th>
+  <th>เขต</th>
   <th>สถานที่จัดส่ง</th>
   <th>ชื่อสินค้า</th>
   <th>สถานะ</th>
@@ -77,23 +78,36 @@ $bodyTable = '';
 $dbdata = dbData();
 foreach($dbdata as $k=>$v){
   $datei = date('d/m/Y',strtotime($v["input_date"]));
-  $status = ($v["status"])?"<span style=\"color:red\"> no approved </span>":"<span style=\"color:green\"> approved </span>";
+  $status = ($v["status"])?"<span style=\"color:red\">no app</span>":"<span style=\"color:green\">app</span>";
   $bodyTable .= "
   <tr>
     <td>{$datei}</td>
+    <td>{$v['req_detail_id']}</td>
     <td>{$v['Quota_id']}</td>
     <td>{$v['Quota_name']}</td>
-    <td>{$v['Quota_ket']}</td>
+    <td>&nbsp;&nbsp;&nbsp;{$v['Quota_ket']}</td>
     <td>{$v['Quota_place']}</td>
     <td>{$v['Product_name']}</td>
-    <td>{$status}</td>
-    <td>{$v['Product_amount']}</td>
+    <td>&nbsp;{$status}</td>
+    <td>&nbsp;{$v['Product_amount']}</td>
  </tr>";
 }
 $output = $output.$bodyTable.'</tbody><tfoot style=\"font-size:18px\">
-<tr><td align="center" colspan="8"> 
-<br><br><br><br>(____________________________)<br><br>
-ผู้อนุมัติ 
+<tr><td align="left" colspan="9"> 
+<br><br><br><br>&nbsp;&nbsp;&nbsp;&nbsp;(_______________________________)
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+(_______________________________)<br><br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; ผู้จัดทำ
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; ผู้อนุมัติ 
 </td></tr></tfoot></table>';
 
 // Write some HTML code:

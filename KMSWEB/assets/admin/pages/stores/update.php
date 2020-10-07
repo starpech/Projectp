@@ -11,10 +11,10 @@ if (isset($_POST['submit'])) {
     $product_name = $_POST['product_name'];
     $product_detail = $_POST['product_detail'];
     $product_price1 = $_POST['product_price1'];
-    $product_price1 = $_POST['product_price2'];
-    $product_price1 = $_POST['product_price3'];
-    $product_price1 = $_POST['product_price4'];
-    $product_price1 = $_POST['product_price5'];
+    $product_price2 = $_POST['product_price2'];
+    $product_price3 = $_POST['product_price3'];
+    $product_price4 = $_POST['product_price4'];
+    $product_price5 = $_POST['product_price5'];
     $product_cost1 = $_POST['product_cost1'];
     $product_cost2 = $_POST['product_cost2'];
     $product_cost3 = $_POST['product_cost3'];
@@ -29,7 +29,25 @@ if (isset($_POST['submit'])) {
     $new_name = round(microtime(true)*9999) . '.' . end($temp); 
     $url = '../../../../assets/image/store/'. $new_name ;
         if(isset($product_image) != $imgUpload_file){ //ค่าเหมือนกัน เช่น aa.jpg aa.jpg
-             $sql="UPDATE `product` SET `product_name` = '$product_name', `product_detail` = '$product_detail', `product_price1` = '$product_price1', `product_price2` = '$product_price2', `product_price3` = '$product_price3', `product_price4` = '$product_price4', `product_price5` = '$product_price5', `product_cost1` = '$product_cost1', `product_cost2` = '$product_cost2', `product_cost3` = '$product_cost3', `product_cost4` = '$product_cost4', `product_cost5` = '$product_cost5', `product_code` = '$product_code', `product_tag` = '$product_tag', `product_date` = '$product_date' WHERE `product_id`= '$product_id'";
+             $sql="UPDATE `product` 
+                    SET 
+                    `product_name` = '$product_name', 
+                    `product_detail` = '$product_detail', 
+                    `product_price1` = '$product_price1', 
+                    `product_price2` = '$product_price2', 
+                    `product_price3` = '$product_price3', 
+                    `product_price4` = '$product_price4', 
+                    `product_price5` = '$product_price5', 
+                    `product_cost1` = '$product_cost1', 
+                    `product_cost2` = '$product_cost2', 
+                    `product_cost3` = '$product_cost3', 
+                    `product_cost4` = '$product_cost4', 
+                    `product_cost5` = '$product_cost5', 
+                    `product_code` = '$product_code', 
+                    `product_tag` = '$product_tag', 
+                    `product_date` = '$product_date' 
+                    WHERE `product_id`= '$product_id'";
+
              $result = $conn->query($sql) or die($conn->error);
              if($result){    
                 echo '<script> alert("อัพเดทสำเร็จแล้ว") </script>';
@@ -39,7 +57,26 @@ if (isset($_POST['submit'])) {
         }else{
             $product_image=$new_name;//เปลี่ยนค่า
             if ( move_uploaded_file($_FILES['imgUpload']['tmp_name'], $url ) ) {
-                $sql="UPDATE `product` SET `product_name` = '$product_name', `product_detail` = '$product_detail', `product_price1` = '$product_price1', `product_price2` = '$product_price2', `product_price3` = '$product_price3', `product_price4` = '$product_price4', `product_price5` = '$product_price5', `product_cost1` = '$product_cost1', `product_cost2` = '$product_cost2', `product_cost3` = '$product_cost3', `product_cost4` = '$product_cost4', `product_cost5` = '$product_cost5', `product_code` = '$product_code', `product_tag` = '$product_tag', `product_date` = '$product_date' WHERE `product_id`= '$product_id'";
+                $sql="UPDATE `product` 
+                SET 
+                `product_name` = '$product_name', 
+                `product_detail` = '$product_detail', 
+                `product_price1` = '$product_price1', 
+                `product_price2` = '$product_price2', 
+                `product_price3` = '$product_price3', 
+                `product_price4` = '$product_price4', 
+                `product_price5` = '$product_price5', 
+                `product_cost1` = '$product_cost1', 
+                `product_cost2` = '$product_cost2', 
+                `product_cost3` = '$product_cost3', 
+                `product_cost4` = '$product_cost4', 
+                `product_cost5` = '$product_cost5', 
+                `product_code` = '$product_code', 
+                `product_tag` = '$product_tag', 
+                `product_date` = '$product_date' 
+                WHERE 
+                `product_id`= '$product_id'";
+
                 $result = $conn->query($sql) or die($conn->error);
                 if($result){    
                     $_SESSION['product_image'] = $new_name;

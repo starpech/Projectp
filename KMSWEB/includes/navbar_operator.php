@@ -143,20 +143,20 @@ $mem_id=$_SESSION['mem_id'];
 <!-- ไม่ได้login-->
       <ul class="navbar-nav mr-auto">
       <li class="nav-item active">
-        <a class="nav-link" href="index.php"><i class="fas fa-home"> </i> <?php echo $home ?> <span class="sr-only">(current)</span></a>
+        <a class="nav-link" href="index.php"><i class="fas fa-home"> </i>หน้าแรก<span class="sr-only">(current)</span></a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" href="stores.php"><?php echo $store ?> </a>
+        <a class="nav-link" href="stores.php">สินค้า</a>
       </li>
       <!-- <li class="nav-item">
-        <a class="nav-link" href="about.php"><?php echo $about ?> </a>
+        <a class="nav-link" href="about.php">เกี่ยวกับ</a>
       </li> -->
     </ul>
     
     <div class="form-inline my-2 my-lg-0 pull-right">
     <ul class="navbar-nav mr-auto">
       <li class="nav-item active">
-        <a class="nav-link " href="login.php" data-toggle="modal" data-target="#mySignin" ><?php echo $signin?><span class="sr-only">(current)</span></a>
+        <a class="nav-link " href="login.php" data-toggle="modal" data-target="#mySignin" >เข้าสู่ระบบ<span class="sr-only">(current)</span></a>
       </li>
       <!-- <li class="nav-item active">
       <a class="nav-link " href="php/register.php" data-toggle="modal" data-target="#mySignup"><?php echo $signup ?>  <span class="sr-only">(current)</span></a>

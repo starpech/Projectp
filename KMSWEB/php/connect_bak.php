@@ -12,10 +12,10 @@
     global $preifx_inv,$preifx_po;
 
     $prefix_inv ='inv_';
-    $prefix_po ='bo_';
+    $prefix_po ='po_';
 
-  //function ที่ใช้ทุกหน้า
-   function debug($arr){
+    // function ที่ใช้ทุกหน้า
+    function debug($arr){
       echo "<pre>";
       print_r($arr);
       echo "</pre>";
@@ -35,7 +35,6 @@ function dbComp(){
     $result->close();
     return $rows;
   }
-
   function dbProduct(){
     global $conn;
    $my_comp_code = (int)$_SESSION["comp_code"];
@@ -69,22 +68,6 @@ function dbComp(){
       
         $op .= "<option value='{$v[5]}|{$v[21]}'> {$v[5]} : {$v[2]} </option>";
       
-    }
-    return sprintf($htmlSelectProduct,$op);
-  }
-
-  function selectProductsEdit($id,$value=''){
-    $htmlSelectProduct ="<select id='{$id}' name='{$id}[]' class=\"form-control\">%s</select>";
-    $op='';
-    $data = dbProduct();
-  
-    if($data)
-    foreach($data as $k=>$v){
-      if($v[5] == $value){
-        $op .= "<option value='{$v[5]}' selected> {$v[5]} : {$v[2]} </option>";
-      }else{
-        $op .= "<option value='{$v[5]}'> {$v[5]} : {$v[2]} </option>";
-      }
     }
     return sprintf($htmlSelectProduct,$op);
   }

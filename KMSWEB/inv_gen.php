@@ -19,25 +19,46 @@ include('includes/function.php');
     <link rel="stylesheet" href="node_modules/css/style.css">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/flag-icon-css/3.4.3/css/flag-icon.css" rel="stylesheet"/>
     <link href="https://fonts.googleapis.com/css?family=Kanit&display=swap" rel="stylesheet">
+	  
+   
     <!-- DataTables -->
   <link rel="stylesheet" href="assets/admin/plugins/datatables/dataTables.bootstrap4.min.css">
   <link rel="stylesheet" href="assets/admin/plugins/responsive/responsive.bootstrap4.min.css"><!-- responsive-->
 
-    <title>สร้างใบส่งสินค้า</title>
+    <title>รายการใบส่งของ</title>
 </head>
 
-
-<?php 
-  include('includes/navbar_sale.php')
+<?php
+  session_start();
+  if($_SESSION["mem_status"]=="operator"){
+        include('includes/navbar_operator.php'); }
+  elseif($_SESSION["mem_status"]=="approver"){
+        include('includes/navbar_approver.php'); }
+  elseif($_SESSION["mem_status"]=="officer"){
+        include('includes/navbar_officer.php'); }
+  elseif($_SESSION["mem_status"]=="sale"){
+        include('includes/navbar_sale.php'); }
+  elseif($_SESSION["mem_status"]=="acc"){
+        include('includes/navbar_acc.php'); }
+  elseif($_SESSION["mem_status"]=="plant"){
+        include('includes/navbar_plant.php'); }
+  else { include('includes/navbar.php'); }
 ?>
 
 <!---  CONTENT----->
 <?php 
+
 function dbPrMain(){
-  global $conn;
+  global $conn,$prefix_inv;
   $query="
-  SELECT p.pr_id, p.pr_date, p.`pr_SupplierName`, (select c.comp_name from comp as c where c.comp_code= p.`site_no`) as site_name, 
-  (select sum(pd.amount) from pr_detail as pd where pd.pr_main_id = p.pr_no) as sumall FROM `pr_main` as p
+  SELECT 
+      p.{$prefix_inv}id, 
+      p.{$prefix_inv}date, 
+      p.`{$prefix_inv}SupplierName`, 
+      (select c.comp_name from comp as c where c.comp_code= p.`site_no`) as site_name, 
+      (select sum(pd.amount) from {$prefix_inv}detail as pd where pd.{$prefix_inv}main_id = p.{$prefix_inv}no) as sumall 
+  ,approved 
+      FROM `{$prefix_inv}main` as p
   where flag_delete = 0
   ";
   $result = $conn->query($query);     
@@ -54,24 +75,25 @@ function dbPrMain(){
 }
 
 $dataPrMain = (dbPrMain());
+
+
 ?>
-
-
 <div class="container-fluid">
    <br><br><br><br><br>
-   <h3 align="center">สร้างใบส่งสินค้า</h3><br />
+   <h3 align="center">รายการใบส่งของ</h3><br />
    
 
    <table id="dataTable" class="table table-bordered table-striped w-100 ">
             <thead>
             <tr>
-       <th width="15%"><h5 align="center">เลขที่ใบสั่งซื้อ</h5></th>
-       <th width="20%"><h5 align="center">วันที่สั่งซื้อ</h5></th>
-       <th width="10%"><h5 align="center">บริษัทที่สั่งซื้อ</h5></th>
+            <th width="15%"><h5 align="center">เลขที่ใบส่งของ</h5></th>
+       <th width="20%"><h5 align="center">วันที่ส่งของ</h5></th>
+       <th width="10%"><h5 align="center">บริษัทที่จำหน่าย</h5></th>
        <th width="15%"><h5 align="center">สถานที่ส่งสินค้า</h5></th>
        <th width="10%"><h5 align="center">จำนวน</h5></th>
+       <th width="10%"><h5 align="center">สถานะ</h5></th>
               <!--<th>More</th>-->
-              <th style="width:100px"><a href="inv_gen_create.php" class="btn btn-info"><i class="fas fa-plus-square"></i> สร้างใบส่งสินค้า</a></th>
+              <th style="width:100px"><a href="<?php echo $prefix_inv?>gen_create.php" class="btn btn-info"><i class="fas fa-plus-square"></i> สร้างรายการส่งของ</a></th>
             </tr>
             </thead>
             <tbody>
@@ -79,6 +101,15 @@ $dataPrMain = (dbPrMain());
              <?php 
              if($dataPrMain)
              foreach($dataPrMain as $row ){
+
+              $approved = "ยังไม่อนุมัติ";
+              $btnApproved = '';
+              if($row[5]){
+                $approved = "<span class='text-success'>อนุมัติแล้ว</span>";
+              }else{
+                $btnApproved = " <a href='{$prefix_inv}approved.php?id=".$row[0]."' class='btn btn-primary btn-sm' > อนุมัติ </a>
+                ";
+              }
                  
                    echo "<tr>
                    <td> {$row[0]} </td>
@@ -86,15 +117,22 @@ $dataPrMain = (dbPrMain());
                    <td> {$row[2]}</td>
                    <td> {$row[3]}</td>
                    <td> ".number_format($row[4],2)."</td>
+                   <td> {$approved} </td>
                    <td>
-                   <a href='onlineinvoice/inv_pdf.php?id=".$row[0]."' target='_blank' class='btn btn-info btn-sm'><span class='glyphicon glyphicon-edit'></span> PDF </a>
+                   <a href='onlineinvoice/{$prefix_inv}pdf.php?id=".$row[0]."' target='_blank' class='btn btn-info btn-sm'><span class='glyphicon glyphicon-edit'></span> PDF </a>
  
-                   <a href='inv_gen_edit.php?id=".$row[0]."' class='btn btn-success btn-sm' ><span class='glyphicon glyphicon-edit'></span> แก้ไข</a>
+                   <a href='{$prefix_inv}gen_edit.php?id=".$row[0]."' class='btn btn-success btn-sm' ><span class='glyphicon glyphicon-edit'></span> แก้ไข</a>
                    <a href='#delete_".$row[0]."' class='btn btn-danger btn-sm' data-toggle='modal'><span class='glyphicon glyphicon-trash'></span> ลบ</a>
+                   
+                   <a href='{$prefix_inv}gen_upload.php?id=".$row[0]."' class='btn btn-warning btn-sm' ><span class='glyphicon glyphicon-edit'></span> รูปภาพ </a>
+
+{$btnApproved}
+
+
                    </td>
                    </tr>";
                    
-                 include "edit_delete_pr_gen.php";
+                 include "edit_delete_{$prefix_inv}gen.php";
                
              }
              ?>

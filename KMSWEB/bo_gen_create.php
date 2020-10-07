@@ -7,10 +7,6 @@ include('includes/function.php');
 <!DOCTYPE html>
 <html lang="en">
 <head>
-
-
-
-
 <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
@@ -26,7 +22,7 @@ include('includes/function.php');
   <link rel="stylesheet" href="assets/admin/plugins/datatables/dataTables.bootstrap4.min.css">
   <link rel="stylesheet" href="assets/admin/plugins/responsive/responsive.bootstrap4.min.css"><!-- responsive-->
 
-    <title>แก้ไขรายการส่งของ</title>
+    <title>สร้างรายการใบวางบิล</title>
 </head>
 
 <?php
@@ -47,82 +43,13 @@ include('includes/function.php');
 ?>
 
 <!---  CONTENT----->
-<?php 
-
-// Create an instance of the class:
-function dbInvDetail(){
-  global $conn,$prefix_inv;
-  $query = "
-  SELECT * FROM `{$prefix_inv}detail` WHERE {$prefix_inv}main_id in (select x.{$prefix_inv}no from {$prefix_inv}main as x where x.{$prefix_inv}id = '{$_GET['id']}')";
-  $result = $conn->query($query);     
-  if (!$result) {
-    printf("Query failed: %s\n", $conn->error);
-    exit;
-  }      
-  while($row = $result->fetch_row()) {
-    $rows[]=$row;
-  }
-  $result->close();
-  return $rows;
-}
-function dbInvMain(){
-  global $conn,$prefix_inv;
-  $query="
-  
-  SELECT 
-
-   p.{$prefix_inv}id,
-   p.{$prefix_inv}date,
-   p.`{$prefix_inv}SupplierID`,
-   p.`{$prefix_inv}SupplierName`,
-   (select c.comp_addr from comp as c where c.comp_code= p.`{$prefix_inv}SupplierID`) as SupplierAddr,
-
-   (select c.comp_name from comp as c where c.comp_code= p.`site_no`) as site_name,
-   (select c.comp_addr from comp as c where c.comp_code= p.`site_no`) as site_addr,
-
-   (select sum(pd.amount) from {$prefix_inv}detail as pd where pd.{$prefix_inv}main_id = p.{$prefix_inv}no) as sumall,
-   inv_RecieveID,
-   remark_po
-
-
-   FROM `{$prefix_inv}main` as p
- 
-   where p.{$prefix_inv}id = '{$_GET['id']}' and flag_delete = 0
-
-  ";
-  //echo $query;
-  $result = $conn->query($query);     
-  if (!$result) {
-    printf("Query failed: %s\n", $conn->error);
-    exit;
-  }      
-  while($row = $result->fetch_row()) {
-    $rows[]=$row;
-  }
-  $result->close();
-  return $rows[0];
-
-}
-
-$pr = dbInvMain();
-$prDate = date('d/m/Y',strtotime($pr[1]));
-$pd = dbInvDetail();
-
-
-
-
-?>
 <div class="container-fluid">
    <br><br><br><br><br>
-   <h3 align="center">แก้ไขรายการส่งของ</h3><br />
-   <h5 style="color:red" align="center">แสดงเฉพาะรายการยังไม่อนุมัติเท่านั้น  กรณีต้องการแก้ไขรายการที่อนุมัติแล้ว โปรดติดต่อผู้ดูแลระบบ</h5><br />
+   <h3 align="center">สร้างรายการใบวางบิล</h3><br />
+   <!--<h5 style="color:red" align="center">แสดงเฉพาะรายการยังไม่อนุมัติเท่านั้น  กรณีต้องการแก้ไขรายการที่อนุมัติแล้ว โปรดติดต่อผู้ดูแลระบบ</h5><br />-->
 
-   <style>
-.table td {
-     padding:5px; 
-}
-</style>
-   <form method="post"  action="<?php echo $prefix_inv?>edit.php">
+  
+   <form method="post"  action="<?php echo $prefix_po?>create.php">
         <div class="table-responsive">
           <table class="table table-bordered">
             <tr>
@@ -130,7 +57,7 @@ $pd = dbInvDetail();
                   <div class="row">
                     <div class="col-md-8">
                       
-                        <b>บริษัทที่สั่งซื้อ</b><br />
+                        <b>บริษัทที่ส่งของ</b><br />
                        <select id="supplier_id" name="supplier_id" class="form-control ">
                         
                         <?php 
@@ -149,13 +76,13 @@ $pd = dbInvDetail();
                        </select>
                        
                        <b>ส่งถึงบริษัท</b><br />
-                       <select id="inv_RecieveID" name="inv_RecieveID" class="form-control ">
+                       <select id="bo_RecieveID" name="bo_RecieveID" class="form-control ">
                         
                         <?php 
                              $dataComp = dbComp();
                              if($dataComp)
                              foreach($dataComp as $k=>$v){
-                                if($v[1] == $pr[8]){
+                                if($v[1] == $pr[2]){
                                   echo "<option value='{$v[1]}' selected> {$v[1]} : {$v[2]} </option>";
                                 }else{
                                  echo "<option value='{$v[1]}'> {$v[1]} : {$v[2]} </option>";
@@ -166,41 +93,26 @@ $pd = dbInvDetail();
 
                        </select>
                        หมายเหตุ<br/>
-                      <input type="text" name="remark_po" id="remark_po" 
-                      placeholder="หมายเหตุกรอกหมายเลข pr/po"
-                      value="<?php echo $pr[9]?>" class="form-control input-sm"  />
-
+                      <input type="text" name="remark_inv" id="remark_inv" 
+                      placeholder="หมายเหตุกรอกหมายเลขใบส่งของที่จะวางบิล"
+                      value="<?php echo $pr[1]?>" class="form-control input-sm"  />
                     </div>
                     <div class="col-md-4">
-                      เลขที่ใบสั่งซื้อ<br />
-                      <input type="text" name="<?php echo $prefix_inv?>id" id="<?php echo $prefix_inv?>id" value="<?php echo $pr[0]?>" class="form-control input-sm" placeholder="" readonly/>
-                      วันที่สั่งซื้อ<br/>
-                      <input type="text" name="<?php echo $prefix_inv?>date" id="order_date" value="<?php echo $pr[1]?>" class="form-control input-sm" readonly placeholder="Select Invoice Date" />
+                      วันที่ส่งของ<br/>
+                      <input type="text" name="<? echo $prefix_po?>date" id="order_date" value="<?php echo $pr[1]?>" class="form-control input-sm" readonly placeholder="Select Invoice Date" />
                     </div>
                   </div>
                   <br />
-                  <table id="invoice-item-table" class="table table-bordered">
+                  <table id="invoice-item-table" class="table table-bordered table-pr">
                     <tr>
-                      <th width="7%">ลำดับ</th>
-                      <th width="20%">รายการสินค้า</th>
-                      <th width="5%">จำนวนส่ง</th>
-                      <th width="5%">ราคาต่อหน่วย</th>
-                      <th width="10%">จำนวนเงิน</th>
+                      <th width="45%">รายการสินค้า</th>
+                      <th width="15%">จำนวนส่ง</th>
+                      <th width="15%">ราคาต่อหน่วย</th>
+                      <th width="15%">จำนวนเงิน</th>
+                      <th> <button type="button" align="left" name="add1" class="btn btn-success btn-sm add1" alt=""><i class="fa fa-plus"></i></button> </th>
                     </tr>
                     
-                   <?php 
-                      if($pd)
-                      foreach($pd as $k=>$v){
-                        echo ' <input type="hidden" name="'.$prefix_inv.'order_no[]" value="'.$v[0].'" />';
-                        echo " <tr>
-                        <td width=\"5%\">".($k+1)."</td>
-                        <td width=\"45%\"> ".selectProductsEdit("product_ids",$v[3])."</td>
-                        <td width=\"15%\"><input type='number' onkeyup=\"calcPrice('{$k}',$(this),1)\" class='form-control'  id=unit_{$k} name='amounts[]' value='{$v[5]}' /></td>
-                        <td width=\"15%\"><input type='number' onkeyup=\"calcPrice('{$k}',$(this),0)\" class='form-control' id=price_{$k} name='priceunits[]' value='{$v[6]}' /></td>
-                        <td width=\"15%\"><input type='number' class='form-control total' id=total_{$k} name='totals[]' value='{$v[8]}' readonly /></td>
-                      </tr>";
-                      }
-                   ?>
+                 
 
 
                   </table>
@@ -211,9 +123,11 @@ $pd = dbInvDetail();
                 <td colspan="2"></td>
               </tr>
               <tr>
-                <td colspan="2" align="center">
-                <div>จำนนเงินทั้งหมด <span id='sumtotal' style="color:red;">00.00</span> บาท</div>
-                                   <input type="submit" name="btnSubmit" id="btnSubmit" class="btn btn-info" value="แก้ไขรายการสั่งซื้อ" />
+              <td colspan="2" align="center">
+                <input type="hidden" name="comp_code" value="<?php echo $_SESSION["comp_code"]?>" />
+                 <div>จำนนเงินทั้งหมด <span id='sumtotal' style="color:red;">00.00</span> บาท</div>
+                                   <input type="submit" name="btnSubmit" id="btnSubmit" class="btn btn-info" value="สร้างรายการส่งของ" />
+              
                                    <button type="button" onclick="window.history.back()" class="btn btn-warning"> กลับไปเมนูก่อนหน้า </button>
 
                 </td>
@@ -222,7 +136,11 @@ $pd = dbInvDetail();
         </div>
       </form>
    
-  
+      <style>
+.table td {
+     padding:5px; 
+}
+</style>
 
 <?php //print "<pre>"; print_r($dataPrMain); print "</pre>"; ?>
 
@@ -250,8 +168,7 @@ $pd = dbInvDetail();
         });
       });
 
-
-function calcPrice(key,obj,type=1){
+  function calcPrice(key,obj,type=1){
   let objPrice = $('#price_'+key);
   let objTotal = $('#total_'+key);
   let objUnit  = $('#unit_'+key)
@@ -261,7 +178,7 @@ function calcPrice(key,obj,type=1){
   objTotal.val( parseFloat(obj.val())*parseFloat(objUnit.val()) )
   sumTotal();
 }
-sumTotal();
+
 function sumTotal(){
   let sum = 0;
   $(".total").each(function() {
@@ -271,6 +188,40 @@ function sumTotal(){
   $('#sumtotal').text(sum.toFixed(2));
 }
 
+ function jSelectProduct(key,obj){
+   let objPrice = $('#price_'+key);
+   let val = obj.val().split('|');
+   objPrice.val(val[1]);
+}
+
+function add_new_row(){
+  var new_row=  " <tr> "+
+                "<td width=\"45%\"> <select id='product_"+num_row+"' onchange=\"jSelectProduct('"+num_row+"',$(this))\" name='products[]' class=\"form-control\"><?php echo selectProducts() ?></select></td>" +
+                "<td width=\"15%\"><input type='number' onkeyup=\"calcPrice('"+num_row+"',$(this),1)\" class='form-control' id=unit_"+num_row+" name='amounts[]' value='' /></td>" +
+                "<td width=\"15%\"><input type='number' onkeyup=\"calcPrice('"+num_row+"',$(this),0)\" class='form-control' id=price_"+num_row+" name='priceunits[]' value='' /></td>" +
+                "<td width=\"15%\"><input type='number' class='form-control total' id=total_"+num_row+" name='totals[]' value='' readonly /></td>" +
+                "<td> <button type='button' name='remove' class='btn btn-danger btn-sm remove remove_"+num_row+"'><i class='fa fa-minus'></i></button></td>" +
+                "</tr>";
+  
+
+num_row++;
+$('.table-pr').append(new_row);
+}
+
+
+var num_row = 0;
+add_new_row();
+$('.add1').click(function(){
+  //alert("xxx");
+  add_new_row();
+});
+
+
+
+$(document).on('click', '.remove', function() {
+        $(this).closest('tr').remove();
+        sumTotal();
+      });
     </script>
 
 </body>

@@ -26,7 +26,7 @@ include('includes/function.php');
   <link rel="stylesheet" href="assets/admin/plugins/datatables/dataTables.bootstrap4.min.css">
   <link rel="stylesheet" href="assets/admin/plugins/responsive/responsive.bootstrap4.min.css"><!-- responsive-->
 
-    <title>แก้ไขรายการส่งของ</title>
+    <title>แก้ไขรายการวางบิล</title>
 </head>
 
 <?php
@@ -51,9 +51,9 @@ include('includes/function.php');
 
 // Create an instance of the class:
 function dbInvDetail(){
-  global $conn,$prefix_inv;
+  global $conn,$prefix_po;
   $query = "
-  SELECT * FROM `{$prefix_inv}detail` WHERE {$prefix_inv}main_id in (select x.{$prefix_inv}no from {$prefix_inv}main as x where x.{$prefix_inv}id = '{$_GET['id']}')";
+  SELECT * FROM `{$prefix_po}detail` WHERE {$prefix_po}main_id in (select x.{$prefix_po}no from {$prefix_po}main as x where x.{$prefix_po}id = '{$_GET['id']}')";
   $result = $conn->query($query);     
   if (!$result) {
     printf("Query failed: %s\n", $conn->error);
@@ -66,28 +66,26 @@ function dbInvDetail(){
   return $rows;
 }
 function dbInvMain(){
-  global $conn,$prefix_inv;
+  global $conn,$prefix_po;
   $query="
   
   SELECT 
 
-   p.{$prefix_inv}id,
-   p.{$prefix_inv}date,
-   p.`{$prefix_inv}SupplierID`,
-   p.`{$prefix_inv}SupplierName`,
-   (select c.comp_addr from comp as c where c.comp_code= p.`{$prefix_inv}SupplierID`) as SupplierAddr,
+   p.{$prefix_po}id,
+   p.{$prefix_po}date,
+   p.`{$prefix_po}SupplierID`,
+   p.`{$prefix_po}SupplierName`,
+   (select c.comp_addr from comp as c where c.comp_code= p.`{$prefix_po}SupplierID`) as SupplierAddr,
 
    (select c.comp_name from comp as c where c.comp_code= p.`site_no`) as site_name,
    (select c.comp_addr from comp as c where c.comp_code= p.`site_no`) as site_addr,
 
-   (select sum(pd.amount) from {$prefix_inv}detail as pd where pd.{$prefix_inv}main_id = p.{$prefix_inv}no) as sumall,
-   inv_RecieveID,
-   remark_po
-
-
-   FROM `{$prefix_inv}main` as p
+   (select sum(pd.amount) from {$prefix_po}detail as pd where pd.{$prefix_po}main_id = p.{$prefix_po}no) as sumall
+, bo_RecieveID,
+remark_inv
+   FROM `{$prefix_po}main` as p
  
-   where p.{$prefix_inv}id = '{$_GET['id']}' and flag_delete = 0
+   where p.{$prefix_po}id = '{$_GET['id']}' and flag_delete = 0
 
   ";
   //echo $query;
@@ -114,15 +112,15 @@ $pd = dbInvDetail();
 ?>
 <div class="container-fluid">
    <br><br><br><br><br>
-   <h3 align="center">แก้ไขรายการส่งของ</h3><br />
-   <h5 style="color:red" align="center">แสดงเฉพาะรายการยังไม่อนุมัติเท่านั้น  กรณีต้องการแก้ไขรายการที่อนุมัติแล้ว โปรดติดต่อผู้ดูแลระบบ</h5><br />
+   <h3 align="center">แก้ไขรายการวางบิล</h3><br />
+   <!--<h5 style="color:red" align="center">แสดงเฉพาะรายการยังไม่อนุมัติเท่านั้น  กรณีต้องการแก้ไขรายการที่อนุมัติแล้ว โปรดติดต่อผู้ดูแลระบบ</h5><br />-->
 
    <style>
 .table td {
      padding:5px; 
 }
 </style>
-   <form method="post"  action="<?php echo $prefix_inv?>edit.php">
+   <form method="post"  action="<?php echo $prefix_po?>edit.php">
         <div class="table-responsive">
           <table class="table table-bordered">
             <tr>
@@ -149,7 +147,7 @@ $pd = dbInvDetail();
                        </select>
                        
                        <b>ส่งถึงบริษัท</b><br />
-                       <select id="inv_RecieveID" name="inv_RecieveID" class="form-control ">
+                       <select id="bo_RecieveID" name="bo_RecieveID" class="form-control ">
                         
                         <?php 
                              $dataComp = dbComp();
@@ -166,16 +164,15 @@ $pd = dbInvDetail();
 
                        </select>
                        หมายเหตุ<br/>
-                      <input type="text" name="remark_po" id="remark_po" 
+                      <input type="text" name="remark_inv" id="remark_inv" 
                       placeholder="หมายเหตุกรอกหมายเลข pr/po"
                       value="<?php echo $pr[9]?>" class="form-control input-sm"  />
-
                     </div>
                     <div class="col-md-4">
                       เลขที่ใบสั่งซื้อ<br />
-                      <input type="text" name="<?php echo $prefix_inv?>id" id="<?php echo $prefix_inv?>id" value="<?php echo $pr[0]?>" class="form-control input-sm" placeholder="" readonly/>
+                      <input type="text" name="<?php echo $prefix_po?>id" id="<?php echo $prefix_po?>id" value="<?php echo $pr[0]?>" class="form-control input-sm" placeholder="" readonly/>
                       วันที่สั่งซื้อ<br/>
-                      <input type="text" name="<?php echo $prefix_inv?>date" id="order_date" value="<?php echo $pr[1]?>" class="form-control input-sm" readonly placeholder="Select Invoice Date" />
+                      <input type="text" name="<?php echo $prefix_po?>date" id="order_date" value="<?php echo $pr[1]?>" class="form-control input-sm" readonly placeholder="Select Invoice Date" />
                     </div>
                   </div>
                   <br />
@@ -191,7 +188,7 @@ $pd = dbInvDetail();
                    <?php 
                       if($pd)
                       foreach($pd as $k=>$v){
-                        echo ' <input type="hidden" name="'.$prefix_inv.'order_no[]" value="'.$v[0].'" />';
+                        echo ' <input type="hidden" name="'.$prefix_po.'order_no[]" value="'.$v[0].'" />';
                         echo " <tr>
                         <td width=\"5%\">".($k+1)."</td>
                         <td width=\"45%\"> ".selectProductsEdit("product_ids",$v[3])."</td>
@@ -215,7 +212,6 @@ $pd = dbInvDetail();
                 <div>จำนนเงินทั้งหมด <span id='sumtotal' style="color:red;">00.00</span> บาท</div>
                                    <input type="submit" name="btnSubmit" id="btnSubmit" class="btn btn-info" value="แก้ไขรายการสั่งซื้อ" />
                                    <button type="button" onclick="window.history.back()" class="btn btn-warning"> กลับไปเมนูก่อนหน้า </button>
-
                 </td>
               </tr>
           </table>

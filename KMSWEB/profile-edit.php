@@ -42,9 +42,23 @@ include('includes/function.php');
     
 </style>
 <body>
-<?php 
-require_once 'config.php';
-include('includes/navbar.php')?>
+<?php
+  session_start();
+  if($_SESSION["mem_status"]=="operator"){
+        include('includes/navbar_operator.php'); }
+  elseif($_SESSION["mem_status"]=="approver"){
+        include('includes/navbar_approver.php'); }
+  elseif($_SESSION["mem_status"]=="officer"){
+        include('includes/navbar_officer.php'); }
+  elseif($_SESSION["mem_status"]=="sale"){
+        include('includes/navbar_sale.php'); }
+  elseif($_SESSION["mem_status"]=="acc"){
+        include('includes/navbar_acc.php'); }
+  elseif($_SESSION["mem_status"]=="plant"){
+        include('includes/navbar_plant.php'); }
+  else { include('includes/navbar.php'); }
+?>
+
 <br><br> <br><br><br>
      <div class="container">
      <section class="jumbotron jumbotron-fluid text-center card-5">
@@ -68,28 +82,28 @@ $row=mysqli_fetch_array($res);
                     <div class="card-body">
                         <div class="form-row">
                             <div class="form-group col-md-4">
-                                <label for="mem_username"><?php echo $user;?></label>
+                                <label for="mem_username">ชื่อผู้ใช้งาน</label>
                                 <input type="text" class="form-control" name="mem_username" value="<?php echo $row['mem_username']?>" disabled>
                             </div>
                             <div class="form-group col-md-4">
-                                <label for="mem_fname"><?php echo $name;?></label>
+                                <label for="mem_fname">ชื่อ</label>
                                 <input type="text" class="form-control" name="mem_fname" value="<?php echo $row['mem_fname']?>" >
                             </div>
                             <div class="form-group col-md-4">
-                                <label for="mem_lname"><?php echo $lname;?></label>
+                                <label for="mem_lname">นามสกุล</label>
                                 <input type="text" class="form-control" name="mem_lname" value="<?php echo $row['mem_lname']?>" >
                             </div>
                             <div class="form-group col-md-6">
-                                <label for="mem_email"><?php echo $mail;?></label>
+                                <label for="mem_email">อีเมลล์</label>
                                 <input type="email" class="form-control" name="mem_email" value="<?php echo $row['mem_email']?>" >
                             </div>
                             <div class="form-group col-md-6">
-                                <label for="mem_tel"><?php echo $tel;?></label>
+                                <label for="mem_tel">เบอร์โทรศัพท์</label>
                                 <input type="text" class="form-control" name="mem_tel" value="<?php echo $row['mem_tel']?>" >
                             </div>
                         </div>
                         <div class="form-group">
-                                <label for="mem_address"><?php echo $add;?></label>
+                                <label for="mem_address">ที่อยู่</label>
                                 <textarea class="form-control" name="mem_address" rows="5" ><?php echo $row['mem_address']?> </textarea>
                             </div>
                             <a href="profile.php"class="btn btn-warning float-left">ย้อนกลับ</a>

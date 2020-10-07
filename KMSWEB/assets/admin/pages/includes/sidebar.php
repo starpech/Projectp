@@ -61,9 +61,18 @@ $row9=mysqli_fetch_array($res9);
           }
           ?></a>
           <a  class="d-block h6"><i class="fas fa-circle text-success"></i>  Online</a>
-          </center>
+        
+          <a href="../dashboard/logout.php" class="nav-link" style="margin:0; padding:0;">
+              <!-- <i class="fas fa-sign-out-alt"></i> -->
+              <button type="button" class="btn btn-danger">ออกจากระบบ</button>
+            </a>
+        
+        </center>
+
         </div>
       </div>
+
+
 
       <!-- Sidebar Menu -->
       <nav class="mt-2">
@@ -184,18 +193,12 @@ $row9=mysqli_fetch_array($res9);
                 </a>
               </li>
             </ul>
-
-
-
           </li>
+
+
 
           <!-- <li class="nav-header dropdown">Account Settings</li> -->
-<div class="sidebar-footer"><li class="nav-item">
-          <a href="../dashboard/logout.php" class="nav-link">
-              <!-- <i class="fas fa-sign-out-alt"></i> -->
-              <p>ออกจากระบบ</p>
-            </a>
-          </li>
+<div class="sidebar-footer">
 </div>
 
           <!-- dropdown -->
