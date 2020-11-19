@@ -1,8 +1,0 @@
-{
-    "files.autoSave": "onWindowChange",
-    "workbench.colorCustomizations": {
-        "activityBar.background": "#441563",
-        "titleBar.activeBackground": "#5F1D8B",
-        "titleBar.activeForeground": "#FCF9FE"
-    }
-}
