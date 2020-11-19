@@ -43,6 +43,8 @@ include('includes/function.php');
         include('includes/navbar_acc.php'); }
   elseif($_SESSION["mem_status"]=="plant"){
         include('includes/navbar_plant.php'); }
+        elseif($_SESSION["mem_status"]=="admin"){
+          include('includes/navbar_admin.php'); }
   else { include('includes/navbar.php'); }
 ?>
 
@@ -106,6 +108,12 @@ $pr = dbInvMain();
 $prDate = date('d/m/Y',strtotime($pr[1]));
 $pd = dbInvDetail();
 
+if(!isset($_SESSION['bo_sid'])){
+  $_SESSION['bo_sid'] = $pr[2];
+}
+if(!isset($_SESSION['bo_rid'])){
+  $_SESSION['bo_rid'] = $pr[8];
+}
 
 
 
@@ -129,7 +137,7 @@ $pd = dbInvDetail();
                     <div class="col-md-8">
                       
                         <b>บริษัทที่สั่งซื้อ</b><br />
-                       <select id="supplier_id" name="supplier_id" class="form-control ">
+                       <select id="supplier_id" name="supplier_id" class="form-control " readonly>
                         
                         <?php 
                              $dataComp = dbComp();
@@ -138,7 +146,7 @@ $pd = dbInvDetail();
                                 if($v[1] == $pr[2]){
                                   echo "<option value='{$v[1]}' selected> {$v[1]} : {$v[2]} </option>";
                                 }else{
-                                 echo "<option value='{$v[1]}'> {$v[1]} : {$v[2]} </option>";
+                                 //echo "<option value='{$v[1]}'> {$v[1]} : {$v[2]} </option>";
                                 }
                              }
                         ?>
@@ -147,7 +155,7 @@ $pd = dbInvDetail();
                        </select>
                        
                        <b>ส่งถึงบริษัท</b><br />
-                       <select id="bo_RecieveID" name="bo_RecieveID" class="form-control ">
+                       <select id="bo_RecieveID" name="bo_RecieveID" class="form-control " readonly>
                         
                         <?php 
                              $dataComp = dbComp();
@@ -156,7 +164,7 @@ $pd = dbInvDetail();
                                 if($v[1] == $pr[8]){
                                   echo "<option value='{$v[1]}' selected> {$v[1]} : {$v[2]} </option>";
                                 }else{
-                                 echo "<option value='{$v[1]}'> {$v[1]} : {$v[2]} </option>";
+                                 //echo "<option value='{$v[1]}'> {$v[1]} : {$v[2]} </option>";
                                 }
                              }
                         ?>
@@ -191,10 +199,10 @@ $pd = dbInvDetail();
                         echo ' <input type="hidden" name="'.$prefix_po.'order_no[]" value="'.$v[0].'" />';
                         echo " <tr>
                         <td width=\"5%\">".($k+1)."</td>
-                        <td width=\"45%\"> ".selectProductsEdit("product_ids",$v[3])."</td>
-                        <td width=\"15%\"><input type='number' onkeyup=\"calcPrice('{$k}',$(this),1)\" class='form-control'  id=unit_{$k} name='amounts[]' value='{$v[5]}' /></td>
-                        <td width=\"15%\"><input type='number' onkeyup=\"calcPrice('{$k}',$(this),0)\" class='form-control' id=price_{$k} name='priceunits[]' value='{$v[6]}' /></td>
-                        <td width=\"15%\"><input type='number' class='form-control total' id=total_{$k} name='totals[]' value='{$v[8]}' readonly /></td>
+                        <td width=\"45%\"> ".selectProductsEditBo("product_ids",$v[3],$k)."</td>
+                        <td width=\"15%\"><input type='number' onkeyup=\"calcPrice('{$k}',$(this),1)\" class='form-control'  id=unit_{$k} name='amounts[]' value='{$v[5]}' step='any' /></td>
+                        <td width=\"15%\"><input type='number' onkeyup=\"calcPrice('{$k}',$(this),0)\" onblur=\"calcPrice('{$k}',$(this),0)\" class='form-control' id=price_{$k} name='priceunits[]' value='{$v[6]}' step='any' /></td>
+                        <td width=\"15%\"><input type='number' class='form-control total' id=total_{$k} name='totals[]' value='{$v[8]}' readonly  step='any' /></td>
                       </tr>";
                       }
                    ?>
@@ -266,6 +274,8 @@ function sumTotal(){
 
   $('#sumtotal').text(sum.toFixed(2));
 }
+
+
 
     </script>
 

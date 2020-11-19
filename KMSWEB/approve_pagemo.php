@@ -6,7 +6,7 @@ include('includes/function.php');
 <?php
 //index.php
 session_start();
-$connect = mysqli_connect("localhost", "root", "", "kms_web_db");
+$connect = mysqli_connect("localhost", "root", "kslitc@1234", "kms_web_db");
 $query = "SELECT * FROM req_detail WHERE ISNULL(approve_date)";
 $result = mysqli_query($connect, $query);
 ?>
@@ -61,6 +61,8 @@ $result = mysqli_query($connect, $query);
         include('includes/navbar_acc.php'); }
   elseif($_SESSION["mem_status"]=="plant"){
         include('includes/navbar_plant.php'); }
+        elseif($_SESSION["mem_status"]=="admin"){
+          include('includes/navbar_admin.php'); }
   else { include('includes/navbar.php'); }
 ?>
   <div class="container-fluid">

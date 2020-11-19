@@ -141,13 +141,13 @@
 					             $admin="selected";  
 				      }  
            ?>
-                  <option value="operator" <?php echo $operator?>>user</option>
+                  <option value="operator" <?php echo $operator?>>operator</option>
                   <option value="approver"<?php echo $approver?>>approver</option>
                   <option value="officer"<?php echo $officer?>>officer</option>
                   <option value="sale"<?php echo $sale?>>sale</option>
                   <option value="acc"<?php echo $acc?>>acc</option>
                   <option value="plant"<?php echo $plant?>>plant</option>
-				          <option value="admin"<?php echo $admin?>>admin</option>
+				  <option value="admin"<?php echo $admin?>>admin</option>
 				  </select>
                   <?php    
                   ?>

@@ -43,6 +43,8 @@ include('includes/function.php');
         include('includes/navbar_acc.php'); }
   elseif($_SESSION["mem_status"]=="plant"){
         include('includes/navbar_plant.php'); }
+        elseif($_SESSION["mem_status"]=="admin"){
+          include('includes/navbar_admin.php'); }
   else { include('includes/navbar.php'); }
 ?>
 

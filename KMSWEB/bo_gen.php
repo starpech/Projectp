@@ -42,6 +42,8 @@ include('includes/function.php');
         include('includes/navbar_acc.php'); }
   elseif($_SESSION["mem_status"]=="plant"){
         include('includes/navbar_plant.php'); }
+        elseif($_SESSION["mem_status"]=="admin"){
+          include('includes/navbar_admin.php'); }
   else { include('includes/navbar.php'); }
 ?>
 
@@ -58,7 +60,8 @@ function dbPrMain(){
       (select c.comp_name from comp as c where c.comp_code= p.`site_no`) as site_name, 
       (select sum(pd.amount) from {$prefix_po}detail as pd where pd.{$prefix_po}main_id = p.{$prefix_po}no) as sumall 
   
-      ,approved 
+      ,approved ,
+	  bo_RecieveName
           FROM `{$prefix_po}main` as p
   where flag_delete = 0
   ";
@@ -67,7 +70,7 @@ function dbPrMain(){
     printf("Query failed: %s\n", $conn->error);
     exit;
   }      
-  while($row = $result->fetch_row()) {
+  while($row = $result->fetch_array()) {
     $rows[]=$row;
   }
   $result->close();
@@ -111,12 +114,16 @@ $dataPrMain = (dbPrMain());
                 $btnApproved = " <a href='{$prefix_po}approved.php?id=".$row[0]."' class='btn btn-primary btn-sm' > อนุมัติ </a>
                 ";
               }
+			  
+			  
+			  if($_SESSION['comp_code']!='01')
+				  $btnApproved = '';
 
                    echo "<tr>
                    <td> {$row[0]} </td>
                    <td> {$row[1]}</td>
                    <td> {$row[2]}</td>
-                   <td> {$row[3]}</td>
+                   <td> {$row['bo_RecieveName']}</td>
                    <td> ".number_format($row[4],2)."</td>
                    <td> {$approved} </td>
                    <td>
@@ -162,8 +169,10 @@ $dataPrMain = (dbPrMain());
     "ordering": true,
     "info": true,
     "autoWidth": true,
-    "responsive": true
+    "responsive": true,
+    "order": [[ 1 , "desc"]]  //วันที่ล่าสุดอยู่ด้านบนสุด
   });
+
 
 </script>
 

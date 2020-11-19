@@ -17,6 +17,10 @@ WHERE p.{$prefix_po}id='{$_POST[$prefix_po.'id']}'  ";
 
 foreach($_POST[$prefix_po.'order_no'] as $k=>$v){
 
+$_POST['product_ids'][$k] = explode("|",$_POST['product_ids'][$k]);
+$_POST['product_ids'][$k] = $_POST['product_ids'][$k][0];
+
+
 $updateQuery[] = "
 UPDATE {$prefix_po}detail as pd 
 set

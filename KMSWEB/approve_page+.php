@@ -28,7 +28,22 @@
 
  <?php 
  
- include('includes/navbar.php');
+ session_start();
+ if($_SESSION["mem_status"]=="operator"){
+       include('includes/navbar_operator.php'); }
+ elseif($_SESSION["mem_status"]=="approver"){
+       include('includes/navbar_approver.php'); }
+ elseif($_SESSION["mem_status"]=="officer"){
+       include('includes/navbar_officer.php'); }
+ elseif($_SESSION["mem_status"]=="sale"){
+       include('includes/navbar_sale.php'); }
+ elseif($_SESSION["mem_status"]=="acc"){
+       include('includes/navbar_acc.php'); }
+ elseif($_SESSION["mem_status"]=="plant"){
+       include('includes/navbar_plant.php'); }
+       elseif($_SESSION["mem_status"]=="admin"){
+         include('includes/navbar_admin.php'); }
+ else { include('includes/navbar.php'); }
 
  $query = "SELECT * FROM req_detail WHERE ISNULL(approve_date)";
 $result = mysqli_query($conn, $query);

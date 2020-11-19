@@ -34,6 +34,9 @@ function dbPrMain(){
    (select c.comp_addr from comp as c where c.comp_code= p.`site_no`) as site_addr,
 
    (select sum(pd.amount) from {$prefix_po}detail as pd where pd.{$prefix_po}main_id = p.{$prefix_po}no) as sumall
+,bo_RecieveName
+,bo_RecieveID
+,(select c.comp_addr from comp as c where c.comp_code= p.`bo_RecieveID`) as bo_RecieveAddr
 
    FROM `{$prefix_po}main` as p
  
@@ -45,7 +48,7 @@ function dbPrMain(){
     printf("Query failed: %s\n", $conn->error);
     exit;
   }      
-  while($row = $result->fetch_row()) {
+  while($row = $result->fetch_array()) {
     $rows[]=$row;
   }
   $result->close();
@@ -108,12 +111,12 @@ $output .= '
     </td>
     <td width="40%" valign="top">
     สถานที่วางบิล<br>
-    '.$pr[4].'
+       503 อาคาร เคเอสแอล ทาวเวอร์ ชั้น 16 ถนน ศรีอยุธยา แขวงพญาไท เขตราชเทวี กรุงเทพฯ 10400
     </td>
     <td width="40%" valign="top">
     สถานที่ส่งสินค้า<br>
-    '.$pr[5].' <br>
-    '.$pr[6].'
+    '.$pr['bo_RecieveName'].' <br>
+    '.$pr['bo_RecieveAddr'].'
     </td>
    </tr>
   </table>

@@ -1,5 +1,5 @@
 <?php
-    $conn = new mysqli('localhost','root','','kms_web_db');
+    $conn = new mysqli('localhost','root','kslitc@1234','kms_web_db');
     //echo $conn->connect_error;//แสดงerror แบบตัวหนังสือ
    // echo $conn->connect_errno; //แสดงerror แบบตัวเลข
     $conn->set_charset("utf8");//รองรับ utf8 ภาษาไทย

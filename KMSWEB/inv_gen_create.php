@@ -2,6 +2,16 @@
 
 <?php require_once('php/connect.php');
 include('includes/function.php');
+
+if(!isset($_SESSION['inv_sid'])){
+  $_SESSION['inv_sid'] = '01';
+}
+if(!isset($_SESSION['inv_rid'])){
+  $_SESSION['inv_rid'] = '01';
+}
+
+
+
 ?>
 
 <!DOCTYPE html>
@@ -39,16 +49,18 @@ include('includes/function.php');
         include('includes/navbar_acc.php'); }
   elseif($_SESSION["mem_status"]=="plant"){
         include('includes/navbar_plant.php'); }
+        elseif($_SESSION["mem_status"]=="admin"){
+          include('includes/navbar_admin.php'); }
   else { include('includes/navbar.php'); }
 ?>
 
 <!---  CONTENT----->
 <div class="container-fluid">
    <br><br><br><br><br>
-   <h3 align="center">สร้างรายการส่งของ</h3><br />
-   <h5 style="color:red" align="center">แสดงเฉพาะรายการยังไม่อนุมัติเท่านั้น  กรณีต้องการแก้ไขรายการที่อนุมัติแล้ว โปรดติดต่อผู้ดูแลระบบ</h5><br />
+   <h3 align="center">สร้างรายการส่งของ จากผู้จำหน่าย ถึง สถานที่รับสินค้า</h3><br />
+   <!--<h5 style="color:red" align="center">แสดงเฉพาะรายการยังไม่อนุมัติเท่านั้น  กรณีต้องการแก้ไขรายการที่อนุมัติแล้ว โปรดติดต่อผู้ดูแลระบบ</h5><br />-->
 
-  
+  <?php //print_r($_SESSION); ?> 
    <form method="post"  action="<?php echo $prefix_inv?>create.php">
         <div class="table-responsive">
           <table class="table table-bordered">
@@ -57,14 +69,14 @@ include('includes/function.php');
                   <div class="row">
                     <div class="col-md-8">
                       
-                        <b>บริษัทที่ส่งของ</b><br />
+                        <b>บริษัทผู้จำหน่ายที่ส่งของ</b><br />
                        <select id="supplier_id" name="supplier_id" class="form-control ">
                         
                         <?php 
-                             $dataComp = dbComp();
+                             $dataComp = dbComp('ผู้ขาย');
                              if($dataComp)
                              foreach($dataComp as $k=>$v){
-                                if($v[1] == $pr[2]){
+                                if($v[1] == $_SESSION['inv_sid']){
                                   echo "<option value='{$v[1]}' selected> {$v[1]} : {$v[2]} </option>";
                                 }else{
                                  echo "<option value='{$v[1]}'> {$v[1]} : {$v[2]} </option>";
@@ -79,10 +91,10 @@ include('includes/function.php');
                        <select id="inv_RecieveID" name="inv_RecieveID" class="form-control ">
                         
                         <?php 
-                             $dataComp = dbComp();
+                             $dataComp = dbComp('ผู้ซื้อ');
                              if($dataComp)
                              foreach($dataComp as $k=>$v){
-                                if($v[1] == $pr[2]){
+                                if($v[1] == $_SESSION['inv_rid']){
                                   echo "<option value='{$v[1]}' selected> {$v[1]} : {$v[2]} </option>";
                                 }else{
                                  echo "<option value='{$v[1]}'> {$v[1]} : {$v[2]} </option>";
@@ -92,15 +104,15 @@ include('includes/function.php');
 
 
                        </select>
-                       หมายเหตุ<br/>
+                       ส่งสินค้าตามใบ Pr/Po หมายเลข<br/>
                       <input type="text" name="remark_po" id="remark_po" 
-                      placeholder="หมายเหตุกรอกหมายเลข pr/po"
+                      placeholder="กรุณากรอกหมายเลข pr/po กรณีมีหลายหมายเลขให้ใช้เครื่องหมาย # คั่นระหว่างหมายเลข"
                       value="<?php echo $pr[1]?>" class="form-control input-sm"  />
 
                     </div>
                     <div class="col-md-4">
                       วันที่ส่งของ<br/>
-                      <input type="text" name="<? echo $prefix_inv?>date" id="order_date" value="<?php echo $pr[1]?>" class="form-control input-sm" readonly placeholder="Select Invoice Date" />
+                      <input type="text" name="<? echo $prefix_inv?>date" id="order_date" value="<?php echo $_SESSION['inv_date']?>" class="form-control input-sm" readonly placeholder="Select Invoice Date" />
                     </div>
                   </div>
                   <br />
@@ -126,8 +138,8 @@ include('includes/function.php');
               <tr>
               <td colspan="2" align="center">
                 <input type="hidden" name="comp_code" value="<?php echo $_SESSION["comp_code"]?>" />
-                 <div>จำนนเงินทั้งหมด <span id='sumtotal' style="color:red;">00.00</span> บาท</div>
-                                   <input type="submit" name="btnSubmit" id="btnSubmit" class="btn btn-info" value="สร้างรายการส่งของ" />
+                 <div>จำนวนเงินทั้งหมด <span id='sumtotal' style="color:red;">00.00</span> บาท</div>
+                                   <input type="submit" name="btnSubmit" ondblclick="return false;" id="btnSubmit" class="btn btn-info" value="สร้างรายการส่งของ" />
                                    <button type="button" onclick="window.history.back()" class="btn btn-warning"> กลับไปเมนูก่อนหน้า </button>
 
                 </td>
@@ -161,11 +173,39 @@ include('includes/function.php');
 <link href='assets\admin\plugins\datepicker\datepicker3.css' rel='stylesheet' type='text/css'>
 <script src='assets\admin\plugins\datepicker\bootstrap-datepicker.js' type='text/javascript'></script>
 <script>
+var inv_rid ='01';
+var inv_sid = '01';
+var inv_date = '';
+
       $(document).ready(function(){
         $('#order_date').datepicker({
           format: "yyyy-mm-dd",
           autoclose: true
         });
+		
+		
+		$('#inv_RecieveID').change(function(){
+			inv_rid = $(this).val();
+			inv_sid = $('#supplier_id').val();
+			inv_date = $('#order_date').val();
+			$.post('php/session_create.php',
+			 {'inv_rid':inv_rid,
+			  'mode':'inv',
+			  'inv_sid':inv_sid,
+			  'inv_date':inv_date
+			  });
+			  window.location.href="?";
+		});
+		
+			$('#btnSubmit').dblclick(function(e)
+     {
+       // $(this).attr('disabled',true);
+	    e.preventDefault();
+	    alert("กรุณาคลิกครั้งเดียว.!!!!");
+        //return false;
+     });
+	 
+		
       });
 
   function calcPrice(key,obj,type=1){
@@ -196,10 +236,10 @@ function sumTotal(){
 
 function add_new_row(){
   var new_row=  " <tr> "+
-                "<td width=\"45%\"> <select id='product_"+num_row+"' onchange=\"jSelectProduct('"+num_row+"',$(this))\" name='products[]' class=\"form-control\"><?php echo selectProducts() ?></select></td>" +
-                "<td width=\"15%\"><input type='number' onkeyup=\"calcPrice('"+num_row+"',$(this),1)\" class='form-control' id=unit_"+num_row+" name='amounts[]' value='' /></td>" +
-                "<td width=\"15%\"><input type='number' onkeyup=\"calcPrice('"+num_row+"',$(this),0)\" class='form-control' id=price_"+num_row+" name='priceunits[]' value='' /></td>" +
-                "<td width=\"15%\"><input type='number' class='form-control total' id=total_"+num_row+" name='totals[]' value='' readonly /></td>" +
+                "<td width=\"45%\"> <select id='product_"+num_row+"' onchange=\"jSelectProduct('"+num_row+"',$(this))\" name='products[]' class=\"form-control\"><?php echo selectProductsInv() ?></select></td>" +
+                "<td width=\"15%\"><input type='number' onkeyup=\"calcPrice('"+num_row+"',$(this),1)\" class='form-control' id=unit_"+num_row+" name='amounts[]' value='' step='0.01' /></td>" +
+                "<td width=\"15%\"><input type='number' onkeyup=\"calcPrice('"+num_row+"',$(this),0)\" class='form-control' id=price_"+num_row+" name='priceunits[]' value='' step='0.01' /></td>" +
+                "<td width=\"15%\"><input type='number' class='form-control total' id=total_"+num_row+" name='totals[]' value='' step='0.01' readonly /></td>" +
                 "<td> <button type='button' name='remove' class='btn btn-danger btn-sm remove remove_"+num_row+"'><i class='fa fa-minus'></i></button></td>" +
                 "</tr>";
   

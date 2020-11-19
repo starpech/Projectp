@@ -34,6 +34,10 @@ function dbPrMain(){
    (select c.comp_addr from comp as c where c.comp_code= p.`site_no`) as site_addr,
 
    (select sum(pd.amount) from {$prefix_inv}detail as pd where pd.{$prefix_inv}main_id = p.{$prefix_inv}no) as sumall
+,inv_RecieveName
+,inv_RecieveID
+,(select c.comp_addr from comp as c where c.comp_code= p.`inv_RecieveID`) as inv_RecieveAddr
+
 
    FROM `{$prefix_inv}main` as p
  
@@ -45,7 +49,7 @@ function dbPrMain(){
     printf("Query failed: %s\n", $conn->error);
     exit;
   }      
-  while($row = $result->fetch_row()) {
+  while($row = $result->fetch_array()) {
     $rows[]=$row;
   }
   $result->close();
@@ -84,7 +88,7 @@ $output .= '
   <td colspan="2" align="center" style="font-size:18px">
   
      <b>บริษัท เคเอสแอล แมททีเรียล ซัพพลายส์ จำกัด</b><br>
-     ใบส่งของ
+     ใบส่งสินค้า
   </td>
  </tr>
  <tr>
@@ -93,7 +97,7 @@ $output .= '
     <tr>
      <td width="65%">
      วันที่ส่งสินค้า '.$prDate.'<br>
-     เลขที่ใบสั่งซื้อสินค้า  '.$pr[0].'
+     เลขที่ใบส่งของ '.$pr[0].'
      </td>
      <td width="35%">
     
@@ -104,33 +108,28 @@ $output .= '
    <table width="100%" cellpadding="5">
    <tr>
     <td width="20%" valign="top">
-   รหัสผู้ขาย '.$pr[2].':'.$pr[3].'
+   รหัสผู้ขาย<br> '.$pr[2].':'.$pr[3].'
     </td>
     <td width="40%" valign="top">
     สถานที่วางบิล<br>
-    '.$pr[4].'
+       503 อาคาร เคเอสแอล ทาวเวอร์ ชั้น 16 ถนน ศรีอยุธยา แขวงพญาไท เขตราชเทวี กรุงเทพฯ 10400
     </td>
     <td width="40%" valign="top">
     สถานที่ส่งสินค้า<br>
-    '.$pr[5].' <br>
-    '.$pr[6].'
+    '.$pr['inv_RecieveName'].' <br>
+    '.$pr['inv_RecieveAddr'].'
     </td>
    </tr>
   </table>
   <br>
   <table width="100%" cellpadding="5">
   <tr>
-   <td width="25%" valign="top">
- ประเภทการจัดส่ง : 
+   <td width="50%" valign="top">
+     ประเภทการจัดส่ง : ส่งถึงสถานที่ตามรายการขอซื้อ : 
    </td>
-   <td width="25%" valign="top">
-   ค่าระวาง : EXW
-   </td>
-   <td width="25%" valign="top">
-   เงื่อนไขการชำระเงิน : R030
-   </td>
-   <td width="25%" valign="top">
-   สกุลเงิน : THB
+
+   <td width="50%" valign="top">
+  
    </td>
   </tr>
  </table>
@@ -143,8 +142,8 @@ $output .= '
      <th>ชื่อสินค้า</th>
      <th>จำนวนที่ส่ง</th>
      <th>หน่วย</th>
-     <th>ราคาต่อหน่วย</th>
-     <th>จำนวนเงิน</th>
+
+
        </tr>
     ';
 if($pd)
@@ -155,38 +154,38 @@ foreach($pd as $k=>$pdRow){
     <td>'.$pdRow[4].'</td>
     <td>'.$pdRow[5].'</td>
     <td>'.$pdRow[7].'</td>
-    <td>'.$pdRow[6].'</td>
-    <td>'.number_format($pdRow[8],2).'</td>
+
       </tr>';
 }
 
 $output .=  '<tr>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-<td align=right>รวมเงินทั้งหมด</td>
-<td>'.number_format($pr[7],2).'</td>
+
   </tr>';
 
-$output .= '
-   </table>
+  $output .= '
+  </table>
 
-   <table width="100%" cellpadding="5">
-   <tr>
-    <td width="25%" valign="top">
-  หมายเหตุ : 
-    </td>
-    <td width="75%" valign="top">
-  6304/001<br>
-  Exchange rate 1.000    </td> 
-    </tr></table>
+  <table width="100%" cellpadding="5">
+  <tr>
+   <td width="50%" valign="top"> <br><br> <br>
+ <center> ลงชื่อ  .................................................................. (ผู้ส่งสินค้า) </center> 
+ <br>
+ <center> วันที่ส่งสินค้า  ................/.................../.................  </center>
+   </td>
 
-  </td>
- </tr>
+   <td width="50%" valign="top"> <br><br>
+   <center>  ลงชื่อ  .................................................................. (ผู้รับสินค้า)  </center>
+   <br>
+   <center> วันที่รับสินค้า  ................/.................../.................  </center>
+   </td> 
+   </tr></table>
+
+ </td>
+</tr>
 </table>
 ';
+
+
 
 // Write some HTML code:
 $mpdf->WriteHTML($output);

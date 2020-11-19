@@ -34,6 +34,8 @@ $comp_code = $_SESSION["comp_code"];
         include('includes/navbar_acc.php'); }
   elseif($_SESSION["mem_status"]=="plant"){
         include('includes/navbar_plant.php'); }
+        elseif($_SESSION["mem_status"]=="admin"){
+          include('includes/navbar_admin.php'); }
   else { include('includes/navbar.php'); }
 ?>
 
@@ -42,6 +44,7 @@ $comp_code = $_SESSION["comp_code"];
 <div class="container-fluid">
    <br><br><br><br><br>
 <?php 
+//debug($_SESSION);
 $query = "SELECT * FROM req_detail{$comp_code} WHERE ISNULL(approve_date)";
 $result = mysqli_query($conn, $query);
  
@@ -139,7 +142,18 @@ $("#clearAll").click(function(){
       }
 
       $.post('approve_process02.php')
-
+      alert("เรียบร้อยแล้ว.");
+      $.post('php/sendemailAppPr.php',function(retData){
+					console.log(retData);
+					
+					if(retData == 'Success'){
+					   alert("ส่งเมล์หาผู้อนุมัติเรียบร้อยแล้ว");
+					}else{
+					   alert("ไม่สามารถส่งเมล์ได้.");
+					}
+					
+				});
+        
       console.log(data)
      }
      
@@ -274,7 +288,7 @@ $("#clearAll").click(function(){
             success: function(data) {
               if (data == 'ok') {
                 $('#item_table').find("tr:gt(0)").remove();
-                $('#error').html('<div class="alert alert-success">บันทึกรายการขอซื้อเรียบร้อย</div>');
+                $('#error').html('<div class="alert alert-success">บันทึกรายการอนุมัติเรียบร้อย</div>');
               }
             }
           });

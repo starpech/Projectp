@@ -25,7 +25,7 @@ include('includes/function.php');
   <link rel="stylesheet" href="assets/admin/plugins/datatables/dataTables.bootstrap4.min.css">
   <link rel="stylesheet" href="assets/admin/plugins/responsive/responsive.bootstrap4.min.css"><!-- responsive-->
 
-    <title>แก้ไขรายการขอซื้อ</title>
+    <title>รายการใบขอซื้อ/ใบสั่งซื้อ</title>
 </head>
 
 <?php
@@ -42,6 +42,8 @@ include('includes/function.php');
         include('includes/navbar_acc.php'); }
   elseif($_SESSION["mem_status"]=="plant"){
         include('includes/navbar_plant.php'); }
+        elseif($_SESSION["mem_status"]=="admin"){
+          include('includes/navbar_admin.php'); }
   else { include('includes/navbar.php'); }
 ?>
 
@@ -51,7 +53,14 @@ include('includes/function.php');
 function dbPrMain(){
   global $conn;
   $query="
-  SELECT p.pr_id, p.pr_date, p.`pr_SupplierName`, (select c.comp_name from comp as c where c.comp_code= p.`site_no`) as site_name, (select sum(pd.amount) from pr_detail as pd where pd.pr_main_id = p.pr_no) as sumall FROM `pr_main` as p
+  SELECT p.pr_id, 
+  p.pr_date, 
+  p.`pr_SupplierName`, 
+  (select c.comp_name from comp as c where c.comp_code= p.`site_no`) as site_name, 
+  (select sum(pd.amount) from pr_detail as pd where pd.pr_main_id = p.pr_no) as sumall 
+  ,approved
+  
+  FROM `pr_main` as p
   where flag_delete = 0
   ";
   $result = $conn->query($query);     
@@ -84,8 +93,9 @@ $dataPrMain = (dbPrMain());
        <th width="10%"><h5 align="center">บริษัทที่จำหน่าย</h5></th>
        <th width="15%"><h5 align="center">สถานที่ส่งสินค้า</h5></th>
        <th width="10%"><h5 align="center">จำนวน</h5></th>
-              <!--<th>More</th>-->
-              <th style="width:100px"><a href="pr_gen_create.php" class="btn btn-info"><i class="fas fa-plus-square"></i> สร้างรายการขอซื้อ</a></th>
+	   <th width="10%"><h5 align="center">สถานะ</h5></th>
+              <th></th>
+           <!-- <th style="width:100px;" hidden><a href="pr_gen_create.php" class="btn btn-info"><i class="fas fa-plus-square"></i> สร้างรายการขอซื้อ</a></th> -->
             </tr>
             </thead>
             <tbody>
@@ -94,21 +104,35 @@ $dataPrMain = (dbPrMain());
              if($dataPrMain)
              foreach($dataPrMain as $row ){
                  
+				 
+              $approved = "ยังไม่อนุมัติ";
+              $btnApproved = '';
+              if($row[5]){
+                $approved = "<span class='text-success'>อนุมัติแล้ว</span>";
+              }else{
+                $btnApproved = " <a href='pr_approved.php?id=".$row[0]."&sid={$row['pr_SupplierID']}' class='btn btn-primary btn-sm' > อนุมัติ </a>
+                ";
+              }
+			  
+			  if($_SESSION['comp_code']!='01') $btnApproved = '';
+				 
                    echo "<tr>
                    <td> {$row[0]} </td>
                    <td> {$row[1]}</td>
                    <td> {$row[2]}</td>
                    <td> {$row[3]}</td>
                    <td> ".number_format($row[4],2)."</td>
+				   <td> {$approved} </td>
                    <td>
                    <a href='onlineinvoice/pr_pdf.php?id=".$row[0]."' target='_blank' class='btn btn-info btn-sm'><span class='glyphicon glyphicon-edit'></span> PDF </a>
  
-                   <a href='pr_gen_edit.php?id=".$row[0]."' class='btn btn-success btn-sm' ><span class='glyphicon glyphicon-edit'></span> แก้ไข</a>
-                   <a href='#delete_".$row[0]."' class='btn btn-danger btn-sm' data-toggle='modal'><span class='glyphicon glyphicon-trash'></span> ลบ</a>
+                   <!--<a href='pr_gen_edit.php?id=".$row[0]."' class='btn btn-success btn-sm' ><span class='glyphicon glyphicon-edit'></span> แก้ไข</a>-->
+                   <!--<a href='#delete_".$row[0]."' class='btn btn-danger btn-sm' data-toggle='modal'><span class='glyphicon glyphicon-trash'></span> ลบ</a>-->
                    
                    <a href='pr_gen_upload.php?id=".$row[0]."' class='btn btn-warning btn-sm' ><span class='glyphicon glyphicon-edit'></span> รูปภาพ </a>
-
+{$btnApproved}
                    </td>
+				   
                    </tr>";
                    
                  include "edit_delete_pr_gen.php";
@@ -143,7 +167,8 @@ $dataPrMain = (dbPrMain());
     "ordering": true,
     "info": true,
     "autoWidth": true,
-    "responsive": true
+    "responsive": true,
+    "order": [[ 1 , "desc"]]
   });
 
 </script>

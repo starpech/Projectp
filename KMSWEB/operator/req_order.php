@@ -22,7 +22,7 @@ include('config.php');
 
 <?php
 //index.php
-$connect = new PDO("mysql:host=localhost;dbname=kms_web_db", "root", "");
+$connect = new PDO("mysql:host=localhost;dbname=kms_web_db", "root", "kslitc@1234");
 function fill_unit_select_box($connect)
 {
   $output = '';

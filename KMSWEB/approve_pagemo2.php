@@ -6,7 +6,7 @@ include('includes/function.php');
 <?php
 //index.php
 //session_start();
-$connect = mysqli_connect("localhost", "root", "", "kms_web_db");
+$connect = mysqli_connect("localhost", "root", "kslitc@1234", "kms_web_db");
 $query = "SELECT * FROM req_detail WHERE ISNULL(approve_date) AND input_by='14'";
 $result = mysqli_query($connect, $query);
 ?>
@@ -41,20 +41,22 @@ $result = mysqli_query($connect, $query);
  </head>
  <body>
  <?php
-   session_start();
-   if($_SESSION["mem_status"]=="operator"){
-         include('includes/navbar_operator.php'); }
-   elseif($_SESSION["mem_status"]=="approver"){
-         include('includes/navbar_approver.php'); }
-   elseif($_SESSION["mem_status"]=="officer"){
-         include('includes/navbar_officer.php'); }
-   elseif($_SESSION["mem_status"]=="sale"){
-         include('includes/navbar_sale.php'); }
-   elseif($_SESSION["mem_status"]=="acc"){
-         include('includes/navbar_acc.php'); }
-   elseif($_SESSION["mem_status"]=="plant"){
-         include('includes/navbar_plant.php'); }
-   else { include('includes/navbar.php'); }
+  session_start();
+  if($_SESSION["mem_status"]=="operator"){
+        include('includes/navbar_operator.php'); }
+  elseif($_SESSION["mem_status"]=="approver"){
+        include('includes/navbar_approver.php'); }
+  elseif($_SESSION["mem_status"]=="officer"){
+        include('includes/navbar_officer.php'); }
+  elseif($_SESSION["mem_status"]=="sale"){
+        include('includes/navbar_sale.php'); }
+  elseif($_SESSION["mem_status"]=="acc"){
+        include('includes/navbar_acc.php'); }
+  elseif($_SESSION["mem_status"]=="plant"){
+        include('includes/navbar_plant.php'); }
+        elseif($_SESSION["mem_status"]=="admin"){
+          include('includes/navbar_admin.php'); }
+  else { include('includes/navbar.php'); }
  ?>
   <div class="container">
    <br />

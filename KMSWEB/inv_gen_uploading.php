@@ -1,7 +1,7 @@
 <?php error_reporting(~E_ALL);?>
 
 <?php require_once('php/connect.php');
-include('includes/function.php');
+//include('includes/function.php');
 ?>
 
 <?php 

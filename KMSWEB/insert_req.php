@@ -7,7 +7,7 @@ $input_date = date("Y-m-d");
 $product_total = 0;
 
 function getProduct($product_code){
-  $conn = new mysqli('localhost','root','','kms_web_db');
+  $conn = new mysqli('localhost','root','kslitc@1234','kms_web_db');
   $conn->set_charset("utf8");
   $st = $conn->prepare("SELECT * FROM product where product_code =  '{$product_code}' ");
   $st->execute(); //ประมวณผล ข้างบน
@@ -30,8 +30,8 @@ function getProduct($product_code){
     ) as x order by x.ccno desc limit 1
 
    ";
-   echo $sql;
-   $conn = new mysqli('localhost','root','','kms_web_db');
+  // echo $sql;
+   $conn = new mysqli('localhost','root','kslitc@1234','kms_web_db');
    $conn->set_charset("utf8");
    $st = $conn->prepare($sql);
    $st->execute(); //ประมวณผล ข้างบน
@@ -43,8 +43,8 @@ function getProduct($product_code){
 
 if(isset($_POST["quota_id"]))
 {
- $connect = new PDO("mysql:host=localhost;dbname=kms_web_db", "root", "");
-  
+ $connect = new PDO("mysql:host=localhost;dbname=kms_web_db", "root", "kslitc@1234");
+  $connect->exec("set names utf8");
  for($count = 0; $count < count($_POST["quota_id"]); $count++)
  {
 
@@ -107,6 +107,7 @@ if(isset($_POST["quota_id"]))
  $connect->query($update_req_detail_id);
  if(isset($result))
  {
+  ///require_once('php/sendemailAppReq.php');
   echo 'ok';
  }
 }

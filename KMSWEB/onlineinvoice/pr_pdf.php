@@ -3,6 +3,27 @@
 require_once __DIR__ . '/vendor/autoload.php';
 require_once '../php/connect.php';
 // Create an instance of the class:
+function dbReqDetail(){
+  global $conn;
+  $query = "
+  (SELECT * FROM `req_detail01` WHERE pr_id = '{$_GET['id']}') UNION
+  (SELECT * FROM `req_detail02` WHERE pr_id = '{$_GET['id']}') UNION
+  (SELECT * FROM `req_detail03` WHERE pr_id = '{$_GET['id']}') UNION
+  (SELECT * FROM `req_detail04` WHERE pr_id = '{$_GET['id']}') UNION
+  (SELECT * FROM `req_detail05` WHERE pr_id = '{$_GET['id']}') UNION
+  (SELECT * FROM `req_detail06` WHERE pr_id = '{$_GET['id']}') 
+   ";
+  $result = $conn->query($query);     
+  if (!$result) {
+    printf("Query failed: %s\n", $conn->error);
+    exit;
+  }      
+  while($row = $result->fetch_row()) {
+    $rows[]=$row;
+  }
+  $result->close();
+  return $rows;
+}
 function dbPrDetail(){
   global $conn;
   $query = "
@@ -56,6 +77,7 @@ function dbPrMain(){
 $pr = dbPrMain();
 $prDate = date('d/m/Y',strtotime($pr[1]));
 $pd = dbPrDetail();
+$req = dbReqDetail();
 
 $defaultConfig = (new Mpdf\Config\ConfigVariables())->getDefaults();
 $fontDirs = $defaultConfig['fontDir'];
@@ -84,7 +106,7 @@ $output .= '
   <td colspan="2" align="center" style="font-size:18px">
   
      <b>บริษัท เคเอสแอล แมททีเรียล ซัพพลายส์ จำกัด</b><br>
-     ใบสั่งซื้อสินค้า
+     ใบสั่งซื้อสินค้า 
   </td>
  </tr>
  <tr>
@@ -92,7 +114,7 @@ $output .= '
    <table width="100%" cellpadding="5">
     <tr>
      <td width="65%">
-     วันที่ส่งสินค้า '.$prDate.'<br>
+     วันที่ '.$prDate.'<br>
      เลขที่ใบสั่งซื้อสินค้า  '.$pr[0].'
      </td>
      <td width="35%">
@@ -104,11 +126,11 @@ $output .= '
    <table width="100%" cellpadding="5">
    <tr>
     <td width="20%" valign="top">
-   รหัสผู้ขาย '.$pr[2].':'.$pr[3].'
+   รหัสผู้ขาย<br> '.$pr[2].':'.$pr[3].'
     </td>
     <td width="40%" valign="top">
     สถานที่วางบิล<br>
-    '.$pr[4].'
+       503 อาคาร เคเอสแอล ทาวเวอร์ ชั้น 16 ถนน ศรีอยุธยา แขวงพญาไท เขตราชเทวี กรุงเทพฯ 10400
     </td>
     <td width="40%" valign="top">
     สถานที่ส่งสินค้า<br>
@@ -120,28 +142,31 @@ $output .= '
   <br>
   <table width="100%" cellpadding="5">
   <tr>
-   <td width="25%" valign="top">
- ประเภทการจัดส่ง : 
+   <td width="50%" valign="top">
+          ประเภทการจัดส่ง : ส่งถึงสถานที่ตามรายการขอซื้อ
    </td>
    <td width="25%" valign="top">
    ค่าระวาง : EXW
    </td>
-   <td width="25%" valign="top">
-   เงื่อนไขการชำระเงิน : R030
    </td>
    <td width="25%" valign="top">
-   สกุลเงิน : THB
+
+   </td>
+   <td width="25%" valign="top">
+
    </td>
   </tr>
  </table>
 
+
+ 
    <br />
    <table width="100%" border="1" cellpadding="5" cellspacing="0">
     <tr>
      <th>ลำดับ</th>
      <th>รหัสสินค้า</th>
      <th>ชื่อสินค้า</th>
-     <th>จำนวนที่ส่ง</th>
+     <th>จำนวน</th>
      <th>หน่วย</th>
      <th>ราคาต่อหน่วย</th>
      <th>จำนวนเงิน</th>
@@ -168,25 +193,70 @@ $output .=  '<tr>
 <td></td>
 <td align=right>รวมเงินทั้งหมด</td>
 <td>'.number_format($pr[7],2).'</td>
-  </tr>';
+  </tr>
+  </table>';
 
 $output .= '
-   </table>
-
    <table width="100%" cellpadding="5">
    <tr>
     <td width="25%" valign="top">
-  หมายเหตุ : 
+
     </td>
-    <td width="75%" valign="top">
-  6304/001<br>
-  Exchange rate 1.000    </td> 
+ 
     </tr></table>
 
   </td>
  </tr>
-</table>
-';
+</table>';
+
+$output .= '
+<table width="100%" border="0" cellpadding="5" cellspacing="0">
+ <tr>
+  <td colspan="2" align="center" style="font-size:18px">
+    <b>รายละเอียดรายการขอซื้อ</b>
+  </td>
+ </tr>
+</table>';
+
+$output .= '
+<table width="100%" border="1" cellpadding="5" cellspacing="0">
+ <tr>
+  <th>ลำดับ</th>
+  <th>เลขรายการขอซื้อ</th>
+  <th>โควต้า</th>
+  <th>ชื่อ-นามสกุล</th>
+  <th>เขต</th>
+  <th>สถานที่</th>
+  <th>ชื่อสินค้า</th>
+  <th>จำนวน</th>
+ </tr>';
+if($req)
+foreach($req as $a=>$reqRow){
+ $output .=  '<tr>
+ <td>'.($a+1).'</td>
+ <td>'.$reqRow[1].'</td>
+ <td>'.$reqRow[9].'</td>
+ <td>'.$reqRow[10].'</td>
+ <td>'.$reqRow[11].'</td>
+ <td>'.$reqRow[12].'</td>
+ <td>'.$reqRow[15].'</td>
+ <td>'.number_format($reqRow[16],2).'</td>
+ </tr>';
+}
+$output .= '</table>';
+
+$output .= '<br><br><br>
+<table width="100%" border="0" cellpadding="5" cellspacing="0">
+ <tr>
+  <td colspan="2" align="center" style="font-size:18px">
+    ลงชื่อ............................................(ผู้รับใบสั่งซื้อ) ลงชื่อ............................................(ผู้จัดเตรียม) ลงชื่อ............................................(ผู้อนุมัติ)<br>
+
+  </td>
+ </tr>
+</table>';
+
+
+
 
 // Write some HTML code:
 $mpdf->WriteHTML($output);

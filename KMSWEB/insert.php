@@ -1,6 +1,6 @@
 <?php
 //insert.php
-$connect = mysqli_connect("localhost", "root", "", "kms_web_db");
+$connect = mysqli_connect("localhost", "root", "kslitc@1234", "kms_web_db");
 if(isset($_POST["item_name"]))
 {
  $item_name = $_POST["item_name"];

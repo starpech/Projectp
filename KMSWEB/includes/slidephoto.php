@@ -12,52 +12,71 @@
         <li data-target="#carousel-example-2" data-slide-to="0" class="active"></li>
         <li data-target="#carousel-example-2" data-slide-to="1"></li>
         <li data-target="#carousel-example-2" data-slide-to="2"></li>
+        <li data-target="#carousel-example-2" data-slide-to="3"></li>
+        <li data-target="#carousel-example-2" data-slide-to="4"></li>
     </ol>
     <!--/.Indicators-->
     <!--Slides-->
     <div class="carousel-inner" role="listbox">
         <div class="carousel-item active">
             <div class="view">
-                <img class="d-block w-100" src="assets/image/storesbar/s4.jpg" alt="First slide">
+                <img class="d-block w-100" src="assets/image/storesbar/S1.jpg" alt="First slide">
                 <div class="mask rgba-black-light"></div>
             </div>
             <div class="carousel-caption">
                 <h3 class="h3-responsive text-white"></h3>
             </div>
         </div>
+
+
         <div class="carousel-item">
-            <!--Mask color-->
+
             <div class="view">
-                <img class="d-block w-100" src="assets/image/storesbar/s31.jpg" alt="adidas" >
+                <img class="d-block w-100" src="assets/image/storesbar/S2.jpg" alt="adidas" >
                 <div class="mask rgba-black-strong"></div>
             </div>
             <div class="carousel-caption">
-                <h3 class="h3-responsive text-success">ปลูกด้วยท่อนพันธุ์คุณภาพ</h3>
+                <h3 class="h3-responsive text-success"></h3>
 
             </div>
         </div>
+
+
         <div class="carousel-item">
-            <!--Mask color-->
+
             <div class="view">
-                <img class="d-block w-100" src="assets/image/storesbar/s1.jpg" alt="Converse">
+                <img class="d-block w-100" src="assets/image/storesbar/S3.jpg" alt="Converse">
                 <div class="mask rgba-black-slight"></div>
             </div>
             <div class="carousel-caption">
-                <h3 class="h3-responsive text-white">การเจริญเติบโตที่สมบูรณ์</h3>
+                <h3 class="h3-responsive text-white"></h3>
             </div>
         </div>
+
+
 	    <div class="carousel-item">
-            <!--Mask color-->
+
             <div class="view">
-                <img class="d-block w-100" src="assets/image/storesbar/s2.jpg" alt="Converse1">
+                <img class="d-block w-100" src="assets/image/storesbar/S4.jpg" alt="Converse1">
                 <div class="mask rgba-black-slight"></div>
             </div>
             <div class="carousel-caption">
-                <h3 class="h3-responsive text-white">เก็บเกี่ยวอ้อยทีได้ทั้งน้ำหนักและความหวาน</h3>
+                <h3 class="h3-responsive text-white"></h3>
             </div>
         </div>
+
+        <div class="carousel-item">
+            <div class="view">
+                <img class="d-block w-100" src="assets/image/storesbar/S5.jpg" alt="Converse1">
+                <div class="mask rgba-black-slight"></div>
+            </div>
+            <div class="carousel-caption">
+                <h3 class="h3-responsive text-white"></h3>
+            </div>
+        </div>
+
     </div>
-	
+    
     <!--/.Slides-->
     <!--Controls-->
     <a class="carousel-control-prev" href="#carousel-example-2" role="button" data-slide="prev">

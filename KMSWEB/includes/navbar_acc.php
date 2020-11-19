@@ -36,9 +36,9 @@ $_SESSION['carttotal']=$rowcount['carttotal'];
 <nav class="navbar navbar-expand-lg navbar-light bg-light fixed-top"> <!-- <nav class="navbar navbar-expand-lg navbar-light bg-light fixed-top">-->
   <a class="navbar-brand" href="index.php"> <img src="assets\image\LOGOKMS.PNG" alt="KMS LOGO" width="80" height="30" > </a>
   <!-- <a class="navbar-brand " href="index.php"> SmartWatch </a> -->
- <!-- <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarColor01" aria-controls="navbarColor01" aria-expanded="false" aria-label="Toggle navigation">
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarColor01" aria-controls="navbarColor01" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
-  </button> -->
+  </button>
     
   <div class="collapse navbar-collapse" id="navbarColor01">
     <?php if(isset($_SESSION["mem_id"])) {?>
@@ -53,14 +53,29 @@ $_SESSION['carttotal']=$rowcount['carttotal'];
       <!--<li class="nav-item">
         <a class="nav-link" href=""><?php echo $about?> </a>
       </li> -->
+
+
+      <li class="nav-item ">
+    <div class="dropdown show">
+          <a class="nav-link dropdown-toggle active" href="#" role="button" id="dropdownMenuLink" 
+          data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">รายการสั่งซื้อสินค้า</a>
+
+          <div class="dropdown-menu " aria-labelledby="dropdownMenuLink">
+            <a class="dropdown-item " href="pr_list_supply.php">ใบสั่งซื้อสินค้า</a>
+            <a class="dropdown-item " href="req_list_supply.php">รายละเอียดใบสั่งซื้อสินค้า</a>
+          </div>
+    </div>
+    </li>
+
+
       <li class="nav-item ">
       <div class="dropdown show">
       <a class="nav-link dropdown-toggle active" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">รายการบัญชี</a>
       <div class="dropdown-menu " aria-labelledby="dropdownMenuLink">
 
-        <a class="dropdown-item " href="">บัญชี1</a>
+        <a class="dropdown-item " href="bo_gen.php">กรอกข้อมูลใบวางบิล</a>
         
-        <a class="dropdown-item" href="" >บัญชี2</a>
+        <a class="dropdown-item" href="bo_list_supply.php" >แสดงรายการวางบิล</a>
       </div>
     </div>
     </li>
@@ -70,7 +85,7 @@ $_SESSION['carttotal']=$rowcount['carttotal'];
 
       <li class="nav-item">
        <!-- <a class="nav-link" href="orderhistory.php"><?php echo $orderhistory?> </a> -->
-        <a class="nav-link" href="">แก้ไขรายการบัญชี</a>
+       <!-- <a class="nav-link" href="">แก้ไขรายการบัญชี</a> -->
       </li>
     </ul>
     

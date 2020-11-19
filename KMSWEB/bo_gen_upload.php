@@ -42,13 +42,15 @@ include('includes/function.php');
         include('includes/navbar_acc.php'); }
   elseif($_SESSION["mem_status"]=="plant"){
         include('includes/navbar_plant.php'); }
+        elseif($_SESSION["mem_status"]=="admin"){
+          include('includes/navbar_admin.php'); }
   else { include('includes/navbar.php'); }
 ?>
 
 <!---  CONTENT----->
 <div class="container-fluid">
 
-   <h3 align="center">ภาพใบสั่งซื้อ <?php echo $_GET['id'] ?></h3><br>
+   <h3 align="center">ภาพใบวางบิล <?php echo $_GET['id'] ?></h3><br>
 <br>
 	<!-- boostrap css-->
 	<link rel="stylesheet" type="text/css" href="upload_image/assets/bootstrap/css/bootstrap.min.css"> 
@@ -91,7 +93,7 @@ include('includes/function.php');
 		        <input id="avatar-2" name="<?php echo $prefix_po?>image" type="file" class="file-loading">
 		    </div>
 		  </div>
-		  <button type="submit" class="btn btn-default">อัพโหลดรูปภาพ</button>
+		  <button type="submit" class="btn btn-default">อัพโหลดรูปภาพใบวางบิล</button>
       <button type="button" onclick="window.history.back()" class="btn btn-warning"> กลับไปเมนูก่อนหน้า </button>
 		</form>
 
@@ -201,7 +203,7 @@ $('.zimage').zoomify();
 	
   	$("#avatar-2").fileinput({
 	    overwriteInitial: true,
-	    maxFileSize: 1500,
+	    maxFileSize: 5000,
 	    showClose: false,
 	    showCaption: false,
 	    showBrowse: false,

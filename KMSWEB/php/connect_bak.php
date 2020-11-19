@@ -1,7 +1,7 @@
 <?php
     session_start();
     global $conn;
-    $conn = new mysqli('localhost','root','','kms_web_db');
+    $conn = new mysqli('localhost','root','kslitc@1234','kms_web_db');
     $conn->set_charset("utf8");
 
     if($conn->connect_errno){

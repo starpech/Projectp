@@ -18,7 +18,7 @@ $query = "INSERT INTO tbl_order_items
 
 // paste here
 if (isset($_POST["item_name"])) {
-    $connect = new PDO("mysql:host=localhost;dbname=kms_web_db", "root", "");
+    $connect = new PDO("mysql:host=localhost;dbname=kms_web_db", "root", "kslitc@1234");
     $order_id = uniqid();
     for ($count = 0; $count < count($_POST["item_name"]); $count++) {
         $query = "INSERT INTO pr_detail 

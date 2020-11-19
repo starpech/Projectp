@@ -27,16 +27,18 @@ body {
   session_start();
   if($_SESSION["mem_status"]=="operator"){
         include('includes/navbar_operator.php'); }
-  elseif($_SESSION["mem_status"]=="approver"){
+    elseif($_SESSION["mem_status"]=="approver"){
         include('includes/navbar_approver.php'); }
-  elseif($_SESSION["mem_status"]=="officer"){
+    elseif($_SESSION["mem_status"]=="officer"){
         include('includes/navbar_officer.php'); }
-  elseif($_SESSION["mem_status"]=="sale"){
+    elseif($_SESSION["mem_status"]=="sale"){
         include('includes/navbar_sale.php'); }
-  elseif($_SESSION["mem_status"]=="acc"){
+    elseif($_SESSION["mem_status"]=="acc"){
         include('includes/navbar_acc.php'); }
-  elseif($_SESSION["mem_status"]=="plant"){
+    elseif($_SESSION["mem_status"]=="plant"){
         include('includes/navbar_plant.php'); }
+    elseif($_SESSION["mem_status"]=="admin"){
+            include('includes/navbar_admin.php'); }
   else { include('includes/navbar.php'); }
 ?>
     <!-- The Modal -->
@@ -44,7 +46,9 @@ body {
 
 
     <?php include('includes/slidephoto.php');?>
+    <br><br>
     <?php include('news.php');?>
+    <br>
     <?php include('includes/storemini.php');?>
     <?php include('includes/footer.php'); ?>
 

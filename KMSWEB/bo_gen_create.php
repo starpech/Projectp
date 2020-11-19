@@ -2,6 +2,16 @@
 
 <?php require_once('php/connect.php');
 include('includes/function.php');
+
+if(!isset($_SESSION['bo_sid'])){
+  $_SESSION['bo_sid'] = '01';
+}
+if(!isset($_SESSION['bo_rid'])){
+  $_SESSION['bo_rid'] = '01';
+}
+
+
+
 ?>
 
 <!DOCTYPE html>
@@ -39,6 +49,8 @@ include('includes/function.php');
         include('includes/navbar_acc.php'); }
   elseif($_SESSION["mem_status"]=="plant"){
         include('includes/navbar_plant.php'); }
+        elseif($_SESSION["mem_status"]=="admin"){
+          include('includes/navbar_admin.php'); }
   else { include('includes/navbar.php'); }
 ?>
 
@@ -57,14 +69,14 @@ include('includes/function.php');
                   <div class="row">
                     <div class="col-md-8">
                       
-                        <b>บริษัทที่ส่งของ</b><br />
+                        <b>บริษัทที่ต้องการวางบิลกับ KMS</b><br />
                        <select id="supplier_id" name="supplier_id" class="form-control ">
                         
                         <?php 
-                             $dataComp = dbComp();
+                             $dataComp = dbComp('ผู้ขาย');
                              if($dataComp)
                              foreach($dataComp as $k=>$v){
-                                if($v[1] == $pr[2]){
+                                if($v[1] == $_SESSION['bo_sid']){
                                   echo "<option value='{$v[1]}' selected> {$v[1]} : {$v[2]} </option>";
                                 }else{
                                  echo "<option value='{$v[1]}'> {$v[1]} : {$v[2]} </option>";
@@ -75,14 +87,14 @@ include('includes/function.php');
 
                        </select>
                        
-                       <b>ส่งถึงบริษัท</b><br />
+                       <b>อ้างถึงใบส่งของที่ส่งถึงบริษัท</b><br />
                        <select id="bo_RecieveID" name="bo_RecieveID" class="form-control ">
                         
                         <?php 
-                             $dataComp = dbComp();
+                             $dataComp = dbComp('ผู้ซื้อ');
                              if($dataComp)
                              foreach($dataComp as $k=>$v){
-                                if($v[1] == $pr[2]){
+                                if($v[1] == $_SESSION['bo_rid']){
                                   echo "<option value='{$v[1]}' selected> {$v[1]} : {$v[2]} </option>";
                                 }else{
                                  echo "<option value='{$v[1]}'> {$v[1]} : {$v[2]} </option>";
@@ -94,12 +106,12 @@ include('includes/function.php');
                        </select>
                        หมายเหตุ<br/>
                       <input type="text" name="remark_inv" id="remark_inv" 
-                      placeholder="หมายเหตุกรอกหมายเลขใบส่งของที่จะวางบิล"
+                      placeholder="หมายเหตุกรอกหมายเลขใบส่งของที่จะวางบิล กรณีมีใบส่งของหลายใบ ให้ใช้เครื่องหมาย , คั่น"
                       value="<?php echo $pr[1]?>" class="form-control input-sm"  />
                     </div>
                     <div class="col-md-4">
                       วันที่ส่งของ<br/>
-                      <input type="text" name="<? echo $prefix_po?>date" id="order_date" value="<?php echo $pr[1]?>" class="form-control input-sm" readonly placeholder="Select Invoice Date" />
+                      <input type="text" name="<? echo $prefix_po?>date" id="order_date" value="<?php echo $_SESSION['bo_date']?>" class="form-control input-sm" readonly placeholder="Select Invoice Date" />
                     </div>
                   </div>
                   <br />
@@ -125,8 +137,8 @@ include('includes/function.php');
               <tr>
               <td colspan="2" align="center">
                 <input type="hidden" name="comp_code" value="<?php echo $_SESSION["comp_code"]?>" />
-                 <div>จำนนเงินทั้งหมด <span id='sumtotal' style="color:red;">00.00</span> บาท</div>
-                                   <input type="submit" name="btnSubmit" id="btnSubmit" class="btn btn-info" value="สร้างรายการส่งของ" />
+                 <div>จำนวนเงินทั้งหมด <span id='sumtotal' style="color:red;">00.00</span> บาท</div>
+                                   <input type="submit" ondblclick="return false;"  name="btnSubmit" id="btnSubmit" class="btn btn-info" value="สร้างรายการวางบิล" />
               
                                    <button type="button" onclick="window.history.back()" class="btn btn-warning"> กลับไปเมนูก่อนหน้า </button>
 
@@ -161,11 +173,40 @@ include('includes/function.php');
 <link href='assets\admin\plugins\datepicker\datepicker3.css' rel='stylesheet' type='text/css'>
 <script src='assets\admin\plugins\datepicker\bootstrap-datepicker.js' type='text/javascript'></script>
 <script>
+
+var bo_rid ='01';
+var bo_sid = '01';
+var bo_date = '';
+
       $(document).ready(function(){
         $('#order_date').datepicker({
           format: "yyyy-mm-dd",
           autoclose: true
         });
+		
+	$('#btnSubmit').dblclick(function(e)
+     {
+       // $(this).attr('disabled',true);
+	    e.preventDefault();
+	    alert("กรุณาคลิกครั้งเดียว.!!!!");
+        //return false;
+     });
+	 
+	 
+	 
+		$('#bo_RecieveID').change(function(){
+			bo_rid = $(this).val();
+			bo_sid = $('#supplier_id').val();
+			bo_date = $('#order_date').val();
+			$.post('php/session_create.php',
+			 {'bo_rid':bo_rid,
+			  'mode':'bo',
+			  'bo_sid':bo_sid,
+			  'bo_date':bo_date
+			  });
+			  window.location.href="?";
+		});
+		
       });
 
   function calcPrice(key,obj,type=1){
@@ -196,10 +237,10 @@ function sumTotal(){
 
 function add_new_row(){
   var new_row=  " <tr> "+
-                "<td width=\"45%\"> <select id='product_"+num_row+"' onchange=\"jSelectProduct('"+num_row+"',$(this))\" name='products[]' class=\"form-control\"><?php echo selectProducts() ?></select></td>" +
-                "<td width=\"15%\"><input type='number' onkeyup=\"calcPrice('"+num_row+"',$(this),1)\" class='form-control' id=unit_"+num_row+" name='amounts[]' value='' /></td>" +
-                "<td width=\"15%\"><input type='number' onkeyup=\"calcPrice('"+num_row+"',$(this),0)\" class='form-control' id=price_"+num_row+" name='priceunits[]' value='' /></td>" +
-                "<td width=\"15%\"><input type='number' class='form-control total' id=total_"+num_row+" name='totals[]' value='' readonly /></td>" +
+                "<td width=\"45%\"> <select id='product_"+num_row+"' onchange=\"jSelectProduct('"+num_row+"',$(this))\" name='products[]' class=\"form-control\"><?php echo selectProductsBo() ?></select></td>" +
+                "<td width=\"15%\"><input type='number' onkeyup=\"calcPrice('"+num_row+"',$(this),1)\" class='form-control' id=unit_"+num_row+" name='amounts[]' value='' step='0.01' /></td>" +
+                "<td width=\"15%\"><input type='number' onkeyup=\"calcPrice('"+num_row+"',$(this),0)\" class='form-control' id=price_"+num_row+" name='priceunits[]' value=''  step='0.01' /></td>" +
+                "<td width=\"15%\"><input type='number' class='form-control total' id=total_"+num_row+" name='totals[]' value='' readonly  step='0.01' /></td>" +
                 "<td> <button type='button' name='remove' class='btn btn-danger btn-sm remove remove_"+num_row+"'><i class='fa fa-minus'></i></button></td>" +
                 "</tr>";
   

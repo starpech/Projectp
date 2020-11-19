@@ -3,35 +3,33 @@ require_once 'php/connect.php';
 //debug($_POST);
 $p = $_POST;
 $updateQuery = array();
-
+$fyear = '6364';
+$prefix ='BO';
 
 // add ${$prefix_po}main
 $insPrMainSQL = "
 insert into `{$prefix_po}main` (`{$prefix_po}SupplierID`,`{$prefix_po}SupplierName`,
-`{$prefix_po}DeliveryTo`,`{$prefix_po}detail_no`,site_no,{$prefix_po}id,
-bo_RecieveID,bo_RecieveName,remark_inv)
+`{$prefix_po}DeliveryTo`,`{$prefix_po}detail_no`,site_no,
+bo_RecieveID,bo_RecieveName,remark_inv,{$prefix_po}id)
 (SELECT 
-'{$p['comp_code']}' as comp_code,
+'{$p['supplier_id']}' as supplier_id,
 (select c.comp_name from comp as c where c.comp_code='{$p['supplier_id']}') as {$prefix_po}SupplierName,
-(select c.comp_addr from comp as c where c.comp_code ='{$p['comp_code']}') as {$prefix_po}DeliveryTo,
-'' as {$prefix_po}detail_no, '{$p['comp_code']}' as site_no , '6364' as {$prefix_po}id,
-
+(select c.comp_addr from comp as c where c.comp_code ='{$p['bo_RecieveID']}') as {$prefix_po}DeliveryTo,
+'' as {$prefix_po}detail_no, '{$p['comp_code']}' as site_no ,
 '{$p['bo_RecieveID']}' as bo_RecieveID,
 (select c.comp_name from comp as c where c.comp_code='{$p['bo_RecieveID']}') as bo_RecieveName,
-'{$p['remark_inv']}' as remark_inv
+'{$p['remark_inv']}' as remark_inv,
+concat(
+      (select c.comp_nickname from comp as c where c.comp_code = '{$p['comp_code']}'),
+      '{$prefix}',
+	  '{$fyear}',
+      RIGHT(concat('00000',(CONVERT(RIGHT(IF(max(bo.bo_id) is null , 'XXBOYYYY0000', max(bo.bo_id)),4),int)+1)),4)
+     ) as bo_id 
+from bo_main as bo 
+where bo.site_no = '{$p['comp_code']}'
 );
 
-update {$prefix_po}main as p set p.{$prefix_po}id = (
- SELECT 
-    concat(
-        (select c.comp_nickname from comp as c where c.comp_code = x.site_no),
-        '6364',RIGHT(concat('00000',x.row_num),4)) 
- from ( 
-     SELECT {$prefix_po}no,site_no, ( ROW_NUMBER() OVER (PARTITION BY site_no ORDER BY site_no,{$prefix_po}no)) AS row_num FROM {$prefix_po}main ) as x  where p.{$prefix_po}no = x.{$prefix_po}no 
-   
-   );
-     
-   SET @{$prefix_po}no = LAST_INSERT_ID();
+SET @{$prefix_po}no = LAST_INSERT_ID();
 
 
 ";

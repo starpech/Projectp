@@ -1,6 +1,6 @@
 <?php
 function getProduct($pid){
- $conn = new mysqli('localhost','root','','kms_web_db');
+ $conn = new mysqli('localhost','root','kslitc@1234','kms_web_db');
  $conn->set_charset("utf8");
  $st = $conn->prepare("SELECT * FROM product where product_id =  {$pid} ");//กัน SQlinjection
  $st->execute(); //ประมวณผล ข้างบน

@@ -2,6 +2,7 @@
 
 <?php require_once('php/connect.php');
 include('includes/function.php');
+
 ?>
 
 <!DOCTYPE html>
@@ -43,6 +44,8 @@ include('includes/function.php');
         include('includes/navbar_acc.php'); }
   elseif($_SESSION["mem_status"]=="plant"){
         include('includes/navbar_plant.php'); }
+        elseif($_SESSION["mem_status"]=="admin"){
+          include('includes/navbar_admin.php'); }
   else { include('includes/navbar.php'); }
 ?>
 
@@ -105,17 +108,26 @@ function dbInvMain(){
 }
 
 $pr = dbInvMain();
+print_r($pr);
 $prDate = date('d/m/Y',strtotime($pr[1]));
 $pd = dbInvDetail();
 
+
+
+if(!isset($_SESSION['inv_sid'])){
+  $_SESSION['inv_sid'] = $pr[2];
+}
+if(!isset($_SESSION['inv_rid'])){
+  $_SESSION['inv_rid'] = $pr[8];
+}
 
 
 
 ?>
 <div class="container-fluid">
    <br><br><br><br><br>
-   <h3 align="center">แก้ไขรายการส่งของ</h3><br />
-   <h5 style="color:red" align="center">แสดงเฉพาะรายการยังไม่อนุมัติเท่านั้น  กรณีต้องการแก้ไขรายการที่อนุมัติแล้ว โปรดติดต่อผู้ดูแลระบบ</h5><br />
+   <h3 align="center">แก้ไขรายการส่งของ จากผู้จำหน่าย ถึง สถานที่รับสินค้า</h3><br />
+   <h5 style="color:red" align="center">แก้ไขได้เฉพาะรายการยังไม่อนุมัติเท่านั้น  กรณีต้องการแก้ไขรายการที่อนุมัติแล้ว โปรดติดต่อผู้ดูแลระบบ</h5><br />
 
    <style>
 .table td {
@@ -130,17 +142,18 @@ $pd = dbInvDetail();
                   <div class="row">
                     <div class="col-md-8">
                       
-                        <b>บริษัทที่สั่งซื้อ</b><br />
+                        <b>บริษัทผู้จำหน่ายที่ส่งของ</b><br />
                        <select id="supplier_id" name="supplier_id" class="form-control ">
                         
                         <?php 
-                             $dataComp = dbComp();
+                             $dataComp = dbComp('ผู้ขาย');
+							 print_r($dataComp);
                              if($dataComp)
                              foreach($dataComp as $k=>$v){
                                 if($v[1] == $pr[2]){
                                   echo "<option value='{$v[1]}' selected> {$v[1]} : {$v[2]} </option>";
                                 }else{
-                                 echo "<option value='{$v[1]}'> {$v[1]} : {$v[2]} </option>";
+                                 //echo "<option value='{$v[1]}'> {$v[1]} : {$v[2]} </option>";
                                 }
                              }
                         ?>
@@ -152,13 +165,13 @@ $pd = dbInvDetail();
                        <select id="inv_RecieveID" name="inv_RecieveID" class="form-control ">
                         
                         <?php 
-                             $dataComp = dbComp();
+                             $dataComp = dbComp('ผู้ซื้อ');
                              if($dataComp)
                              foreach($dataComp as $k=>$v){
                                 if($v[1] == $pr[8]){
                                   echo "<option value='{$v[1]}' selected> {$v[1]} : {$v[2]} </option>";
                                 }else{
-                                 echo "<option value='{$v[1]}'> {$v[1]} : {$v[2]} </option>";
+                                 //echo "<option value='{$v[1]}'> {$v[1]} : {$v[2]} </option>";
                                 }
                              }
                         ?>
@@ -194,10 +207,10 @@ $pd = dbInvDetail();
                         echo ' <input type="hidden" name="'.$prefix_inv.'order_no[]" value="'.$v[0].'" />';
                         echo " <tr>
                         <td width=\"5%\">".($k+1)."</td>
-                        <td width=\"45%\"> ".selectProductsEdit("product_ids",$v[3])."</td>
-                        <td width=\"15%\"><input type='number' onkeyup=\"calcPrice('{$k}',$(this),1)\" class='form-control'  id=unit_{$k} name='amounts[]' value='{$v[5]}' /></td>
-                        <td width=\"15%\"><input type='number' onkeyup=\"calcPrice('{$k}',$(this),0)\" class='form-control' id=price_{$k} name='priceunits[]' value='{$v[6]}' /></td>
-                        <td width=\"15%\"><input type='number' class='form-control total' id=total_{$k} name='totals[]' value='{$v[8]}' readonly /></td>
+                        <td width=\"45%\"> ".selectProductsEditInv("product_ids",$v[3],$k)."</td>
+                        <td width=\"15%\"><input type='number' onkeyup=\"calcPrice('{$k}',$(this),1)\" class='form-control'  id=unit_{$k} name='amounts[]' value='{$v[5]}' step='0.01'/></td>
+                        <td width=\"15%\"><input type='number' onkeyup=\"calcPrice('{$k}',$(this),0)\" onblur=\"calcPrice('{$k}',$(this),0)\"  class='form-control'  step='0.01' id=price_{$k} name='priceunits[]' value='{$v[6]}' /></td>
+                        <td width=\"15%\"><input type='number' class='form-control total' id=total_{$k} name='totals[]' value='{$v[8]}'  step='0.01' readonly /></td>
                       </tr>";
                       }
                    ?>
@@ -212,7 +225,7 @@ $pd = dbInvDetail();
               </tr>
               <tr>
                 <td colspan="2" align="center">
-                <div>จำนนเงินทั้งหมด <span id='sumtotal' style="color:red;">00.00</span> บาท</div>
+                <div>จำนวนเงินทั้งหมด <span id='sumtotal' style="color:red;">00.00</span> บาท</div>
                                    <input type="submit" name="btnSubmit" id="btnSubmit" class="btn btn-info" value="แก้ไขรายการสั่งซื้อ" />
                                    <button type="button" onclick="window.history.back()" class="btn btn-warning"> กลับไปเมนูก่อนหน้า </button>
 

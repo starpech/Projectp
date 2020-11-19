@@ -36,9 +36,9 @@ $_SESSION['carttotal']=$rowcount['carttotal'];
 <nav class="navbar navbar-expand-lg navbar-light bg-light fixed-top"> <!-- <nav class="navbar navbar-expand-lg navbar-light bg-light fixed-top">-->
   <a class="navbar-brand" href="index.php"> <img src="assets\image\LOGOKMS.PNG" alt="KMS LOGO" width="80" height="30" > </a>
   <!-- <a class="navbar-brand " href="index.php"> SmartWatch </a> -->
- <!-- <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarColor01" aria-controls="navbarColor01" aria-expanded="false" aria-label="Toggle navigation">
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarColor01" aria-controls="navbarColor01" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
-  </button> -->
+  </button>
     
   <div class="collapse navbar-collapse" id="navbarColor01">
     <?php if(isset($_SESSION["mem_id"])) {?>

@@ -21,7 +21,8 @@ include('includes/function.php');
 
 <?php
 //index.php
-$connect = new PDO("mysql:host=localhost;dbname=kms_web_db", "root", "");
+$connect = new PDO("mysql:host=localhost;dbname=kms_web_db", "root", "kslitc@1234");
+$connect->exec("set names utf8");
 function fill_unit_select_box($connect)
 {
   $output = '';
@@ -74,12 +75,14 @@ function fill_unit_select_box($connect)
         include('includes/navbar_acc.php'); }
   elseif($_SESSION["mem_status"]=="plant"){
         include('includes/navbar_plant.php'); }
+        elseif($_SESSION["mem_status"]=="admin"){
+          include('includes/navbar_admin.php'); }
   else { include('includes/navbar.php'); }
 ?>
 
   <div class="container-fluid">
    <br><br><br><br><br>
-      <div class="card" style="width:100%; background-color:#a9a8a863; border-radius: 25px;">
+      <div class="card" style="width:100%; background-color:#a9a8a863; border-radius: 10px;">
        <br> <h3><center>สร้างรายการขอซื้อ</center></h3><h4 style="color:red"><center>*กรอกข้อมูลรายการสั่งซื้อให้ครบถ้วน*</center></h4>
       </div>
       <br>
@@ -103,6 +106,7 @@ function fill_unit_select_box($connect)
        </tr>
       
      </table>
+ <div align="center"><button type="button" name="add1" class="btn btn-success btn-sm add1" alt="เพิ่มชื่อชาวไร่"><i class="fa fa-plus"></i></button></div> <br>
      <div align="center">
       <input type="submit" name="submit" class="btn btn-info" value="บันทึกรายการขอซื้อ" >
       <input type="reset" name="reset" class="btn btn-danger" value="เคลียร์ทั้งหมด" >
@@ -214,7 +218,6 @@ function fill_unit_select_box($connect)
           count = count + 1;
         });
 
-
         var form_data = $(this).serialize();
         if (error == '') {
           $.ajax({
@@ -222,22 +225,38 @@ function fill_unit_select_box($connect)
             method: "POST",
             data: form_data,
             success: function(data) {
+              console.log(data)
               if (data == 'ok') {
+				  
                 $('#item_table').find("tr:gt(0)").remove();
                 $('#error').html('<div class="alert alert-success">บันทึกรายการขอซื้อเรียบร้อย</div>');
+				
+				$.post('php/sendemailAppReq.php',function(retData){
+					console.log(retData);
+					
+					if(retData == 'Success'){
+					   alert("ส่งเมล์หาผู้อนุมัติเรียบร้อยแล้ว");
+					}else{
+					   alert("ไม่สามารถส่งเมล์ได้.");
+					}
+					
+				});
+                
               }
             }
           });
+          
         } else {
           $('#error').html('<div class="alert alert-danger">' + error + '</div>');
+          
         }
+        
       });
 
     });
   </script>
   <!-- PASTE HERE -->
-
-
+  
 </body>
-
+<?php  ?>
 </html>

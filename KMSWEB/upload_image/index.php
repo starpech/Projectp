@@ -54,7 +54,7 @@
 		    '</button>'; 
 		$("#avatar-2").fileinput({
 	    overwriteInitial: true,
-	    maxFileSize: 1500,
+	    maxFileSize: 5000,
 	    showClose: false,
 	    showCaption: false,
 	    showBrowse: false,

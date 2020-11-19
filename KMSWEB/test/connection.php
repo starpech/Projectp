@@ -1,6 +1,6 @@
 <?php
 	//for MySQLi OOP
-	$conn = new mysqli('localhost', 'root', '', 'mydatabase');
+	$conn = new mysqli('localhost', 'root', 'kslitc@1234', 'mydatabase');
 	if($conn->connect_error){
 	   die("Connection failed: " . $conn->connect_error);
 	}

@@ -3,6 +3,7 @@
 <?php require_once('php/connect.php');
 include('includes/function.php');
 $comp_code = $_SESSION["comp_code"];
+$mem_id = $_SESSION["mem_id"];
 ?>
 
 <!DOCTYPE html>
@@ -43,6 +44,8 @@ $comp_code = $_SESSION["comp_code"];
         include('includes/navbar_acc.php'); }
   elseif($_SESSION["mem_status"]=="plant"){
         include('includes/navbar_plant.php'); }
+        elseif($_SESSION["mem_status"]=="admin"){
+          include('includes/navbar_admin.php'); }
   else { include('includes/navbar.php'); }
 ?>
 
@@ -72,8 +75,10 @@ $comp_code = $_SESSION["comp_code"];
              // $sql = "
              // SELECT `id_no`, `req_id`, `req_comp_code`, `input_date`, `input_by`, `Quota_id`, `Quota_name`, `Quota_ket`, `Quota_place`, `Product_code`, `Product_name`, `Product_amount`, `Product_price`, `status` FROM `req_detail02`
              // ";
-             $sql = "SELECT * FROM req_detail{$comp_code} WHERE ISNULL(approve_date)"; 
-             $result = mysqli_query($conn, $sql);
+        $sql = "SELECT * FROM req_detail{$comp_code} WHERE (ISNULL(approve_date)) AND (input_by = '{$mem_id}')"; 
+        //echo $sql;
+        //print_r($_SESSION);
+        $result = mysqli_query($conn, $sql);
              if(mysqli_num_rows($result)>0){
                while($row=mysqli_fetch_array($result)){
                  

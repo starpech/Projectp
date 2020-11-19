@@ -42,6 +42,8 @@ include('includes/function.php');
         include('includes/navbar_acc.php'); }
   elseif($_SESSION["mem_status"]=="plant"){
         include('includes/navbar_plant.php'); }
+        elseif($_SESSION["mem_status"]=="admin"){
+          include('includes/navbar_admin.php'); }
   else { include('includes/navbar.php'); }
 ?>
 
@@ -92,6 +94,7 @@ include('includes/function.php');
 		    </div>
 		  </div>
 		  <button type="submit" class="btn btn-default">อัพโหลดรูปภาพ</button>
+		  <button type="button" onclick="window.history.back()" class="btn btn-warning"> กลับไปเมนูก่อนหน้า </button>
 		</form>
 
   </div>
@@ -144,7 +147,15 @@ $file_name = end(explode('/',$v['pr_image_path']));
   
   
   </td>
-  <td> <a href=\"pr_gen_upload_delete.php?pr_id={$v['pr_id']}&id={$v['id']}&file_name={$file_name}\" class='btn btn-danger'> delete </a> </td>
+  <td> 
+  
+  <a href=\"pr_gen_upload_delete.php?pr_id={$v['pr_id']}&id={$v['id']}&file_name={$file_name}\" class='btn btn-danger'> delete </a> 
+  <a href=\"onlineinvoice/pr_image_pdf.php?file_name={$file_name}\" target='_blank' class='btn btn-info'> print </a> 
+  
+  
+  </td>
+  
+  
   </tr>";
     
 }  
@@ -197,7 +208,7 @@ $('.zimage').zoomify();
 	
   	$("#avatar-2").fileinput({
 	    overwriteInitial: true,
-	    maxFileSize: 1500,
+	    maxFileSize: 5000,
 	    showClose: false,
 	    showCaption: false,
 	    showBrowse: false,

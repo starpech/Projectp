@@ -1,7 +1,7 @@
 <?php
     session_start();
     global $conn;
-    $conn = new mysqli('localhost','root','','kms_web_db');
+    $conn = new mysqli('localhost','root','kslitc@1234','kms_web_db');
     $conn->set_charset("utf8");
 
     if($conn->connect_errno){
@@ -20,10 +20,14 @@
       print_r($arr);
       echo "</pre>";
     }
-function dbComp(){
+function dbComp($comp_type=''){
     global $conn;
-    $query = "
-    SELECT * FROM comp order by comp_code";
+	if(!$comp_type){
+       $query = "  SELECT * FROM comp where 1 order by comp_code ";
+	}else{
+		$query = "  SELECT * FROM comp where comp_type like '{$comp_type}'   order by comp_code ";
+		
+	}
     $result = $conn->query($query);     
     if (!$result) {
       printf("Query failed: %s\n", $conn->error);
@@ -88,4 +92,129 @@ function dbComp(){
     }
     return sprintf($htmlSelectProduct,$op);
   }
+  
+  function dbProductInv(){
+    global $conn;
+   $my_comp_code = (int)$_SESSION["inv_rid"];
+    
+	$query = "
+    SELECT * , product_cost{$my_comp_code} as product_price FROM product where 1=1 order by product_code";
+    
+   // echo ":::".$query;
+  
+    $result = $conn->query($query);     
+    if (!$result) {
+      printf("Query failed: %s\n", $conn->error);
+      exit;
+    }      
+    while($row = $result->fetch_array()) {
+      $rows[]=$row;
+    }
+    $result->close();
+    return $rows;
+  }
+  
+  function selectProductsInv(){
+    //$htmlSelectProduct ="<select id='{$id}' onchange=\"jSelectProduct('{$key}',$(this))\" name='{$id}[]' class=\"form-control\">%s</select>";
+    $op="<option val='' selected> -กรุณาเลือกสินค้า- </option>";
+    $htmlSelectProduct ="%s";
+    $data = dbProductInv();
+  
+    if($data)
+    foreach($data as $k=>$v){
+      
+        $op .= "<option value='{$v[5]}|{$v['product_price']}'> {$v[5]} : {$v[2]} </option>";
+      
+    }
+    return sprintf($htmlSelectProduct,$op);
+  }
+  
+  function selectProductsEditInv($id,$value='',$k){
+    $htmlSelectProduct ="<select id='{$id}' name='{$id}[]' onchange=\"jSelectProduct('{$k}',$(this))\" class=\"form-control\">%s</select>";
+    $op='';
+    $data = dbProductInv();
+  
+    if($data)
+    foreach($data as $k=>$v){
+      if($v[5] == $value){
+        $op .= "<option value='{$v[5]}|{$v['product_price']}' selected> {$v[5]} : {$v[2]} </option>";
+      }else{
+        $op .= "<option value='{$v[5]}|{$v['product_price']}'> {$v[5]} : {$v[2]} </option>";
+      }
+    }
+		$op .= "<script>
+	function jSelectProduct(key,obj){
+      let objPrice = $('#price_'+key);
+      let val = obj.val().split('|');
+      objPrice.val(val[1]);
+	  setTimeout(function(){ objPrice.blur(); },1000);
+    } 
+	</script>
+	";
+    return sprintf($htmlSelectProduct,$op);
+  }
+  
+  
+  
+function dbProductBo(){
+    global $conn;
+   $my_comp_code = (int)$_SESSION["bo_rid"];
+    
+	$query = "
+    SELECT * , product_cost{$my_comp_code} as product_price FROM product where 1=1 order by product_code";
+    
+   // echo ":::".$query;
+  
+    $result = $conn->query($query);     
+    if (!$result) {
+      printf("Query failed: %s\n", $conn->error);
+      exit;
+    }      
+    while($row = $result->fetch_array()) {
+      $rows[]=$row;
+    }
+    $result->close();
+    return $rows;
+  }
+  
+  function selectProductsBo(){
+    //$htmlSelectProduct ="<select id='{$id}' onchange=\"jSelectProduct('{$key}',$(this))\" name='{$id}[]' class=\"form-control\">%s</select>";
+    $op="<option val='' selected> -กรุณาเลือกสินค้า- </option>";
+    $htmlSelectProduct ="%s";
+    $data = dbProductBo();
+  
+    if($data)
+    foreach($data as $k=>$v){
+      
+        $op .= "<option value='{$v[5]}|{$v['product_price']}'> {$v[5]} : {$v[2]} </option>";
+      
+    }
+    return sprintf($htmlSelectProduct,$op);
+  }
+  
+  function selectProductsEditBo($id,$value,$k){
+    $htmlSelectProduct ="<select id='{$id}' name='{$id}[]' onchange=\"jSelectProduct('{$k}',$(this))\" class=\"form-control\">%s</select>";
+    $op='';
+    $data = dbProductBo();
+  
+    if($data)
+    foreach($data as $k=>$v){
+      if($v[5] == $value){
+        $op .= "<option value='{$v[5]}|{$v['product_price']}' selected> {$v[5]} : {$v[2]} </option>";
+      }else{
+        $op .= "<option value='{$v[5]}|{$v['product_price']}'> {$v[5]} : {$v[2]} </option>";
+      }
+    }
+	$op .= "<script>
+	function jSelectProduct(key,obj){
+      let objPrice = $('#price_'+key);
+      let val = obj.val().split('|');
+      objPrice.val(val[1]);
+	  setTimeout(function(){ objPrice.blur(); },1000);
+    } 
+	</script>
+	";
+    return sprintf($htmlSelectProduct,$op);
+  }
+  
 ?>

@@ -19,8 +19,8 @@ $find_date = isset($_GET['findDate'])?$_GET['findDate']:'';
     <link rel="stylesheet" href="node_modules/css/style.css">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/flag-icon-css/3.4.3/css/flag-icon.css" rel="stylesheet"/>
     <link href="https://fonts.googleapis.com/css?family=Kanit&display=swap" rel="stylesheet">
-
-
+    <link href="https://cdn.datatables.net/1.10.22/css/jquery.dataTables.min.css" rel="stylesheet">
+    <link href="https://cdn.datatables.net/buttons/1.6.4/css/buttons.dataTables.min.css" rel="stylesheet">
 
     <title><?php echo $page_title ?></title>
 </head>
@@ -40,6 +40,8 @@ $find_date = isset($_GET['findDate'])?$_GET['findDate']:'';
         include('includes/navbar_acc.php'); }
   elseif($_SESSION["mem_status"]=="plant"){
         include('includes/navbar_plant.php'); }
+        elseif($_SESSION["mem_status"]=="admin"){
+          include('includes/navbar_admin.php'); }
   else { include('includes/navbar.php'); }
 ?>
 
@@ -71,13 +73,16 @@ $result = mysqli_query($conn, $query);
     <table class="table table-bordered tb-req-list display"  style="width:100%">
     <thead width="100%" class="thead-light">
       <th>วันที่</th>
+	  <th>หมายเลข</th>
       <th>โค้วต้าชาวไร่</th>
       <th>ชื่อนามสกุล</th>
       <th>เขตชาวไร่</th>
       <th>สถานที่จัดส่ง</th>
       <th>ชื่อสินค้า</th>
-      <th>สถานะ</th>
+      <th>สถานะอนุมัติ</th>
+      <th>สถานะการจัดส่ง</th>
       <th>จำนวน</th>
+	  <th>จัดการ</th>
      </thead>
      <tbody>
    <?php
@@ -86,13 +91,16 @@ $result = mysqli_query($conn, $query);
    ?>
      <tr id="<?php echo $row["id_no"]; ?>" >
       <td><?php echo date('d/m/Y',strtotime($row["input_date"])); ?></td>
+	  <td><?php echo $row["req_detail_id"]; ?></td>
       <td><?php echo $row["Quota_id"]; ?></td>
       <td><?php echo $row["Quota_name"]; ?></td>
       <td><?php echo $row["Quota_ket"]; ?></td>
       <td><?php echo $row["Quota_place"]; ?></td>
       <td><?php echo $row["Product_name"]; ?></td>
       <td><?php echo ($row["status"])?"<span style=\"color:red\"> no approved </span>":"<span style=\"color:green\"> approved </span>" ?></td>
+      <td><?php echo $row[""]; ?></td>
       <td><?php echo $row["Product_amount"]; ?></td>
+	  <td><a href="req_gen_upload.php?id=<?php echo $row['req_detail_id']; ?>" class="btn btn-warning btn-sm"><span class="glyphicon glyphicon-edit"></span> รูปภาพ </a></td>
      </tr>
    <?php
     }
@@ -109,13 +117,49 @@ $result = mysqli_query($conn, $query);
 
    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
    <script src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js"></script>
+   <script src="node_modules/jquery/dist/jquery.min.js"></script><!--เรียกjquery -->
+<script src="node_modules/popper.js/dist/umd/popper.min.js"></script><!--เรียกpopper -->
+<script src="node_modules/bootstrap/dist/js/bootstrap.min.js"></script><!--เรียกbootstrap.min.js -->
+<script src="node_modules/jquery-validation/dist/jquery.validate.min.js"></script><!--เรียกjquery.validate -->
+<script src="https://code.jquery.com/jquery-3.5.1.js"></script>
+<script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js"></script>
+<script src="https://cdn.datatables.net/buttons/1.6.4/js/dataTables.buttons.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.1.3/jszip.min.js"></script>
+<script src="pdfmake-thai-master/build/pdfmake.min.js"></script>
+<script src="pdfmake-thai-master/build/vfs_fonts.js"></script>
+<script src="https://cdn.datatables.net/buttons/1.6.4/js/buttons.html5.min.js"></script>
+
 <script>
+//pdfMake.addVirtualFileSystem(pdfFonts);
 
-  $('.tb-req-list').DataTable({
+pdfMake.fonts = {
+   THSarabun: {
+     normal: 'THSarabunNew.ttf',
+     bold: 'THSarabunNew-Bold.ttf',
+     italics: 'THSarabunNew-Italic.ttf',
+     bolditalics: 'THSarabunNew-BoldItalic.ttf'
+   }
+}
 
-    "order": [[ 6, "desc" ]]
+  $('.tb-req-list').DataTable({ 
+	  
+	   dom: 'Bfrtip',
+        buttons: [
+          'excelHtml5',
+          {extend: 'pdf',text: 'Export PDF',exportOptions: {columns: ':visible'},                    
+            customize: function (doc) {        
+              doc.defaultStyle.fontSize = 10;
+              doc.defaultStyle = {
+                font:'THSarabun',
+                fontSize:10
+              }
+            
+            }
+            }
+        ],
+	   order: [[ 7 , "desc" ]]
 
-  });
+ });
 
 $('#find').click(()=>{
   var find_date=$('#findDate').val();
@@ -144,10 +188,6 @@ $('#find_all').click(()=>{
  <?php 
  include('includes/footer.php');
   ?>
-<script src="node_modules/jquery/dist/jquery.min.js"></script><!--เรียกjquery -->
-<script src="node_modules/popper.js/dist/umd/popper.min.js"></script><!--เรียกpopper -->
-<script src="node_modules/bootstrap/dist/js/bootstrap.min.js"></script><!--เรียกbootstrap.min.js -->
-<script src="node_modules/jquery-validation/dist/jquery.validate.min.js"></script><!--เรียกjquery.validate -->
 
   <!-- PASTE HERE -->
   <script>

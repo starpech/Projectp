@@ -133,3 +133,4 @@ else if($lang == 'en')
 }   
 
 // <?php echo $about?>
+

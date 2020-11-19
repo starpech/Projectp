@@ -7,10 +7,32 @@
     box-shadow: 0 1px 2px rgba(0,0,0,.075);
     max-width: 100%;
 }
-.sidebar-footer {
-  position:fixed;
-  bottom:0px;
+
+/* ปรับ Scroll bar */
+.sidebar {
+  height : calc(100% - 6.5rem);
 }
+
+/* ปรับ Style Scroll Bar */
+/* width */
+::-webkit-scrollbar {
+  width: 7px;
+}
+/* Track */
+::-webkit-scrollbar-track {
+  box-shadow: inset 0 0 5px grey; 
+  border-radius: 10px;
+}
+ /* Handle */
+::-webkit-scrollbar-thumb {
+  background: #b8b8b8; 
+  border-radius: 10px;
+}
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: #737373; 
+}
+
 </style>
 
 <?php 
@@ -18,7 +40,7 @@ $link = $_SERVER['REQUEST_URI'];
 $link_array = explode('/',$link);
 $name = $link_array[count($link_array) - 2];
 ?>
-<nav class="main-header navbar navbar-expand border-bottom navbar-dark bg-primary">
+<nav class="main-header navbar navbar-expand border-bottom navbar-dark bg-dark">
     <!-- Left navbar links -->
     <ul class="navbar-nav" >
       <li class="nav-item">
@@ -55,24 +77,26 @@ $row9=mysqli_fetch_array($res9);
         <div class="info">
           <center>
 		  <a  class="d-block h5"><?php echo "ยินดีต้อนรับ  คุณ" ?></a>
-          <a  class="d-block h6"><?php echo $_SESSION['mem_fname']?></a>
-          <a  class="d-block h7">  Status: <?php if($_SESSION['mem_status']=="admin"){ 
+          <a  class="d-block h5"><?php echo $_SESSION['mem_fname']?></a>
+          <a  class="d-block h6">  Status: <?php if($_SESSION['mem_status']=="admin"){ 
         echo "ผู้ดูแลระบบ";
           }
           ?></a>
           <a  class="d-block h6"><i class="fas fa-circle text-success"></i>  Online</a>
-        
+
+          <a href="/KMSWEB/index.php" class="nav-link" style="margin:0; padding:0;">
+              <!-- <i class="fas fa-sign-out-alt"></i> -->
+              <button type="button" class="btn btn-success btn-block">Web Page</button>
+            </a>
+          
           <a href="../dashboard/logout.php" class="nav-link" style="margin:0; padding:0;">
               <!-- <i class="fas fa-sign-out-alt"></i> -->
-              <button type="button" class="btn btn-danger">ออกจากระบบ</button>
+              <button type="button" class="btn btn-danger btn-block">Sign Out</button>
             </a>
-        
-        </center>
 
+          </center>
         </div>
       </div>
-
-
 
       <!-- Sidebar Menu -->
       <nav class="mt-2">
@@ -193,13 +217,11 @@ $row9=mysqli_fetch_array($res9);
                 </a>
               </li>
             </ul>
+
+
+
           </li>
 
-
-
-          <!-- <li class="nav-header dropdown">Account Settings</li> -->
-<div class="sidebar-footer">
-</div>
 
           <!-- dropdown -->
         </ul>

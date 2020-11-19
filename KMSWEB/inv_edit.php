@@ -1,5 +1,8 @@
 <?php 
 require_once 'php/connect.php';
+
+
+
 //debug($_POST);
 $updateQuery = array();
 $updateQuery[] = "
@@ -14,6 +17,10 @@ p.remark_po='{$_POST['remark_po']}'
 WHERE p.{$prefix_inv}id='{$_POST[$prefix_inv.'id']}'  ";
 
 foreach($_POST[$prefix_inv.'order_no'] as $k=>$v){
+
+$_POST['product_ids'][$k] = explode("|",$_POST['product_ids'][$k]);
+$_POST['product_ids'][$k] = $_POST['product_ids'][$k][0];
+
 
 $updateQuery[] = "
 UPDATE {$prefix_inv}detail as pd 

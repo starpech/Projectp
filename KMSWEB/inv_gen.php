@@ -2,6 +2,7 @@
 
 <?php require_once('php/connect.php');
 include('includes/function.php');
+//print_r($_SESSION);
 ?>
 
 <!DOCTYPE html>
@@ -42,6 +43,8 @@ include('includes/function.php');
         include('includes/navbar_acc.php'); }
   elseif($_SESSION["mem_status"]=="plant"){
         include('includes/navbar_plant.php'); }
+        elseif($_SESSION["mem_status"]=="admin"){
+          include('includes/navbar_admin.php'); }
   else { include('includes/navbar.php'); }
 ?>
 
@@ -57,7 +60,8 @@ function dbPrMain(){
       p.`{$prefix_inv}SupplierName`, 
       (select c.comp_name from comp as c where c.comp_code= p.`site_no`) as site_name, 
       (select sum(pd.amount) from {$prefix_inv}detail as pd where pd.{$prefix_inv}main_id = p.{$prefix_inv}no) as sumall 
-  ,approved 
+  ,approved ,
+  inv_RecieveName
       FROM `{$prefix_inv}main` as p
   where flag_delete = 0
   ";
@@ -66,7 +70,7 @@ function dbPrMain(){
     printf("Query failed: %s\n", $conn->error);
     exit;
   }      
-  while($row = $result->fetch_row()) {
+  while($row = $result->fetch_array()) {
     $rows[]=$row;
   }
   $result->close();
@@ -79,7 +83,7 @@ $dataPrMain = (dbPrMain());
 
 ?>
 <div class="container-fluid">
-   <br><br><br><br><br>
+   <br><br><br><br><br><br>
    <h3 align="center">รายการใบส่งของ</h3><br />
    
 
@@ -110,12 +114,14 @@ $dataPrMain = (dbPrMain());
                 $btnApproved = " <a href='{$prefix_inv}approved.php?id=".$row[0]."' class='btn btn-primary btn-sm' > อนุมัติ </a>
                 ";
               }
-                 
+                 if($_SESSION['comp_code']!='01')
+				  $btnApproved = '';
+			  
                    echo "<tr>
                    <td> {$row[0]} </td>
                    <td> {$row[1]}</td>
                    <td> {$row[2]}</td>
-                   <td> {$row[3]}</td>
+                   <td> {$row['inv_RecieveName']}</td>
                    <td> ".number_format($row[4],2)."</td>
                    <td> {$approved} </td>
                    <td>
@@ -164,8 +170,11 @@ $dataPrMain = (dbPrMain());
     "ordering": true,
     "info": true,
     "autoWidth": true,
-    "responsive": true
+    "responsive": true,
+    "order": [[ 0 , "desc"]] //วันที่ล่าสุดอยู่ด้านบนสุด
   });
+//  order: [[ 6 , "desc" ]] 
+//    "order": [[ 1 , "asc"]]
 
 </script>
 

@@ -3,37 +3,34 @@ require_once 'php/connect.php';
 //debug($_POST);
 $p = $_POST;
 $updateQuery = array();
-
-
+$fyear = '6364';
+$prefix="IN";
 // add ${$prefix_inv}main
 $insPrMainSQL = "
 insert into `{$prefix_inv}main` (`{$prefix_inv}SupplierID`,`{$prefix_inv}SupplierName`,`{$prefix_inv}DeliveryTo`,
-`{$prefix_inv}detail_no`,site_no,{$prefix_inv}id,inv_RecieveID,inv_RecieveName,remark_po)
+`{$prefix_inv}detail_no`,site_no,inv_RecieveID,inv_RecieveName,remark_po,inv_id)
 (SELECT 
-'{$p['comp_code']}' as comp_code,
+'{$p['supplier_id']}' as supplier_id,
 (select c.comp_name from comp as c where c.comp_code='{$p['supplier_id']}') as {$prefix_inv}SupplierName,
 (select c.comp_addr from comp as c where c.comp_code ='{$p['comp_code']}') as {$prefix_inv}DeliveryTo,
 '' as {$prefix_inv}detail_no, 
 '{$p['comp_code']}' as site_no , 
-'6364' as {$prefix_inv}id,
 '{$p['inv_RecieveID']}' as inv_RecieveID,
 (select c.comp_name from comp as c where c.comp_code='{$p['inv_RecieveID']}') as inv_RecieveName,
-'{$p['remark_po']}' as remark_po
+'{$p['remark_po']}' as remark_po,
+ concat(
+      (select c.comp_nickname from comp as c where c.comp_code = '{$p['comp_code']}'),
+      '{$prefix}','{$fyear}',
+      RIGHT(concat('00000',(CONVERT(RIGHT(IF(max(inv.inv_id) is null , 'XXYYYY0000', max(inv.inv_id)),4),int)+1)),4)
+     ) as inv_id 
+from inv_main as inv 
+where inv.site_no = '{$p['comp_code']}'
 
 
 );
 
-update {$prefix_inv}main as p set p.{$prefix_inv}id = (
- SELECT 
-    concat(
-        (select c.comp_nickname from comp as c where c.comp_code = x.site_no),
-        '6364',RIGHT(concat('00000',x.row_num),4)) 
- from ( 
-     SELECT {$prefix_inv}no,site_no, ( ROW_NUMBER() OVER (PARTITION BY site_no ORDER BY site_no,{$prefix_inv}no)) AS row_num FROM {$prefix_inv}main ) as x  where p.{$prefix_inv}no = x.{$prefix_inv}no 
-   
-   );
-     
-   SET @{$prefix_inv}no = LAST_INSERT_ID();
+    
+SET @{$prefix_inv}no = LAST_INSERT_ID();
 
 
 ";
@@ -63,4 +60,22 @@ update {$prefix_inv}main set {$prefix_inv}detail_add=1 where {$prefix_inv}no = @
 }
 //echo $insPrMainSQL.$insPrDetailSQL;
 $conn->multi_query($insPrMainSQL.$insPrDetailSQL);
-header('location: '.$prefix_inv.'gen.php');
+
+// send mail
+echo "กรุณารอสักครู่...ระบบทำการส่งเมลแจ้งเจ้าหน้ที่ KMS เพื่อรับทราบ";
+echo "
+<script src=\"assets/admin/plugins/jquery/jquery.min.js\"></script>
+<script>
+$.post('php/sendemailInvSendKMS.php',function(retData){
+    console.log(retData);
+
+    if(retData == 'Success'){
+        alert('ส่งเมลแจ้งกับ KMS เรียบร้อยแล้ว');
+    }else{
+        alert('ไม่สามารถส่งเมลได้.');
+    }
+window.location = 'inv_gen.php';
+
+}); </script>";
+
+//header('location: '.$prefix_inv.'gen.php');

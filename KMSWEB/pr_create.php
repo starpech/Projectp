@@ -7,19 +7,19 @@ $updateQuery = array();
 
 // add pr_main
 $insPrMainSQL = "
-insert into `pr_main` (`pr_SupplierID`,`pr_SupplierName`,`pr_DeliveryTo`,`pr_detail_no`,site_no,pr_id)
+insert into `pr_main` (`pr_SupplierID`,`pr_SupplierName`,`pr_DeliveryTo`,`pr_detail_no`,site_no)
 (SELECT 
 '{$p['comp_code']}' as comp_code,
 (select c.comp_name from comp as c where c.comp_code='{$p['supplier_id']}') as pr_SupplierName,
 (select c.comp_addr from comp as c where c.comp_code ='{$p['comp_code']}') as pr_DeliveryTo,
-'' as pr_detail_no, '{$p['comp_code']}' as site_no , '6364' as pr_id
+'' as pr_detail_no, '{$p['comp_code']}' as site_no 
 );
 
 update pr_main as p set p.pr_id = (
  SELECT 
     concat(
         (select c.comp_nickname from comp as c where c.comp_code = x.site_no),
-        '6364',RIGHT(concat('00000',x.row_num),4)) 
+        'PO','6364',RIGHT(concat('00000',x.row_num),4)) 
  from ( 
      SELECT pr_no,site_no, ( ROW_NUMBER() OVER (PARTITION BY site_no ORDER BY site_no,pr_no)) AS row_num FROM pr_main ) as x  where p.pr_no = x.pr_no 
    

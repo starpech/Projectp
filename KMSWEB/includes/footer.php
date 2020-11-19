@@ -15,9 +15,9 @@
           <!-- Content -->
           <h5 class="text-uppercase text-black font-weight-bold "><?php echo $Service ?></h5>
           <ul class="text-dark">
-          <li><?php echo "จัดจำหน่ายปุ๋ยอินทรีย์ คุณภาพสูง KMS888"?></li>
+          <li><?php echo "ผลิตและจัดจำหน่ายปุ๋ยอินทรีย์ คุณภาพสูง"?></li>
           <li><?php echo "ตัวแทนจำหน่ายปุ๋ยเคมีคุณภาพดี เครือศักดิ์สยาม" ?></li>
-          <li><?php echo "จัดจำหน่ายเครื่องมือการเกษตรชนิดต่างๆ" ?></li>
+          <li><?php echo "ตัวแทนจำหน่ายสารเคมีการเกษตร เครือคชาเคมีเกษตร" ?></li>
           </ul>
 
         </div>
@@ -32,8 +32,8 @@
           <h5 class="text-uppercase font-weight-bold text-black"><?php echo $Contact ?></h5>
           <ul class="text-dark">
           <li><?php echo "503 อาคาร KSL Tower ชั้น 16 ถ.ศรีอยุธยา พญาไท กรุงเทพ" ?></li>
-          <li><?php echo "KMS_Admin@kslgroup.com" ?></li>
-          <li><?php echo "Tel.026426191-9" ?></li>
+          <li><?php echo "thaninnat@kslgroup.com , jirayut@kslgroup.com , phirawit@kslgroup.com" ?></li>
+          <li><?php echo "Tel.02-642-6191 - 9 ต่อ 449 หรือ 451 หรือ 452" ?></li>
           </ul>
 
         </div>

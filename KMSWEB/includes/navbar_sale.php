@@ -30,9 +30,9 @@ $mem_id=$_SESSION['mem_id'];
 <nav class="navbar navbar-expand-lg navbar-light bg-light fixed-top"> <!-- <nav class="navbar navbar-expand-lg navbar-light bg-light fixed-top">-->
   <a class="navbar-brand" href="index.php"> <img src="assets\image\LOGOKMS.PNG" alt="KMS LOGO" width="80" height="30" > </a>
   <!-- <a class="navbar-brand " href="index.php"> SmartWatch </a> -->
- <!-- <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarColor01" aria-controls="navbarColor01" aria-expanded="false" aria-label="Toggle navigation">
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarColor01" aria-controls="navbarColor01" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
-  </button> -->
+  </button>
     
   <div class="collapse navbar-collapse" id="navbarColor01">
     <?php if(isset($_SESSION["mem_id"])) {?>
@@ -47,24 +47,45 @@ $mem_id=$_SESSION['mem_id'];
       <!--<li class="nav-item">
         <a class="nav-link" href=""><?php echo $about?> </a>
       </li> -->
-      <li class="nav-item ">
-      <div class="dropdown show">
-      <a class="nav-link dropdown-toggle active" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">รายการจัดส่งสินค้า</a>
-      <div class="dropdown-menu " aria-labelledby="dropdownMenuLink">
 
-        <a class="dropdown-item " href="">สร้างรายการจัดส่งสินค้า</a>
-        
-        <a class="dropdown-item" href="" >แสดงรายการจัดส่งสินค้า</a>
+
+
+      <li class="nav-item">
+        <a class="nav-link" href="pr_list_supply.php">ใบสั่งซื้อสินค้า</a>
+      </li>
+
+      <li class="nav-item ">
+        <a class="nav-link" href="req_list_supply.php">รายละเอียดใบสั่งซื้อสินค้า</a>
+      </li>
+
+      <li class="nav-item">
+        <a class="nav-link" href="inv_gen.php">สร้างใบส่งสินค้าถึง KMS</a>
+      </li>
+
+      <li class="nav-item">
+        <a class="nav-link" href="inv_list_supply.php">รายการจัดส่งสินค้า</a>
+      </li>
+
+
+
+
+      <!-- <li class="nav-item ">
+      <div class="dropdown show">
+      <a class="nav-link dropdown-toggle active" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Menu</a>
+      <div class="dropdown-menu " aria-labelledby="dropdownMenuLink">
       </div>
-    </div>
-    </li>
+     </div>
+    </li> -->
+
+
+
 <!--      <li class="nav-item">
-        <a class="nav-link" href="pr_order.php"><?php echo $prorder?> </a>
+        <a class="nav-link" href="pr_order.php"></a>
       </li> -->
 
       <li class="nav-item">
        <!-- <a class="nav-link" href="orderhistory.php"><?php echo $orderhistory?> </a> -->
-        <a class="nav-link" href="">แก้ไขรายการจัดส่งสินค้า</a>
+        <!--<a class="nav-link" href="">แก้ไขรายการจัดส่งสินค้า</a>-->
       </li>
     </ul>
     
